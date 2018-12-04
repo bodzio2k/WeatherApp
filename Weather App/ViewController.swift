@@ -8,13 +8,57 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var hourlyCollectionView: UICollectionView!
+    @IBOutlet weak var dailyTableView: UITableView!
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        hourlyCollectionView.delegate = self
+        hourlyCollectionView.dataSource = self
+        
+        dailyTableView.delegate = self
+        dailyTableView.dataSource = self
+        
+        let nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
+        hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
+        
+    }
+    
+    // MARK: TablewView
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath)
+        
+        cell.textLabel?.text = "LOL"
+        
+        return cell
     }
 
-
+    // MARK: CollectionView
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
+        //let item  = items[indexPath.item]
+        
+        cell.now.text = "Now"//item.title
+        cell.icon.image = UIImage(named: "cloudy")
+        cell.temp.text = "21" + "°"
+        
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 0.5
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 12
+    }
 }
 
