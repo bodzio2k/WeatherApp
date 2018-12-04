@@ -38,8 +38,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath)
         
-        cell.textLabel?.text = "LOL"
-        
         return cell
     }
 
