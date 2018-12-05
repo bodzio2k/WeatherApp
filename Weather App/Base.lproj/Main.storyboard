@@ -65,7 +65,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
                                 <rect key="frame" x="8" y="372.5" width="304" height="187.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -77,11 +77,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wtorek" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyN-WB-EPs">
-                                                    <rect key="frame" x="15" y="11.5" width="56" height="21"/>
+                                                    <rect key="frame" x="-1" y="11.5" width="56" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudy" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
+                                                    <rect key="frame" x="102" y="0.0" width="100" height="43.5"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Zk-wvE">
                                                     <rect key="frame" x="269" y="14" width="20" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -97,10 +100,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="MyN-WB-EPs" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="99B-4m-rX6"/>
+                                                <constraint firstItem="RuO-Im-jbl" firstAttribute="centerX" secondItem="qvR-bQ-YjA" secondAttribute="centerX" id="ARd-gl-Hvw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="rhA-Zk-wvE" secondAttribute="trailing" id="C8X-0E-CjM"/>
-                                                <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" id="Z7B-ck-mv6"/>
+                                                <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" constant="-16" id="Z7B-ck-mv6"/>
+                                                <constraint firstItem="RuO-Im-jbl" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="fOj-44-7s7"/>
                                                 <constraint firstItem="rhA-Zk-wvE" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="gfP-wh-FMo"/>
                                                 <constraint firstItem="slD-J7-ykh" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="mAK-aU-bUV"/>
+                                                <constraint firstItem="RuO-Im-jbl" firstAttribute="height" relation="lessThanOrEqual" secondItem="qvR-bQ-YjA" secondAttribute="height" id="q2A-l9-KuL"/>
                                                 <constraint firstItem="rhA-Zk-wvE" firstAttribute="leading" secondItem="slD-J7-ykh" secondAttribute="trailing" constant="8" id="w8F-Fz-nvJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -138,4 +144,7 @@
             <point key="canvasLocation" x="133.125" y="133.09859154929578"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cloudy" width="100" height="100"/>
+    </resources>
 </document>
