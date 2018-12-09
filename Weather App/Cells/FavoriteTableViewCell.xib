@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="133" id="KGk-i7-Jjw" customClass="FavoriteTableViewCell" customModule="Weather_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="133"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="132.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-F8-Rty">
+                        <rect key="frame" x="28" y="19" width="42.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VrG-xC-Frr">
+                        <rect key="frame" x="28" y="75.5" width="121.5" height="38.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P71-NN-g3E">
+                        <rect key="frame" x="293" y="19" width="72" height="95"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="48"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="VrG-xC-Frr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9cF-iT-42N"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="VrG-xC-Frr" secondAttribute="bottom" constant="8" id="FNK-6R-wEr"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="P71-NN-g3E" secondAttribute="bottom" constant="8" id="Tqb-qg-VeJ"/>
+                    <constraint firstItem="iVh-F8-Rty" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Vtj-qJ-6GN"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="P71-NN-g3E" secondAttribute="trailing" constant="8" id="fzB-yU-E2D"/>
+                    <constraint firstItem="P71-NN-g3E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="qpq-3c-9pf"/>
+                    <constraint firstItem="iVh-F8-Rty" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="w70-zm-q3x"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="currentTemp" destination="P71-NN-g3E" id="PgZ-Br-Hmh"/>
+                <outlet property="hour" destination="iVh-F8-Rty" id="A5y-GX-rsf"/>
+                <outlet property="location" destination="VrG-xC-Frr" id="eto-fm-d9I"/>
+            </connections>
+            <point key="canvasLocation" x="191.19999999999999" y="149.77511244377811"/>
+        </tableViewCell>
+    </objects>
+</document>

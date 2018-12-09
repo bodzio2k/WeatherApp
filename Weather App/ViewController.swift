@@ -11,7 +11,8 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
- 
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +24,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
-        
+    
     }
     
     // MARK: TablewView
@@ -51,7 +52,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.temp.text = "21" + "°"
         
         cell.layer.borderColor = UIColor.lightGray.cgColor
-        cell.layer.borderWidth = 0.5
+        cell.layer.borderWidth = 0.1
+        
         return cell
     }
     

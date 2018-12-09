@@ -1,15 +1,18 @@
 //
-//  DailyTableViewCell.swift
+//  FavoriteTableViewCell.swift
 //  Weather App
 //
-//  Created by Krzysztof Podolak on 04/12/2018.
+//  Created by Krzysztof Podolak on 09/12/2018.
 //  Copyright © 2018 Krzysztof Podolak. All rights reserved.
 //
 
 import UIKit
 
-class DailyTableViewCell: UITableViewCell {
-
+class FavoriteTableViewCell: UITableViewCell {
+    @IBOutlet weak var hour: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var currentTemp: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +23,5 @@ class DailyTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }
