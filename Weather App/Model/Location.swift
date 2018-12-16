@@ -10,4 +10,10 @@ import Foundation
 
 public struct Location {
     var name = "undefined"
+    var country: String?
+    
+    init(_ name: String, _ country: String?) {
+        self.name = name
+        self.country = country ?? "undefined"
+    }
 }

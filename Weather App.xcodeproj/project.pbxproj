@@ -13,10 +13,13 @@
 		8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B172721ADCB7A001A3219 /* Weather_App.xcdatamodeld */; };
 		8B0B172B21ADCB7E001A3219 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B172A21ADCB7E001A3219 /* Assets.xcassets */; };
 		8B0B172E21ADCB7E001A3219 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B172C21ADCB7E001A3219 /* LaunchScreen.storyboard */; };
+		8B115DC521C6B2A000CC7BF4 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B115DC421C6B2A000CC7BF4 /* Common.swift */; };
 		8B5DE25E21BD26F400DE8EC4 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE25D21BD26F400DE8EC4 /* FavoritesViewController.swift */; };
 		8B5DE26121BD288500DE8EC4 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE25F21BD288500DE8EC4 /* FavoriteTableViewCell.swift */; };
 		8B5DE26221BD288500DE8EC4 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B5DE26021BD288500DE8EC4 /* FavoriteTableViewCell.xib */; };
 		8B5DE26421BD302F00DE8EC4 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE26321BD302F00DE8EC4 /* Location.swift */; };
+		8B5DE26721BD3F8000DE8EC4 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE26621BD3F8000DE8EC4 /* LocationsViewController.swift */; };
+		8B5DE26C21BD6D3200DE8EC4 /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE26B21BD6D3200DE8EC4 /* FakeData.swift */; };
 		8B7C665621B1AD9300047A36 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C665421B1AD9300047A36 /* HourlyCollectionViewCell.swift */; };
 		8B7C665721B1AD9300047A36 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C665521B1AD9300047A36 /* HourlyCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -30,10 +33,13 @@
 		8B0B172A21ADCB7E001A3219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B0B172D21ADCB7E001A3219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B0B172F21ADCB7E001A3219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B115DC421C6B2A000CC7BF4 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		8B5DE25D21BD26F400DE8EC4 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		8B5DE25F21BD288500DE8EC4 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		8B5DE26021BD288500DE8EC4 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		8B5DE26321BD302F00DE8EC4 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		8B5DE26621BD3F8000DE8EC4 /* LocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
+		8B5DE26B21BD6D3200DE8EC4 /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
 		8B7C665421B1AD9300047A36 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B7C665521B1AD9300047A36 /* HourlyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,16 +74,18 @@
 		8B0B171F21ADCB79001A3219 /* Weather App */ = {
 			isa = PBXGroup;
 			children = (
+				8B5DE26821BD6A4500DE8EC4 /* Model */,
 				8B5DE26521BD30DB00DE8EC4 /* Cells */,
 				8B0B172021ADCB79001A3219 /* AppDelegate.swift */,
 				8B0B172221ADCB79001A3219 /* ViewController.swift */,
 				8B0B172421ADCB7A001A3219 /* Main.storyboard */,
 				8B5DE25D21BD26F400DE8EC4 /* FavoritesViewController.swift */,
-				8B5DE26321BD302F00DE8EC4 /* Location.swift */,
+				8B5DE26621BD3F8000DE8EC4 /* LocationsViewController.swift */,
 				8B0B172A21ADCB7E001A3219 /* Assets.xcassets */,
 				8B0B172C21ADCB7E001A3219 /* LaunchScreen.storyboard */,
 				8B0B172F21ADCB7E001A3219 /* Info.plist */,
 				8B0B172721ADCB7A001A3219 /* Weather_App.xcdatamodeld */,
+				8B115DC421C6B2A000CC7BF4 /* Common.swift */,
 			);
 			path = "Weather App";
 			sourceTree = "<group>";
@@ -91,6 +99,15 @@
 				8B7C665521B1AD9300047A36 /* HourlyCollectionViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8B5DE26821BD6A4500DE8EC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B5DE26321BD302F00DE8EC4 /* Location.swift */,
+				8B5DE26B21BD6D3200DE8EC4 /* FakeData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,12 +183,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B5DE26C21BD6D3200DE8EC4 /* FakeData.swift in Sources */,
 				8B7C665621B1AD9300047A36 /* HourlyCollectionViewCell.swift in Sources */,
 				8B5DE26421BD302F00DE8EC4 /* Location.swift in Sources */,
 				8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */,
+				8B5DE26721BD3F8000DE8EC4 /* LocationsViewController.swift in Sources */,
 				8B0B172321ADCB79001A3219 /* ViewController.swift in Sources */,
 				8B5DE25E21BD26F400DE8EC4 /* FavoritesViewController.swift in Sources */,
 				8B5DE26121BD288500DE8EC4 /* FavoriteTableViewCell.swift in Sources */,
+				8B115DC521C6B2A000CC7BF4 /* Common.swift in Sources */,
 				8B0B172121ADCB79001A3219 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

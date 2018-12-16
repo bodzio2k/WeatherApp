@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let cities = ["New Your", "Miami"]
+    let cities = ["New York", "Miami", "Los Angeles", "San Francisco", "Cupertino"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,16 +29,18 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var favoriteCell: UITableViewCell!
-        
         if indexPath.row < cities.count {
-            favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as? FavoriteTableViewCell
+            let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
+            favoriteCell.hour.text = "23:59"
+            favoriteCell.location.text = cities[indexPath.row]
+            favoriteCell.currentTemp.text = "21°"
+            
+            return favoriteCell
         }
         else
         {
-            favoriteCell = tableView.dequeueReusableCell(withIdentifier: "AddLocationCell")
+            let addLocationCell = tableView.dequeueReusableCell(withIdentifier: "AddLocationCell")!
+            return addLocationCell
         }
-        
-        return favoriteCell
     }
 }
