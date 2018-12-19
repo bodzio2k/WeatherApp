@@ -20,7 +20,7 @@ class FakeData {
         }
         return rc
     }
-    
+    var filteredLocations: [Location]?
     
     init() {
         locations = []
@@ -72,5 +72,24 @@ class FakeData {
         rc  = citiesInCountry[index.row]
         
         return rc!
+    }
+    
+    func filter(by subString: String) -> Int {
+        var rc = 0
+        
+        filteredLocations = locations.filter({ (Location) -> Bool in
+            var rc = false
+            
+            let found = Location.name.uppercased().range(of: subString.uppercased())
+            rc = found?.isEmpty ?? true
+            
+            return rc
+        })
+        
+        locations = filteredLocations!
+        
+        rc = filteredLocations?.count ?? 0
+        
+        return rc
     }
 }

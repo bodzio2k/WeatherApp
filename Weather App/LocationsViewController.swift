@@ -8,19 +8,42 @@
 
 import UIKit
 
-class LocationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LocationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    //MARK: Properties
     @IBOutlet var tableView: UITableView!
     var fakeData = FakeData()
+    let searchController = UISearchController(searchResultsController: nil)
+    var shouldShowSearchResults = false
+    
+    func configureSearchBar() {
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "SEARCH"
+        searchController.searchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        
+        tableView.tableHeaderView = searchController.searchBar
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = self
         tableView.delegate = self
+        
+        configureSearchBar()
     }
     
-    //MARK: TableView
+    //MARK: UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchFor = searchController.searchBar.text ?? ""
+        
+        fakeData.filter(by: searchFor)
+        
+        tableView.reloadData()
+    }
     
+    //MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
         let l = fakeData.getLocation(at: indexPath)
@@ -30,6 +53,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
+    //MARK: UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         let rc = fakeData.distinctCountries.count
         
@@ -46,5 +70,11 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         let rc = fakeData.distinctCountries[section]
         
         return rc
+    }
+    
+    //MARK: UISearchBarDelegate
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = false
+        tableView.reloadData()
     }
 }
