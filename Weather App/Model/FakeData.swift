@@ -9,7 +9,7 @@
 import Foundation
 
 class FakeData {
-    var locations: [Location]
+    var locations: [Location] = []
     var distinctCountries: [String] {
         var rc: [String] = []
         
@@ -20,23 +20,30 @@ class FakeData {
         }
         return rc
     }
-    var filteredLocations: [Location]?
     
     init() {
-        locations = []
-        locations.append(Location("Warszawa", "Polska"))
-        locations.append(Location("Gdańsk", "Polska"))
-        locations.append(Location("Wrocław", "Polska"))
-        locations.append(Location("Zielona Góra", "Polska"))
+        locations = getAll()
+    }
+    
+    func getAll() -> [Location] {
+        var l: [Location] = []
         
-        locations.append(Location("Drezno", "Repuplika Federalna Niemiec"))
-        locations.append(Location("Lipsk", "Repuplika Federalna Niemiec"))
-        locations.append(Location("Rostok", "Repuplika Federalna Niemiec"))
-        locations.append(Location("Chociebuż", "Repuplika Federalna Niemiec"))
-        locations.append(Location("Berlin", "Repuplika Federalna Niemiec"))
+        l.append(Location("Warszawa", "Polska"))
+        l.append(Location("Gdańsk", "Polska"))
+        l.append(Location("Wrocław", "Polska"))
+        l.append(Location("Zielona Góra", "Polska"))
         
-        locations.append(Location("Warna", "Bułgaria"))
-        locations.append(Location("Sofia", "Bułgaria"))
+        l.append(Location("Drezno", "Repuplika Federalna Niemiec"))
+        l.append(Location("Lipsk", "Repuplika Federalna Niemiec"))
+        
+        l.append(Location("Rostok", "Repuplika Federalna Niemiec"))
+        l.append(Location("Chociebuż", "Repuplika Federalna Niemiec"))
+        l.append(Location("Berlin", "Repuplika Federalna Niemiec"))
+        
+        l.append(Location("Warna", "Bułgaria"))
+        l.append(Location("Sofia", "Bułgaria"))
+        
+        return l
     }
     
     func getLocations(byCountry country: String) -> [Location] {
@@ -75,18 +82,24 @@ class FakeData {
     }
     
     func filter(by subString: String) -> Int {
-        var rc = 0
+        var rc = locations.count
+        var filteredLocations: [Location]?
         
-        filteredLocations = locations.filter({ (Location) -> Bool in
-            var rc = false
-            
-            let found = Location.name.uppercased().range(of: subString.uppercased())
-            rc = found?.isEmpty ?? true
+        if subString.count == 0 {
+            locations = getAll()
             
             return rc
+        }
+        
+        filteredLocations = getAll().filter({ (Location) -> Bool in
+            if Location.name.range(of: subString, options: NSString.CompareOptions.caseInsensitive) != nil {
+                return true
+            }
+            
+            return false
         })
         
-        locations = filteredLocations!
+        self.locations = filteredLocations!
         
         rc = filteredLocations?.count ?? 0
         
