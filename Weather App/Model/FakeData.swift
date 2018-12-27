@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CSV
 
 class FakeData {
     var locations: [Location] = []
@@ -27,23 +28,17 @@ class FakeData {
     
     func getAll() -> [Location] {
         var l: [Location] = []
+        let mainBundle = Bundle.main
         
-        l.append(Location("Warszawa", "Polska"))
-        l.append(Location("Gdańsk", "Polska"))
-        l.append(Location("Wrocław", "Polska"))
-        l.append(Location("Zielona Góra", "Polska"))
+        let pathToCities = mainBundle.path(forResource: "world-cities", ofType: "csv")
+        let stream = InputStream(fileAtPath: pathToCities!)
+        let csv = try? CSVReader(stream: stream!)
         
-        l.append(Location("Drezno", "Repuplika Federalna Niemiec"))
-        l.append(Location("Lipsk", "Repuplika Federalna Niemiec"))
-        
-        l.append(Location("Rostok", "Repuplika Federalna Niemiec"))
-        l.append(Location("Chociebuż", "Repuplika Federalna Niemiec"))
-        l.append(Location("Berlin", "Repuplika Federalna Niemiec"))
-        
-        l.append(Location("Warna", "Bułgaria"))
-        l.append(Location("Sofia", "Bułgaria"))
-        
-        return l
+        while let row = csv?.next() {
+            l.append(Location(row[0], row[1]))
+        }
+ 
+        return Array(l.prefix(100))
     }
     
     func getLocations(byCountry country: String) -> [Location] {

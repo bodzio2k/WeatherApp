@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Location {
+public class Location {
     var name = "undefined"
     var country: String?
     
