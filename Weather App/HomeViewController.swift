@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController
 //  Weather App
 //
 //  Created by Krzysztof Podolak on 27/11/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -59,6 +59,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 12
+    }
+    
+    //MARK: Navigation
+    @IBAction func onShowFavorites() {
+        self.performSegue(withIdentifier: "showFavorites", sender: self)
+    }
+    
+    @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
+        
     }
 }
 

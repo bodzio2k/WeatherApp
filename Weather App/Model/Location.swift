@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Location {
+public class Location: Codable {
     var name = "undefined"
     var country: String?
     
