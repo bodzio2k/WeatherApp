@@ -11,7 +11,6 @@ import UIKit
 class LocationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     //MARK: Properties
     @IBOutlet var tableView: UITableView!
-    var fakeData = FakeData()
     let searchController = UISearchController(searchResultsController: nil)
     var shouldShowSearchResults = false
     
@@ -34,11 +33,18 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         configureSearchBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        //searchController.isActive = true
+        DispatchQueue.main.async {
+            self.searchController.searchBar.becomeFirstResponder()
+        }
+    }
+    
     //MARK: UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         let searchFor = searchController.searchBar.text ?? ""
         
-        fakeData.filter(by: searchFor)
+        getFakeData().filter(by: searchFor)
         
         tableView.reloadData()
     }
@@ -46,28 +52,45 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
-        let l = fakeData.getLocation(at: indexPath)
+        let l = getFakeData().getLocation(at: indexPath)
         
         cell.textLabel?.text = l.name
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let location = getFakeData().getLocation(at: indexPath)
+        
+        getFakeData().favourites?.append(location)
+        getFakeData().saveFavorites()
+        
+        if searchController.isActive {
+            searchController.dismiss(animated: false, completion: {
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
+        else
+        {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     //MARK: UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        let rc = fakeData.distinctCountries.count
+        let rc = getFakeData().distinctCountries.count
         
         return rc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rc = fakeData.numberOfRowsInSection(section)
+        let rc = getFakeData().numberOfRowsInSection(section)
         
         return rc
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let rc = fakeData.distinctCountries[section]
+        let rc = getFakeData().distinctCountries[section]
         
         return rc
     }

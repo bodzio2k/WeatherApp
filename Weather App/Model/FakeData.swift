@@ -9,8 +9,13 @@
 import Foundation
 import CSV
 
-class FakeData {
+class FakeData: NSObject {
+    //MARK: Properties
     var locations: [Location] = []
+    var favourites: [Location]?
+    let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    var filePath: String!
+    
     var distinctCountries: [String] {
         var rc: [String] = []
         
@@ -19,11 +24,16 @@ class FakeData {
                 rc.append(l.country!)
             }
         }
+        
         return rc
     }
     
-    init() {
+    override init() {
+        super.init()
+        
         locations = getAll()
+        filePath = documentDirectory + "/favorites.json"
+        loadFavorites()
     }
     
     func getAll() -> [Location] {
@@ -100,4 +110,38 @@ class FakeData {
         
         return rc
     }
+    
+    //MARK: Model
+    func saveFavorites() {
+        let encoder = JSONEncoder()
+        
+        let encoded = try? encoder.encode(favourites)
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            if let file = FileHandle(forWritingAtPath: filePath) {
+                file.write(encoded!)
+            }
+        }
+        else {
+            FileManager.default.createFile(atPath: filePath, contents: encoded!, attributes: nil)
+        }
+        
+        print("Saved at \(filePath)...")
+    }
+    
+    func loadFavorites() {
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let filePath = documentDirectory + "/favorites.json"
+        let decoder = JSONDecoder()
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            if let file = FileHandle(forReadingAtPath: filePath) {
+                let data = file.readDataToEndOfFile()
+                let favourites = try? decoder.decode([Location].self, from: data)
+                self.favourites = favourites
+            }
+            
+        }
+    }
+
 }
