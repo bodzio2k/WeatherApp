@@ -14,7 +14,7 @@ class FakeData: NSObject {
     var locations: [Location] = []
     var favourites: [Location]?
     let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-    var filePath: String!
+    var filePath = ""
     
     var distinctCountries: [String] {
         var rc: [String] = []
@@ -130,9 +130,9 @@ class FakeData: NSObject {
     }
     
     func loadFavorites() {
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let filePath = documentDirectory + "/favorites.json"
         let decoder = JSONDecoder()
+        
+        print("Attempting to load favourties from \(filePath)...")
         
         if FileManager.default.fileExists(atPath: filePath) {
             if let file = FileHandle(forReadingAtPath: filePath) {
@@ -141,6 +141,19 @@ class FakeData: NSObject {
                 self.favourites = favourites
             }
             
+        }
+        else
+        {
+            favourites = []
+            saveFavorites()
+        }
+    }
+    
+    func addToFavourties(_ newLocation: Location) {
+        let alreadyInFavourties = favourites!.contains(newLocation)
+        
+        if !alreadyInFavourties {
+            favourites!.append(newLocation)
         }
     }
 

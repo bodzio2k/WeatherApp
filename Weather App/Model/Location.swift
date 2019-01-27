@@ -8,12 +8,19 @@
 
 import Foundation
 
-public class Location: Codable {
+public class Location: NSObject, Codable {
     var name = "undefined"
     var country: String?
     
     init(_ name: String, _ country: String?) {
         self.name = name
         self.country = country ?? "undefined"
+    }
+    
+    public override func isEqual(_ object: Any?) -> Bool {
+        let l = object as! Location
+        let rc = self.country == l.country && self.name == l.name
+        
+        return rc
     }
 }

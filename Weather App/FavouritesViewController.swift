@@ -21,6 +21,13 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.register(nibCell, forCellReuseIdentifier: "FavoriteCell")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getFakeData().loadFavorites()
+        tableView.reloadData()
+    }
+    
     // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rc = (getFakeData().favourites?.count ?? 0) + 1

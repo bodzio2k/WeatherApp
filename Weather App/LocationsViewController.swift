@@ -62,7 +62,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let location = getFakeData().getLocation(at: indexPath)
         
-        getFakeData().favourites?.append(location)
+        getFakeData().addToFavourties(location)
         getFakeData().saveFavorites()
         
         if searchController.isActive {
