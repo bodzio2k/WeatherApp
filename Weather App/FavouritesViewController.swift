@@ -9,7 +9,9 @@
 import UIKit
 
 class FavouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
+    var selectedLocation: Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +57,18 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedId = getFakeData().favourites?[indexPath.row].id ?? -1
+        selectedLocation = getFakeData().getLocation(byId: selectedId)
+        
         performSegue(withIdentifier: "backToHome", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier ?? "" == "backToHome" {
+            
+            let destVC = segue.destination as! HomeViewController
+        
+            destVC.currentLocation = selectedLocation
+        }
     }
 }

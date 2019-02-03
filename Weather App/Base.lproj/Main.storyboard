@@ -86,16 +86,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudy" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
-                                                    <rect key="frame" x="242" y="0.0" width="100" height="43.5"/>
+                                                    <rect key="frame" x="129.5" y="0.0" width="100" height="43.5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Zk-wvE">
-                                                    <rect key="frame" x="549" y="14" width="20" height="16"/>
+                                                    <rect key="frame" x="324" y="14" width="20" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
-                                                    <rect key="frame" x="521" y="14" width="20" height="16"/>
+                                                    <rect key="frame" x="296" y="14" width="20" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -139,6 +139,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ey5-yY-Ysr"/>
                     <connections>
+                        <outlet property="currentAirTemp" destination="m11-U6-DWO" id="PdU-5X-8qd"/>
+                        <outlet property="currentCity" destination="Tv6-ez-LSL" id="gWS-3u-mg9"/>
+                        <outlet property="currentConditions" destination="P4f-ue-JgE" id="pGg-vR-mV6"/>
                         <outlet property="dailyTableView" destination="lOX-6L-L5U" id="onP-JA-ENp"/>
                         <outlet property="flowLayout" destination="7w2-YJ-3xl" id="9hj-p5-kvz"/>
                         <outlet property="hourlyCollectionView" destination="ArT-xm-xWG" id="2v5-S3-5W1"/>
@@ -177,7 +180,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Br-41-Jk5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <state key="normal" title="Add a location..."/>
                                                     <connections>
                                                         <segue destination="Ipr-q1-heh" kind="presentation" id="ezp-mC-y0r"/>

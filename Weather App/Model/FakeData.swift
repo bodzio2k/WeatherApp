@@ -45,7 +45,7 @@ class FakeData: NSObject {
         let csv = try? CSVReader(stream: stream!)
         
         while let row = csv?.next() {
-            l.append(Location(row[0], row[1]))
+            l.append(Location(row[0], row[1], Int(row[3])))
         }
  
         return Array(l.prefix(100))
@@ -84,6 +84,14 @@ class FakeData: NSObject {
         rc  = citiesInCountry[index.row]
         
         return rc!
+    }
+    
+    func getLocation(byId: Int) -> Location {
+        let rc = locations.first(where: {(Location) -> Bool in
+            return Location.id == byId
+        })
+        
+        return rc ?? Location("none", "none", -2)
     }
     
     func filter(by subString: String) -> Int {

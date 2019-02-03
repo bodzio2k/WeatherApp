@@ -9,9 +9,24 @@
 import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+    //MARK: Properties
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
+    @IBOutlet weak var currentCity: UILabel!
+    @IBOutlet weak var currentConditions: UILabel!
+    @IBOutlet weak var currentAirTemp: UILabel!
+    
+    var currentLocation: Location? {
+        didSet(newValue) {
+            print("didSet")
+            
+            currentCity.text = newValue?.name
+            currentConditions.text = "foggy"
+            currentAirTemp.text = "-1°"
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +39,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
-    
     }
     
     // MARK: TablewView
@@ -67,7 +81,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
-        
+        return
     }
 }
 
