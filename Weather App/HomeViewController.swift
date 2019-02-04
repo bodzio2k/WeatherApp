@@ -13,32 +13,38 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
-    @IBOutlet weak var currentCity: UILabel!
-    @IBOutlet weak var currentConditions: UILabel!
-    @IBOutlet weak var currentAirTemp: UILabel!
+    @IBOutlet weak var favouritesCollectionView: UICollectionView!
+    @IBOutlet weak var favouritesButton: UIButton!
     
     var currentLocation: Location? {
         didSet(newValue) {
             print("didSet")
-            
-            currentCity.text = newValue?.name
-            currentConditions.text = "foggy"
-            currentAirTemp.text = "-1°"
         }
     }
     
     override func viewDidLoad() {
+        //let favouriteCollectionViewDelegate = FavouriteCollectionViewDelegate()
+        var nibCell: UINib?
         super.viewDidLoad()
         
+        self.view.bringSubviewToFront(favouritesButton)
+            
         hourlyCollectionView.delegate = self
         hourlyCollectionView.dataSource = self
         
         dailyTableView.delegate = self
         dailyTableView.dataSource = self
         
-        let nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
+        favouritesCollectionView.delegate = self
+        favouritesCollectionView.dataSource = self
+        
+        nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
+        
+        nibCell = UINib(nibName: "FavouriteCollectionViewCell", bundle: nil)
+        favouritesCollectionView.register(nibCell, forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
+        
+        return
     }
     
     // MARK: TablewView
@@ -58,21 +64,43 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     // MARK: CollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
-        //let item  = items[indexPath.item]
+        if collectionView == hourlyCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
+            //let item  = items[indexPath.item]
+            
+            cell.now.text = "Now"//item.title
+            cell.icon.image = UIImage(named: "cloudy")
+            cell.temp.text = "21" + "°"
+            
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.borderWidth = 0.1
+            
+            return cell
+        }
+        else
+        {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
         
-        cell.now.text = "Now"//item.title
-        cell.icon.image = UIImage(named: "cloudy")
-        cell.temp.text = "21" + "°"
+            cell.currentConditions.text = "LOL"
+            cell.currentCity.text = "ROFL"
+            cell.currentTemp.text = "22°"
         
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        cell.layer.borderWidth = 0.1
-        
-        return cell
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        var rc = 0
+        
+        if collectionView == hourlyCollectionView {
+            rc = 12
+        }
+        
+        if collectionView == favouritesCollectionView {
+            rc = getFakeData().favourites?.count ?? 0
+        }
+        
+        return rc
     }
     
     //MARK: Navigation

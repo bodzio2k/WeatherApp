@@ -25,31 +25,28 @@
                                     <action selector="onShowFavorites" destination="BYZ-38-t0r" eventType="touchUpInside" id="5hE-cS-dIO"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5wD-ME-w4W" userLabel="Details View">
-                                <rect key="frame" x="78" y="28" width="219" height="221"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tv6-ez-LSL">
-                                        <rect key="frame" x="85.5" y="0.0" width="48.5" height="55"/>
-                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4f-ue-JgE">
-                                        <rect key="frame" x="79" y="55" width="61.5" height="29.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m11-U6-DWO">
-                                        <rect key="frame" x="50.5" y="84.5" width="118" height="136.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="80"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WK1-gO-QvJ">
+                                <rect key="frame" x="8" y="28" width="359" height="220"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6vz-uQ-PYg">
+                                    <size key="itemSize" width="214" height="202"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kMS-Em-PCb">
+                                        <rect key="frame" x="0.0" y="9" width="214" height="202"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="214" height="202"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-xm-xWG">
-                                <rect key="frame" x="8" y="249" width="359" height="221"/>
+                                <rect key="frame" x="8" y="248" width="359" height="221"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7w2-YJ-3xl">
                                     <size key="itemSize" width="50" height="120"/>
@@ -121,28 +118,27 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="1Sc-tt-u4J"/>
-                            <constraint firstItem="5wD-ME-w4W" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" constant="1" id="5Z3-o1-I3V"/>
+                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="5fs-9J-KoB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lOX-6L-L5U" secondAttribute="bottom" constant="8" id="5oX-QI-fmX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ArT-xm-xWG" secondAttribute="trailing" constant="8" id="75F-8p-WXD"/>
-                            <constraint firstItem="m11-U6-DWO" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9Ii-p4-mkA"/>
-                            <constraint firstItem="ArT-xm-xWG" firstAttribute="top" secondItem="5wD-ME-w4W" secondAttribute="bottom" id="BTt-p3-ORT"/>
-                            <constraint firstItem="5wD-ME-w4W" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Bsa-pb-D1s"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="G9Z-zx-wXy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" constant="8" id="KBh-ca-5Lq"/>
                             <constraint firstItem="WVj-Ov-mHO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="KjT-Lc-wvY"/>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" id="MOe-To-Lw9"/>
+                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" id="Nxc-JE-Rzi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WK1-gO-QvJ" secondAttribute="trailing" constant="8" id="XCG-FC-3MF"/>
+                            <constraint firstItem="ArT-xm-xWG" firstAttribute="top" secondItem="WK1-gO-QvJ" secondAttribute="bottom" id="crv-CH-AA4"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" constant="1" id="dRo-RZ-Yrr"/>
-                            <constraint firstItem="5wD-ME-w4W" firstAttribute="leading" secondItem="WVj-Ov-mHO" secondAttribute="trailing" constant="8" id="qri-Ur-V8c"/>
+                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="ncs-Mj-4IN"/>
                             <constraint firstItem="WVj-Ov-mHO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="xVL-yM-Lrc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="ey5-yY-Ysr"/>
                     <connections>
-                        <outlet property="currentAirTemp" destination="m11-U6-DWO" id="PdU-5X-8qd"/>
-                        <outlet property="currentCity" destination="Tv6-ez-LSL" id="gWS-3u-mg9"/>
-                        <outlet property="currentConditions" destination="P4f-ue-JgE" id="pGg-vR-mV6"/>
                         <outlet property="dailyTableView" destination="lOX-6L-L5U" id="onP-JA-ENp"/>
+                        <outlet property="favouritesButton" destination="WVj-Ov-mHO" id="gMW-Rt-fCk"/>
+                        <outlet property="favouritesCollectionView" destination="WK1-gO-QvJ" id="xL7-aV-bWx"/>
                         <outlet property="flowLayout" destination="7w2-YJ-3xl" id="9hj-p5-kvz"/>
                         <outlet property="hourlyCollectionView" destination="ArT-xm-xWG" id="2v5-S3-5W1"/>
                         <segue destination="PEh-Xk-Y3V" kind="show" identifier="showFavorites" id="fi4-Wk-Je3"/>
@@ -150,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128.125" y="133.09859154929578"/>
+            <point key="canvasLocation" x="2127.1999999999998" y="132.68365817091455"/>
         </scene>
         <!--Favourites View Controller-->
         <scene sceneID="T8d-im-NAT">
