@@ -13,32 +13,33 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavouriteCollectionViewCell" id="gTV-IL-0wX" customClass="FavouriteCollectionViewCell" customModule="Weather_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="160" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="159" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="160" height="200"/>
+                <rect key="frame" x="0.0" y="0.0" width="159" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pL-xA-5cu">
-                        <rect key="frame" x="56" y="36.5" width="48.5" height="38.5"/>
+                        <rect key="frame" x="55.5" y="36.5" width="48.5" height="38.5"/>
                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lk4-T5-VPx">
-                        <rect key="frame" x="49" y="8" width="62" height="20.5"/>
+                        <rect key="frame" x="48.5" y="8" width="62" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIJ-Cm-d1N">
-                        <rect key="frame" x="21" y="83" width="118" height="95.5"/>
+                        <rect key="frame" x="20.5" y="83" width="118" height="95.5"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="80"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Lk4-T5-VPx" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="HMW-qd-YSe"/>
                 <constraint firstItem="2pL-xA-5cu" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="HMq-29-Iu6"/>
@@ -48,13 +49,13 @@
                 <constraint firstItem="2pL-xA-5cu" firstAttribute="top" secondItem="Lk4-T5-VPx" secondAttribute="bottom" constant="8" id="uN1-eb-i7j"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="333" height="291"/>
+            <size key="customSize" width="92" height="291"/>
             <connections>
                 <outlet property="currentCity" destination="2pL-xA-5cu" id="3f7-ne-UEU"/>
                 <outlet property="currentConditions" destination="Lk4-T5-VPx" id="5UD-li-sLv"/>
                 <outlet property="currentTemp" destination="NIJ-Cm-d1N" id="51Q-WJ-Hs4"/>
             </connections>
-            <point key="canvasLocation" x="530" y="138"/>
+            <point key="canvasLocation" x="336.80000000000001" y="136.73163418290855"/>
         </collectionViewCell>
     </objects>
 </document>

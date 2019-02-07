@@ -23,7 +23,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewDidLoad() {
-        //let favouriteCollectionViewDelegate = FavouriteCollectionViewDelegate()
         var nibCell: UINib?
         super.viewDidLoad()
         
@@ -44,7 +43,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         nibCell = UINib(nibName: "FavouriteCollectionViewCell", bundle: nil)
         favouritesCollectionView.register(nibCell, forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
         
-        return
+        let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        fl?.itemSize.width = self.view.frame.width - 16
+        fl?.minimumLineSpacing = 1    
     }
     
     // MARK: TablewView
@@ -62,7 +63,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
 
-    // MARK: CollectionView
+    //MARK: Navigation
+    @IBAction func onShowFavorites() {
+        self.performSegue(withIdentifier: "showFavorites", sender: self)
+    }
+    
+    @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
+        return
+    }
+}
+
+extension HomeViewController {
+    // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
@@ -80,11 +92,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
-        
+            
             cell.currentConditions.text = "LOL"
             cell.currentCity.text = "ROFL"
             cell.currentTemp.text = "22°"
-        
+            
             return cell
         }
     }
@@ -102,14 +114,4 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         return rc
     }
-    
-    //MARK: Navigation
-    @IBAction func onShowFavorites() {
-        self.performSegue(withIdentifier: "showFavorites", sender: self)
-    }
-    
-    @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
-        return
-    }
 }
-
