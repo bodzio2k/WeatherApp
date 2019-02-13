@@ -45,7 +45,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         fl?.itemSize.width = self.view.frame.width - 16
-        fl?.minimumLineSpacing = 1    
+        fl?.minimumLineSpacing = 1
     }
     
     // MARK: TablewView
@@ -92,9 +92,10 @@ extension HomeViewController {
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
+            let fav: Location = getFakeData().favourites![indexPath.row]
             
-            cell.currentConditions.text = "LOL"
-            cell.currentCity.text = "ROFL"
+            cell.currentConditions.text = "foggy"
+            cell.currentCity.text = fav.name
             cell.currentTemp.text = "22°"
             
             return cell

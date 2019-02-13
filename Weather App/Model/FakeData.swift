@@ -164,5 +164,24 @@ class FakeData: NSObject {
             favourites!.append(newLocation)
         }
     }
-
+    
+    //MARK: Forecasts
+    func getForecast(for location: Location) -> Forecast {
+        var rc = Forecast()
+        
+        rc.currentTemp = Int.random(in: -10...10)
+        rc.currentConditions = getRandomConditions()
+        rc.location = location
+        rc.nextDays = []
+        rc.today = []
+        
+        return rc
+    }
+    
+    fileprivate func getRandomConditions() -> UIImage {
+        let literal: String = weatherConditions.randomElement()!
+        let rc = UIImage(named: literal) ?? UIImage(named: "hail")
+        
+        return rc!
+    }
 }

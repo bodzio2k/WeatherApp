@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
-class LocationForecast {
+struct Forecast {
     var location: Location?
-    var today: [[String: String]]?
-    var nextDays: [[String: String]]?
+    var today: [[String: WeatherConditions]]?
+    var nextDays: [[String: WeatherConditions]]?
     var currentTemp: Int?
+    var currentConditions: UIImage?
 }
