@@ -82,23 +82,27 @@ class Locations: LocationsProtocol {
         return rc ?? Location("none", "none", -2)
     }
     
-    func filter(by subString: String) {
+    func filter(by subString: String) -> Int {
         var filteredLocations: [Location]?
         
-        /*if subString.count == 0 {
-            locations = getAll()
+        if subString.count == 0 {
+            let rc = Locations(Globals.maxLocationsCount)
             
-            return rc
-        }*/
-        
-        filteredLocations = items.filter({ (Location) -> Bool in
-            if Location.name.range(of: subString, options: NSString.CompareOptions.caseInsensitive) != nil {
-                return true
-            }
+            self.items = rc.items
+        }
+        else
+        {
+            filteredLocations = items.filter({ (Location) -> Bool in
+                if Location.name.range(of: subString, options: NSString.CompareOptions.caseInsensitive) != nil {
+                    return true
+                }
+                
+                return false
+            })
             
-            return false
-        })
+            self.items = filteredLocations!
+        }
         
-        self.items = filteredLocations!
+        return self.items.count
     }
 }

@@ -12,13 +12,12 @@ import XCTest
 class WeatherAppTests: XCTestCase {
     var locations: Locations!
     var favourites: Favourites!
-    let locationsMaxCount = 100
     let favouritesDir = "/Users/bodzio2k"
     
     override func setUp() {
         super.setUp()
         
-        locations = Locations(locationsMaxCount)
+        locations = Locations(Globals.maxLocationsCount)
         favourites = Favourites(favouritesDir)
     }
     
@@ -34,7 +33,7 @@ class WeatherAppTests: XCTestCase {
         
         created = locations.items.count
         
-        XCTAssertEqual(created, locationsMaxCount, "OK")
+        XCTAssertEqual(created, Globals.maxLocationsCount, "OK")
     }
     
     func testCreatingFavourites() {
@@ -44,20 +43,27 @@ class WeatherAppTests: XCTestCase {
             favourites!.add(l)
         }
         
-        XCTAssertEqual(favourites!.items.count, locationsMaxCount)
+        XCTAssertEqual(favourites!.items.count, Globals.maxLocationsCount)
         favourites.save()
     }
     
     func testLoadFavourites() {
         favourites.load()
         
-        XCTAssertEqual(favourites!.items.count, locationsMaxCount)
+        XCTAssertEqual(favourites!.items.count, Globals.maxLocationsCount)
     }
     
     func testLocations() {
         let distinctCountries = locations!.distinctCountries.count
+        let i = 0
+        var citiesInCountryCount = 0
         
         XCTAssertNotEqual(distinctCountries, 0)
+        
+        for _ in locations!.distinctCountries {
+            citiesInCountryCount = locations!.getCityCount(in: i)
+            XCTAssertNotEqual(citiesInCountryCount, 0)
+        }
     }
     
     func testPerformanceExample() {
@@ -65,5 +71,19 @@ class WeatherAppTests: XCTestCase {
         self.measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testFilteringLocations() {
+        var phrases: [String: Int] = [:]
+        
+        phrases["les"] = 9
+        phrases["dibba"] = 2
+        phrases[""] = Globals.maxLocationsCount
+        
+        for (k, v) in phrases {
+            let filteredCount = locations!.filter(by: k)
+            XCTAssertEqual(filteredCount, v)
+        }
+        
     }
 }

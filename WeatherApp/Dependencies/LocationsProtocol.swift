@@ -15,6 +15,7 @@ protocol LocationsProtocol {
     func getLocations(byCountry country: String) -> [Location]
     func getLocation(at index: IndexPath) -> Location
     func getLocation(by id: Int) -> Location
-    func filter(by subString: String) -> Void
+    func filter(by subString: String) -> Int
     func getCityCount(in country: Int) -> Int
+    
 }
