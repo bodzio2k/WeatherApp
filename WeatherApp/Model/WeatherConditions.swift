@@ -8,18 +8,10 @@
 
 import Foundation
 
-/*enum WeatherConditions {
-    case cloudy
-    case hail
-    case heavy_rain
-    case partly_cloudy
-    case rain
-    case storm
-    case snow
-    case sunny
-    case windy
-}*/
-
 typealias WeatherConditions = Array<String>
 
 let weatherConditions: WeatherConditions = ["cloudy", "hail", "heavy_rain", "partly_cloudy", "rain", "storm", "snow", "sunny", "windy"]
+
+typealias Hourly = [String: String]
+
+typealias Daily = [String: String]

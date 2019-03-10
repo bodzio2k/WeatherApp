@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Swinject
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     //MARK: Properties
@@ -16,11 +17,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     @IBOutlet weak var favouritesButton: UIButton!
     
-    var currentLocation: Location? {
-        didSet(newValue) {
-            print("didSet")
-        }
-    }
+    var currentLocation: Location?
+    var currentForecast: Forecast?
+    var favourites: FavouritesProtocol?
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -92,7 +91,7 @@ extension HomeViewController {
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
-            let fav: Location = getFakeData().favourites![indexPath.row]
+            let fav: Location = favourites!.items[indexPath.row]
             
             cell.currentConditions.text = "foggy"
             cell.currentCity.text = fav.name
@@ -106,11 +105,13 @@ extension HomeViewController {
         var rc = 0
         
         if collectionView == hourlyCollectionView {
-            rc = 12
+            //let items = currentForecast.today!
+            
+            return 12 //items.count
         }
         
         if collectionView == favouritesCollectionView {
-            rc = getFakeData().favourites?.count ?? 0
+            rc = favourites!.items.count
         }
         
         return rc

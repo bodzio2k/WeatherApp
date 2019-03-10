@@ -11,8 +11,8 @@ import UIKit
 
 struct Forecast {
     var location: Location?
-    var today: [[String: WeatherConditions]]?
-    var nextDays: [[String: WeatherConditions]]?
+    var today: Hourly?
+    var nextDays: Daily?
     var currentTemp: Int?
     var currentConditions: UIImage?
 }

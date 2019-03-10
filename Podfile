@@ -9,4 +9,6 @@ target 'Weather App' do
 
   # Pods for Weather App
   pod 'CSV.swift', '~> 2.3.1'
+  pod 'Swinject'
+  pod 'SwinjectStoryboard'
 end

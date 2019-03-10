@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import Swinject
 
-extension UIViewController {
+/*extension UIViewController {
     func getFakeData() -> FakeData {
         var appDelegate: AppDelegate?
         
@@ -17,4 +18,13 @@ extension UIViewController {
         
         return appDelegate!.fakeData
     }
+    
+    func getContainer() -> Container {
+        var appDelegate: AppDelegate?
+        
+        appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        return appDelegate!.container
+    }
 }
+*/

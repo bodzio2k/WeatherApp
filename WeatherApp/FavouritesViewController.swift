@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Swinject
 
 class FavouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
     var selectedLocation: Location?
+    var favourites: FavouritesProtocol?
+    var locations: LocationsProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,24 +29,24 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getFakeData().loadFavorites()
+        favourites?.load()
         tableView.reloadData()
     }
     
     // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rc = (getFakeData().favourites?.count ?? 0) + 1
+        let rc = favourites!.items.count ?? 0
         
-        return rc
+        return rc + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < getFakeData().favourites?.count ?? 0 {
+        if indexPath.row < favourites!.items.count {
             let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
-            let location = getFakeData().favourites?[indexPath.row]
+            let location = favourites!.items[indexPath.row]
             
             favoriteCell.hour.text = "23:59"
-            favoriteCell.location.text = location?.name
+            favoriteCell.location.text = location.name
             favoriteCell.currentTemp.text = "21°"
             
             return favoriteCell
@@ -57,8 +60,8 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedId = getFakeData().favourites?[indexPath.row].id ?? -1
-        selectedLocation = getFakeData().getLocation(byId: selectedId)
+        let selectedId = favourites!.items[indexPath.row].id
+        selectedLocation = locations!.getLocation(by: selectedId)
         
         performSegue(withIdentifier: "backToHome", sender: self)
     }

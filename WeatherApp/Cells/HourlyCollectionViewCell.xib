@@ -36,6 +36,7 @@
                     </imageView>
                 </subviews>
             </view>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstItem="6YD-6L-ull" firstAttribute="height" relation="lessThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="height" id="59S-6x-6XM"/>
                 <constraint firstItem="u9q-OB-WUm" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="BLz-h5-bRo"/>
