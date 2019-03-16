@@ -111,7 +111,7 @@ extension HomeViewController {
         }
         
         if collectionView == favouritesCollectionView {
-            rc = favourites!.items.count
+            rc = favourites?.items.count ?? 0
         }
         
         return rc

@@ -8,22 +8,50 @@
 
 import Foundation
 import SwinjectStoryboard
+import SwinjectAutoregistration
 
 extension SwinjectStoryboard {
     @objc class func setup() {
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let favourites = Favourites(documentDirectory)
+        let locations = Locations(Globals.maxLocationsCount)
+        
         defaultContainer.storyboardInitCompleted(HomeViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)
         }
         defaultContainer.storyboardInitCompleted(FavouritesViewController.self) { (r, c) in
+            c.locations = r.resolve(LocationsProtocol.self)
             c.favourites = r.resolve(FavouritesProtocol.self)
         }
         defaultContainer.storyboardInitCompleted(LocationsViewController.self) { (r, c) in
             c.locations = r.resolve(LocationsProtocol.self)
+            c.favourites = r.resolve(FavouritesProtocol.self)
         }
         
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        defaultContainer.register(FavouritesProtocol.self, factory: {_ in return favourites})
+        defaultContainer.register(LocationsProtocol.self, factory: {_ in return locations})
         
-        defaultContainer.register(FavouritesProtocol.self, factory: {_ in return Favourites(documentDirectory)})
-        defaultContainer.register(LocationsProtocol.self, factory: {_ in return Locations(100)})
+        /*defaultContainer.autoregister(FavouritesProtocol.self, name: "Favourites", initializer: Favourites.init)
+        defaultContainer.autoregister(LocationsProtocol.self, name: "Locations", initializer: Locations.init)
+        
+        defaultContainer.storyboardInitCompleted(HomeViewController.self, name: "Favourites", initCompleted: { r, c in
+            //c.favourites = r.resolve(FavouritesProtocol.self, argument: documentDirectory)
+            c.favourites = r ~> FavouritesProtocol.self
+        })
+        
+        defaultContainer.storyboardInitCompleted(FavouritesViewController.self, name: "Favourites", initCompleted: { r, c in
+            //c.favourites = r.resolve(FavouritesProtocol.self, argument: documentDirectory)
+            c.favourites = r ~> FavouritesProtocol.self
+        })
+        
+        defaultContainer.storyboardInitCompleted(LocationsViewController.self, name: "Locations", initCompleted: { r, c in
+            //c.locations = r.resolve(LocationsProtocol.self)
+            c.locations = r ~> LocationsProtocol.self
+        })
+        
+        defaultContainer.storyboardInitCompleted(LocationsViewController.self, name: "Favourites", initCompleted: { r, c in
+            c.favourites = r ~> FavouritesProtocol.self
+        })*/
     }
+
 }

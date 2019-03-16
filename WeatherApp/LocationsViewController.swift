@@ -80,7 +80,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK: UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        let rc = locations!.distinctCountries.count
+        let rc = locations?.distinctCountries.count ?? 0
         
         return rc
     }

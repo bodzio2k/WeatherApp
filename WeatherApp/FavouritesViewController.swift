@@ -15,6 +15,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
     var locations: LocationsProtocol?
+    var favouritesCount: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +31,17 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewWillAppear(animated)
         
         favourites?.load()
+        favouritesCount = favourites?.items.count ?? 0
         tableView.reloadData()
     }
     
     // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rc = favourites!.items.count ?? 0
-        
-        return rc + 1
+        return favouritesCount + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < favourites!.items.count {
+        if indexPath.row < favouritesCount {
             let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
             let location = favourites!.items[indexPath.row]
             
