@@ -16,6 +16,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     var favourites: FavouritesProtocol?
     var locations: LocationsProtocol?
     var favouritesCount: Int!
+    var selectedItemIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedId = favourites!.items[indexPath.row].id
         selectedLocation = locations!.getLocation(by: selectedId)
+        selectedItemIndex = indexPath.row
         
         performSegue(withIdentifier: "backToHome", sender: self)
     }
@@ -72,6 +74,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             let destVC = segue.destination as! HomeViewController
         
             destVC.currentLocation = selectedLocation
+            destVC.scrollToFavourite = selectedItemIndex
         }
     }
 }

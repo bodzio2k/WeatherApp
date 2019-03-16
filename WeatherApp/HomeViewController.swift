@@ -20,6 +20,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var currentLocation: Location?
     var currentForecast: Forecast?
     var favourites: FavouritesProtocol?
+    var favouritesCount: Int?
+    var scrollToFavourite = 0
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -45,6 +47,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         fl?.itemSize.width = self.view.frame.width - 16
         fl?.minimumLineSpacing = 1
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        favourites?.load()
+        favouritesCount = favourites?.items.count ?? 0
+        favouritesCollectionView.reloadData()
+        
+        favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
     }
     
     // MARK: TablewView
