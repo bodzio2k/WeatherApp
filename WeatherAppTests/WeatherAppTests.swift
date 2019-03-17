@@ -86,4 +86,22 @@ class WeatherAppTests: XCTestCase {
         }
         
     }
+    
+    func testDeletingFavourites() {
+        var itemsCount: Int!
+        var afterDeletion: Int!
+        
+        favourites.load()
+        itemsCount = favourites.items.count
+        
+        afterDeletion = favourites.delete(at: -1)
+        XCTAssertEqual(afterDeletion, -1)
+        
+        afterDeletion = favourites.delete(at: Int.max)
+        XCTAssertEqual(afterDeletion, -1)
+        
+        afterDeletion = favourites.delete(at: 1)
+        XCTAssertEqual(afterDeletion, itemsCount - 1)
+        
+    }
 }

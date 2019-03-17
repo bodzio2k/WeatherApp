@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var favourites: FavouritesProtocol?
     var favouritesCount: Int?
     var scrollToFavourite = 0
+    var locations: LocationsProtocol?
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -52,8 +53,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         favourites?.load()
         favouritesCount = favourites?.items.count ?? 0
-        favouritesCollectionView.reloadData()
         
+        if favouritesCount == 0 {
+            let initialLocation = locations?.getLocation(by: 1132495)
+            favourites?.add(initialLocation!)
+            favourites?.save()
+        }
+        
+        favouritesCollectionView.reloadData()
         favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
     }
     

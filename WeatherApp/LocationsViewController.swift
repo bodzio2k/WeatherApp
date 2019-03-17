@@ -37,9 +37,9 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidAppear(_ animated: Bool) {
         //searchController.isActive = true
-        /*DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
-        }*/
+        }
     }
     
     //MARK: UISearchResultsUpdating

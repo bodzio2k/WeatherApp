@@ -15,4 +15,5 @@ protocol FavouritesProtocol {
     func save() -> Void
     func load() -> Void
     func add(_ newLocation: Location) -> Void
+    func delete(at index: Int, commit: Bool) -> Int
 }

@@ -77,4 +77,8 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             destVC.scrollToFavourite = selectedItemIndex
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }

@@ -9,6 +9,19 @@
 import Foundation
 
 class Favourites: FavouritesProtocol {
+    func delete(at index: Int, commit: Bool = false) -> Int {
+        if index > items.count || index < 0 {
+            return -1
+        }
+        
+        items.remove(at: index)
+        if commit == true {
+            self.save()
+        }
+        
+        return items.count
+    }
+    
     var items: [Location] = []
     var filePath = ""
     
