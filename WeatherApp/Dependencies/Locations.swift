@@ -24,7 +24,7 @@ class Locations: LocationsProtocol {
         return rc
     }
     
-    var items: [Location]
+    var items: Set<Location>
     var distinctCountries: [String] {
         var rc: [String] = []
         
@@ -49,7 +49,7 @@ class Locations: LocationsProtocol {
             l.append(Location(row[0], row[1], Int(row[3])))
         }
         
-        items = Array(l.prefix(count))
+        items = Set(l.prefix(count))
     }
     
     func getLocations(byCountry country: String) -> [Location] {
@@ -100,7 +100,7 @@ class Locations: LocationsProtocol {
                 return false
             })
             
-            self.items = filteredLocations!
+            self.items = Set(filteredLocations!)
         }
         
         return self.items.count

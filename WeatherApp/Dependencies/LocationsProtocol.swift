@@ -9,7 +9,7 @@
 import Foundation
 
 protocol LocationsProtocol {
-    var items: [Location] { get }
+    var items: Set<Location> { get }
     var distinctCountries: [String] { get }
     
     func getLocations(byCountry country: String) -> [Location]

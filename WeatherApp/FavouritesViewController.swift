@@ -79,6 +79,23 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let itemsCount = tableView.dataSource?.tableView(tableView, numberOfRowsInSection: 0) ?? 0
+        
+        if indexPath.row == 0 || indexPath.row == itemsCount - 1 {
+            return false
+        }
+        
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            favourites?.delete(at: indexPath.row, commit: true)
+            tableView.reloadData()
+        default:
+            return
+        }
     }
 }
