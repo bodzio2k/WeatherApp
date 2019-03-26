@@ -15,7 +15,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
     var locations: LocationsProtocol?
-    var favouritesCount: Int!
+    //var favouritesCount: Int!
     var selectedItemIndex = 0
     
     override func viewDidLoad() {
@@ -32,17 +32,18 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewWillAppear(animated)
         
         favourites?.load()
-        favouritesCount = favourites?.items.count ?? 0
         tableView.reloadData()
     }
-    
+}
+
+    extension FavouritesViewController {
     // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favouritesCount + 1
+        return (favourites?.items.count ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < favouritesCount {
+        if indexPath.row < favourites?.items.count ?? 0 {
             let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
             let location = favourites!.items[indexPath.row]
             
@@ -89,13 +90,9 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .delete:
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        if editingStyle == .delete {
             favourites?.delete(at: indexPath.row, commit: true)
-            tableView.reloadData()
-        default:
-            return
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }

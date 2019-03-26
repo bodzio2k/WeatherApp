@@ -9,5 +9,5 @@
 import Foundation
 
 public struct Globals {
-    static let maxLocationsCount = 100
+    static let maxLocationsCount = 200
 }
