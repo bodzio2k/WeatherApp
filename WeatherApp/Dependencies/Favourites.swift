@@ -32,11 +32,15 @@ class Favourites: FavouritesProtocol {
     func save() {
         let encoder = JSONEncoder()
         
+        encoder.outputFormatting = .prettyPrinted
+        
         let encoded = try? encoder.encode(items)
         
         if FileManager.default.fileExists(atPath: filePath) {
             if let file = FileHandle(forWritingAtPath: filePath) {
+                file.truncateFile(atOffset: 0)
                 file.write(encoded!)
+                file.closeFile()
             }
         }
         else {
@@ -56,6 +60,7 @@ class Favourites: FavouritesProtocol {
                 let data = file.readDataToEndOfFile()
                 let favourites = try? decoder.decode([Location].self, from: data)
                 self.items = favourites!
+                file.closeFile()
             }
         }
         else
