@@ -91,7 +91,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            favourites?.delete(at: indexPath.row, commit: true)
+            _ = favourites?.delete(at: indexPath.row, commit: true)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

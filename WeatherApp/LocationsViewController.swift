@@ -46,7 +46,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     func updateSearchResults(for searchController: UISearchController) {
         let searchFor = searchController.searchBar.text ?? ""
         
-        locations!.filter(by: searchFor)
+        _ = locations!.filter(by: searchFor)
         
         tableView.reloadData()
     }
