@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 
-struct Forecast {
-    var location: Location?
-    var today: Hourly?
-    var nextDays: Daily?
-    var currentTemp: Int?
-    var currentConditions: UIImage?
+protocol ForecastProtocol {
+    var today: Hourly  { get }
+    var nextDays: Daily  { get }
+    var currentTemp: Int  { get }
+    var currentConditions: UIImage { get }
 }

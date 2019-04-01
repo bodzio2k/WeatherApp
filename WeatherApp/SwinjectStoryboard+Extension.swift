@@ -19,6 +19,7 @@ extension SwinjectStoryboard {
         defaultContainer.storyboardInitCompleted(HomeViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)
             c.locations = r.resolve(LocationsProtocol.self)
+            c.currentForecast = r.resolve(ForecastProtocol.self)
         }
         defaultContainer.storyboardInitCompleted(FavouritesViewController.self) { (r, c) in
             c.locations = r.resolve(LocationsProtocol.self)

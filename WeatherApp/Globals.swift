@@ -10,4 +10,6 @@ import Foundation
 
 public struct Globals {
     static let maxLocationsCount = 200
+    static let maxHourlyCount = 12
+    static let maxNextDaysCount = 7
 }

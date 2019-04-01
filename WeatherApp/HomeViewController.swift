@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var favouritesButton: UIButton!
     
     var currentLocation: Location?
-    var currentForecast: Forecast?
+    var currentForecast: ForecastProtocol?
     var favourites: FavouritesProtocol?
     var favouritesCount: Int?
     var scrollToFavourite = 0
@@ -70,7 +70,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return Globals.maxNextDaysCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,7 +90,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 }
 
 extension HomeViewController {
-    // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
@@ -122,9 +121,7 @@ extension HomeViewController {
         var rc = 0
         
         if collectionView == hourlyCollectionView {
-            //let items = currentForecast.today!
-            
-            return 12 //items.count
+            return Globals.maxHourlyCount
         }
         
         if collectionView == favouritesCollectionView {
@@ -133,4 +130,6 @@ extension HomeViewController {
         
         return rc
     }
+    
+    
 }
