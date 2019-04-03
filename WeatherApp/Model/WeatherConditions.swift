@@ -12,6 +12,6 @@ typealias WeatherConditions = Array<String>
 
 let weatherConditions: WeatherConditions = ["cloudy", "hail", "heavy_rain", "partly_cloudy", "rain", "storm", "snow", "sunny", "windy"]
 
-typealias Hourly = [String: String]
+//typealias Hourly = [[String: String]]
 
 typealias Daily = [String: String]

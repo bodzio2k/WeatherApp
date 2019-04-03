@@ -62,6 +62,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         favouritesCollectionView.reloadData()
         favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
+        
+        currentLocation = favourites?.items[scrollToFavourite]
+        currentForecast = Forecast(for: currentLocation!)
+        
+        return
     }
     
     // MARK: TablewView
@@ -93,11 +98,16 @@ extension HomeViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
-            //let item  = items[indexPath.item]
             
-            cell.now.text = "Now"//item.title
-            cell.icon.image = UIImage(named: "cloudy")
-            cell.temp.text = "21" + "°"
+            let row = currentForecast?.today[indexPath.row]
+            
+            cell.icon.image = row?.currentConditions
+            cell.now.text = row?.now
+            cell.temp.text = row?.currentTemp
+            //cell.now.text = currentForecast?.today[indexPath.row]
+            //cell.icon.image = image
+            //let currentTemp = currentForecast?.currentTemp ?? -99
+            //cell.temp.text = String(currentTemp)
             
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 0.1

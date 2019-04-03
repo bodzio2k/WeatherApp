@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 protocol ForecastProtocol {
-    var today: Hourly  { get }
+    var today: [Hourly]  { get }
     var nextDays: Daily  { get }
-    var currentTemp: Int  { get }
-    var currentConditions: UIImage { get }
 }
