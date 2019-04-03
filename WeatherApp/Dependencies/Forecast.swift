@@ -22,10 +22,11 @@ class Forecast: ForecastProtocol {
         
         for i in 0...Globals.maxHourlyCount {
             let nextHour = Date(timeInterval: Double(i * 3600), since: currentDate)
-            let nextHourString = dateFormatter.string(from: nextHour)
+            let currentHour = Calendar.current.component(.hour, from: nextHour)
             let temp = String(Int.random(in: -20...20))
-            
-            let element = Hourly(currentConditions: UIImage(named: "rain")!, currentTemp: temp, now: nextHourString)
+            let iconCount = Globals.weatherConditions.count
+            let iconName = Globals.weatherConditions[Int.random(in: 0...iconCount - 1)] 
+            let element = Hourly(currentConditions: UIImage(named: iconName)!, currentTemp: temp, currentHour: String(currentHour))
             
             today.append(element)
         }

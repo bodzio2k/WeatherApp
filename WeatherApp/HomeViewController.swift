@@ -102,7 +102,7 @@ extension HomeViewController {
             let row = currentForecast?.today[indexPath.row]
             
             cell.icon.image = row?.currentConditions
-            cell.now.text = row?.now
+            cell.now.text = row?.currentHour
             cell.temp.text = row?.currentTemp
             //cell.now.text = currentForecast?.today[indexPath.row]
             //cell.icon.image = image

@@ -12,5 +12,5 @@ import UIKit
 struct Hourly {
     var currentConditions: UIImage?
     var currentTemp: String?
-    var now: String?
+    var currentHour: String?
 }

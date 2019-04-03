@@ -12,4 +12,5 @@ public struct Globals {
     static let maxLocationsCount = 200
     static let maxHourlyCount = 12
     static let maxNextDaysCount = 7
+    static let weatherConditions: WeatherConditions = ["cloudy", "hail", "heavy_rain", "partly_cloudy", "rain", "storm", "snow", "sunny", "windy"]
 }
