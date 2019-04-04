@@ -95,4 +95,16 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            var rc: CGFloat!
+            
+            if indexPath.row == favourites!.items.count + 1 {
+                rc = 120.00
+            }
+            
+            rc = 90
+            
+            return rc
+        }
 }

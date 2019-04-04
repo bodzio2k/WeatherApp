@@ -48,6 +48,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         fl?.itemSize.width = self.view.frame.width - 16
         fl?.minimumLineSpacing = 1
+        
+        let rowHeight = CGFloat(40.00)
+        dailyTableView.rowHeight = rowHeight
     }
     
     override func viewWillAppear(_ animated: Bool) {

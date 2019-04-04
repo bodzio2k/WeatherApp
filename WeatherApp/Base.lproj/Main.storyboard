@@ -102,11 +102,12 @@
                                                 <constraint firstItem="MyN-WB-EPs" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="99B-4m-rX6"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="centerX" secondItem="qvR-bQ-YjA" secondAttribute="centerX" id="ARd-gl-Hvw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="rhA-Zk-wvE" secondAttribute="trailing" id="C8X-0E-CjM"/>
+                                                <constraint firstItem="RuO-Im-jbl" firstAttribute="top" secondItem="qvR-bQ-YjA" secondAttribute="top" id="E4a-ex-FVX"/>
+                                                <constraint firstAttribute="bottom" secondItem="RuO-Im-jbl" secondAttribute="bottom" id="Wj3-sb-ghg"/>
                                                 <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" constant="-16" id="Z7B-ck-mv6"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="fOj-44-7s7"/>
                                                 <constraint firstItem="rhA-Zk-wvE" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="gfP-wh-FMo"/>
                                                 <constraint firstItem="slD-J7-ykh" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="mAK-aU-bUV"/>
-                                                <constraint firstItem="RuO-Im-jbl" firstAttribute="height" relation="lessThanOrEqual" secondItem="qvR-bQ-YjA" secondAttribute="height" id="q2A-l9-KuL"/>
                                                 <constraint firstItem="rhA-Zk-wvE" firstAttribute="leading" secondItem="slD-J7-ykh" secondAttribute="trailing" constant="8" id="w8F-Fz-nvJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
