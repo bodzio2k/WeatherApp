@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var favouritesButton: UIButton!
     
     var currentLocation: Location?
-    var currentForecast: ForecastProtocol?
+    var currentForecast: Forecast?
     var favourites: FavouritesProtocol?
     var favouritesCount: Int?
     var scrollToFavourite = 0
@@ -66,6 +66,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         currentLocation = favourites?.items[scrollToFavourite]
         currentForecast = Forecast(for: currentLocation!)
         
+        hourlyCollectionView.reloadData()
+        dailyTableView.reloadData()
+        
         return
     }
     
@@ -79,7 +82,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath) as! DailyTableViewCell
+        
+        let row = currentForecast?.nextDays[indexPath.row]
+        
+        cell.dayOfWeek.text = "LOL"
+        cell.conditions.image = UIImage(named: "rain")
+        cell.maxTemp.text = "200" + "°"
+        cell.minTemp.text = "-99" + "°"
         
         return cell
     }

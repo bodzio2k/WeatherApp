@@ -10,8 +10,3 @@ import Foundation
 
 typealias WeatherConditions = Array<String>
 
-
-
-//typealias Hourly = [[String: String]]
-
-typealias Daily = [String: String]

@@ -9,14 +9,13 @@
 import Foundation
 import UIKit
 
-class Forecast: ForecastProtocol {
+class Forecast {
     private let dateFormatter = DateFormatter()
     
     var today: [Hourly] = []
-    var nextDays: Daily
+    var nextDays: [Daily] = []
     
     init(for location: Location) {
-        nextDays = [:]
         let currentDate = Date()
         dateFormatter.timeStyle = .short
         
@@ -32,7 +31,9 @@ class Forecast: ForecastProtocol {
         }
         
         for i in 0...Globals.maxNextDaysCount {
-            self.nextDays[String(i)] = ""
+            let element = Daily(dayOfWeek: "LOL", minTemp: "20", maxTemp: "-20", conditions: UIImage(named: "rain")!)
+            
+            nextDays.append(element)
         }
     }
 }
