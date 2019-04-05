@@ -89,10 +89,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let row = currentForecast?.nextDays[indexPath.row]
         
-        cell.dayOfWeek.text = "LOL"
-        cell.conditions.image = UIImage(named: "rain")
-        cell.maxTemp.text = "200" + "°"
-        cell.minTemp.text = "-99" + "°"
+        cell.dayOfWeek.text = row?.dayOfWeek
+        cell.conditions.image = row?.conditions
+        cell.maxTemp.text = (row?.maxTemp ?? "--") + "°"
+        cell.minTemp.text = (row?.minTemp ?? "--") + "°"
         
         return cell
     }

@@ -14,4 +14,12 @@ for i in 0..<12 {
     
 }
 
+dateFormatter.weekdaySymbols
+
+for i in 0..<7 {
+    let nextDay = Calendar.current.date(byAdding: .day, value: i, to: currentDate)
+    dateFormatter.dateFormat = "EE"
+    let nd = dateFormatter.string(from: nextDay!)
+    print(nd)
+}
 
