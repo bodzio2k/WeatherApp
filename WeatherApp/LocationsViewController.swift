@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+class LocationsViewController: UIViewController {
     //MARK: Properties
     @IBOutlet var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
@@ -41,17 +41,9 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
             self.searchController.searchBar.becomeFirstResponder()
         }
     }
-    
-    //MARK: UISearchResultsUpdating
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchFor = searchController.searchBar.text ?? ""
-        
-        _ = locations!.filter(by: searchFor)
-        
-        tableView.reloadData()
-    }
-    
-    //MARK: UITableViewDelegate
+}
+
+extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
         let l = locations!.getLocation(at: indexPath)
@@ -78,7 +70,6 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    //MARK: UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         let rc = locations?.distinctCountries.count ?? 0
         
@@ -96,10 +87,21 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         
         return rc
     }
-    
-    //MARK: UISearchBarDelegate
+}
+
+extension LocationsViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         shouldShowSearchResults = false
+        tableView.reloadData()
+    }
+}
+
+extension LocationsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchFor = searchController.searchBar.text ?? ""
+        
+        _ = locations!.filter(by: searchFor)
+        
         tableView.reloadData()
     }
 }

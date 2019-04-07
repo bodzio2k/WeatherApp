@@ -9,7 +9,7 @@
 import UIKit
 import Swinject
 
-class FavouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavouritesViewController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
     var selectedLocation: Location?
@@ -34,9 +34,19 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         favourites?.load()
         tableView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier ?? "" == "backToHome" {
+            
+            let destVC = segue.destination as! HomeViewController
+            
+            destVC.currentLocation = selectedLocation
+            destVC.scrollToFavourite = selectedItemIndex
+        }
+    }
 }
 
-    extension FavouritesViewController {
+extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (favourites?.items.count ?? 0) + 1
@@ -69,16 +79,6 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         performSegue(withIdentifier: "backToHome", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier ?? "" == "backToHome" {
-            
-            let destVC = segue.destination as! HomeViewController
-        
-            destVC.currentLocation = selectedLocation
-            destVC.scrollToFavourite = selectedItemIndex
-        }
-    }
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let itemsCount = tableView.dataSource?.tableView(tableView, numberOfRowsInSection: 0) ?? 0
         
@@ -95,16 +95,17 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var rc: CGFloat!
         
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            var rc: CGFloat!
-            
-            if indexPath.row == favourites!.items.count + 1 {
-                rc = 120.00
-            }
-            
-            rc = 90
-            
-            return rc
+        if indexPath.row == favourites!.items.count + 1 {
+            rc = 120.00
         }
+        
+        rc = 90
+        
+        return rc
+    }
 }
+
