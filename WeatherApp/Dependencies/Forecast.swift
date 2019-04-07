@@ -15,6 +15,7 @@ class Forecast {
     
     var today: [Hourly] = []
     var nextDays: [Daily] = []
+    let iconCount = Globals.weatherConditions.count
     
     init(for location: Location) {
         getHourly()
@@ -28,7 +29,6 @@ class Forecast {
             let nextHour = Date(timeInterval: Double(i * 3600), since: currentDate)
             let currentHour = Calendar.current.component(.hour, from: nextHour)
             let temp = String(Int.random(in: -20...20))
-            let iconCount = Globals.weatherConditions.count
             let iconName = Globals.weatherConditions[Int.random(in: 0...iconCount - 1)]
             let element = Hourly(currentConditions: UIImage(named: iconName)!, currentTemp: temp, currentHour: String(currentHour))
             
@@ -43,8 +43,8 @@ class Forecast {
             let dayOfWeek = dateFormatter.string(from: nextDay!)
             let minTemp = Int.random(in: -100...100)
             let maxTemp = Int.random(in: minTemp...minTemp + 10)
-            
-            let element = Daily(dayOfWeek: dayOfWeek, minTemp: String(minTemp), maxTemp: String(maxTemp), conditions: UIImage(named: "rain")!)
+            let iconName = Globals.weatherConditions[Int.random(in: 0...iconCount - 1)]
+            let element = Daily(dayOfWeek: dayOfWeek, minTemp: String(minTemp), maxTemp: String(maxTemp), conditions: UIImage(named: iconName)!)
             
             nextDays.append(element)
         }

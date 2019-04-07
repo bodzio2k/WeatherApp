@@ -9,7 +9,7 @@
 import UIKit
 import Swinject
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
@@ -17,7 +17,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     @IBOutlet weak var favouritesButton: UIButton!
     
-    var currentLocation: Location?
+    var currentLocation: Location? {
+        didSet (newValue) {
+            if newValue != nil {
+                currentForecast = Forecast(for: newValue!)
+            }
+            else {
+                currentForecast = Forecast(for: favourites!.items[0])
+            }
+            
+            return
+        }
+    }
     var currentForecast: Forecast?
     var favourites: FavouritesProtocol?
     var favouritesCount: Int?
@@ -38,6 +49,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         favouritesCollectionView.delegate = self
         favouritesCollectionView.dataSource = self
+        
         
         nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
@@ -67,7 +79,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
         
         currentLocation = favourites?.items[scrollToFavourite]
-        currentForecast = Forecast(for: currentLocation!)
+        //currentForecast = Forecast(for: currentLocation!)
         
         hourlyCollectionView.reloadData()
         dailyTableView.reloadData()
@@ -75,7 +87,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return
     }
     
-    // MARK: TablewView
+    //MARK: Navigation
+    @IBAction func onShowFavorites() {
+        self.performSegue(withIdentifier: "showFavorites", sender: self)
+    }
+    
+    @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
+        return
+    }
+}
+
+    extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -97,17 +120,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
 
-    //MARK: Navigation
-    @IBAction func onShowFavorites() {
-        self.performSegue(withIdentifier: "showFavorites", sender: self)
-    }
-    
-    @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
-        return
-    }
 }
 
-extension HomeViewController {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
@@ -153,6 +168,18 @@ extension HomeViewController {
         
         return rc
     }
-    
+ 
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == favouritesCollectionView {
+            let currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+            
+            DispatchQueue.main.async {
+                self.currentLocation = self.favourites!.items[currentIndex]
+            }
+        }
+    }
     
 }
