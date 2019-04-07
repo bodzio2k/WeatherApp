@@ -19,12 +19,9 @@ class HomeViewController: UIViewController {
     
     var currentLocation: Location? {
         didSet (newValue) {
-            if newValue != nil {
-                currentForecast = Forecast(for: newValue!)
-            }
-            else {
-                currentForecast = Forecast(for: favourites!.items[0])
-            }
+            currentForecast = Forecast(for: newValue ?? favourites!.items[0])
+            hourlyCollectionView.reloadData()
+            dailyTableView.reloadData()
             
             return
         }
@@ -132,10 +129,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.icon.image = row?.currentConditions
             cell.now.text = row?.currentHour
             cell.temp.text = row?.currentTemp
-            //cell.now.text = currentForecast?.today[indexPath.row]
-            //cell.icon.image = image
-            //let currentTemp = currentForecast?.currentTemp ?? -99
-            //cell.temp.text = String(currentTemp)
             
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 0.1
@@ -176,9 +169,9 @@ extension HomeViewController: UIScrollViewDelegate {
         if scrollView == favouritesCollectionView {
             let currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
             
-            DispatchQueue.main.async {
-                self.currentLocation = self.favourites!.items[currentIndex]
-            }
+            self.currentLocation = self.favourites!.items[currentIndex]
+            
+            return
         }
     }
     
