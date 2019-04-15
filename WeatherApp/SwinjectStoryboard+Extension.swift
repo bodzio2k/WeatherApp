@@ -8,7 +8,7 @@
 
 import Foundation
 import SwinjectStoryboard
-import SwinjectAutoregistration
+//import SwinjectAutoregistration
 
 extension SwinjectStoryboard {
     @objc class func setup() {

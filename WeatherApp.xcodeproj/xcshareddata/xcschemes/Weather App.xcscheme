@@ -39,6 +39,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "GeoDBCitiesTest/testPerformanceExample()">
+               </Test>
+               <Test
                   Identifier = "WeatherAppTests/testPerformanceExample()">
                </Test>
                <Test

@@ -11,5 +11,6 @@ target 'WeatherApp' do
   pod 'CSV.swift', '~> 2.3.1'
   pod 'Swinject'
   pod 'SwinjectStoryboard'
-  pod 'SwinjectAutoregistration'
+  # pod 'SwinjectAutoregistration'
+  pod 'Alamofire'
 end
