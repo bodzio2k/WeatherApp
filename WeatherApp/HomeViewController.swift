@@ -8,6 +8,7 @@
 
 import UIKit
 import Swinject
+import CoreLocation
 
 class HomeViewController: UIViewController {
     //MARK: Properties
@@ -30,7 +31,9 @@ class HomeViewController: UIViewController {
     var favourites: FavouritesProtocol?
     var favouritesCount: Int?
     var scrollToFavourite = 0
-    var locations: LocationsProtocol?
+    var locations: [Location]?
+    var locationManager = CLLocationManager()
+    var dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -47,6 +50,9 @@ class HomeViewController: UIViewController {
         favouritesCollectionView.delegate = self
         favouritesCollectionView.dataSource = self
         
+        dateFormatter.timeStyle = .medium
+        
+        setUpLocationManager()
         
         nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
@@ -62,13 +68,23 @@ class HomeViewController: UIViewController {
         dailyTableView.rowHeight = rowHeight
     }
     
+    private func setUpLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        
+        print("setUpLocationManager: ", dateFormatter.string(from: Date()))
+        
+        locationManager.requestLocation()
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         favourites?.load()
         favouritesCount = favourites?.items.count ?? 0
         
         if favouritesCount == 0 {
-            let initialLocation = locations?.getLocation(by: 1132495)
-            favourites?.add(initialLocation!)
+            let initialLocation = Location()
+            
+            favourites?.add(initialLocation)
             favourites?.save()
         }
         
@@ -94,8 +110,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-    extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -116,7 +131,6 @@ class HomeViewController: UIViewController {
         
         return cell
     }
-
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -174,5 +188,15 @@ extension HomeViewController: UIScrollViewDelegate {
             return
         }
     }
+}
+
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopUpdatingLocation()
+    }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("didFailWithError: ", dateFormatter.string(from: Date()))
+        print(error.localizedDescription)
+    }
 }

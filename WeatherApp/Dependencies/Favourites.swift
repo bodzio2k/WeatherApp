@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Favourites: FavouritesProtocol {
+    var items: [Location] = []
+    var filePath = ""
+    var locationManager: CLLocationManager!
+    
     func delete(at index: Int, commit: Bool = false) -> Int {
         if index > items.count || index < 0 {
             return -1
@@ -21,9 +26,6 @@ class Favourites: FavouritesProtocol {
         
         return items.count
     }
-    
-    var items: [Location] = []
-    var filePath = ""
     
     init(_ dir : String) {
         filePath = dir + "/favorites.json"
@@ -65,7 +67,12 @@ class Favourites: FavouritesProtocol {
         }
         else
         {
-            items = []
+            locationManager = CLLocationManager()
+            //locationManager.delegate = self as? CLLocationManagerDelegate
+            
+            let initialLocation = Location()
+            
+            items.append(initialLocation)
             save()
         }
     }

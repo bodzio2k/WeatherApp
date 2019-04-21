@@ -35,9 +35,5 @@ class GeoDBClient: GeoDBClientProtocol {
                     completion(jsonDict, nil)
                 }
             }
-            //.responseString { response in
-            //    print(response)
-            //}
-        
     }
 }

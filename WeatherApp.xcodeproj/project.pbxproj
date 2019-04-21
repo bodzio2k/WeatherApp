@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B053491223513070010BEE8 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B053490223513070010BEE8 /* Locations.swift */; };
 		8B08C6CC22567B3400B8DAD7 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B08C6CA22567B3400B8DAD7 /* DailyTableViewCell.swift */; };
 		8B0995C922633CF0000852A5 /* GeoDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0995C822633CF0000852A5 /* GeoDBClient.swift */; };
 		8B0995CA22634FC9000852A5 /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B596689223528F300B17BE2 /* WeatherAppTests.swift */; };
@@ -22,7 +21,6 @@
 		8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */; };
 		8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */; };
 		8B3A2A052230636500CAFBF8 /* SwinjectStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */; };
-		8B3A2A0722306FF900CAFBF8 /* LocationsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A2A0622306FF900CAFBF8 /* LocationsProtocol.swift */; };
 		8B5DE25E21BD26F400DE8EC4 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE25D21BD26F400DE8EC4 /* FavouritesViewController.swift */; };
 		8B5DE26121BD288500DE8EC4 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5DE25F21BD288500DE8EC4 /* FavoriteTableViewCell.swift */; };
 		8B5DE26221BD288500DE8EC4 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B5DE26021BD288500DE8EC4 /* FavoriteTableViewCell.xib */; };
@@ -55,7 +53,6 @@
 /* Begin PBXFileReference section */
 		256692FC5E1CECA346AAD5F6 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		615C54A83E78F3C7795971B1 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
-		8B053490223513070010BEE8 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
 		8B08C6CA22567B3400B8DAD7 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		8B0995C822633CF0000852A5 /* GeoDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDBClient.swift; sourceTree = "<group>"; };
 		8B0995CB22635091000852A5 /* GeoDBCitiesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDBCitiesTest.swift; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 		8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesProtocol.swift; sourceTree = "<group>"; };
 		8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
 		8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Extension.swift"; sourceTree = "<group>"; };
-		8B3A2A0622306FF900CAFBF8 /* LocationsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsProtocol.swift; sourceTree = "<group>"; };
 		8B596689223528F300B17BE2 /* WeatherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppTests.swift; sourceTree = "<group>"; };
 		8B596695223557FD00B17BE2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B59669B22355A0A00B17BE2 /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,8 +176,6 @@
 			children = (
 				8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */,
 				8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */,
-				8B053490223513070010BEE8 /* Locations.swift */,
-				8B3A2A0622306FF900CAFBF8 /* LocationsProtocol.swift */,
 				8B0B645F2250CEDA00F4CB89 /* Forecast.swift */,
 				8BC1E1B1225BE8D500081D66 /* GeoDBClientProtocol.swift */,
 				8B0995C822633CF0000852A5 /* GeoDBClient.swift */,
@@ -393,14 +387,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B053491223513070010BEE8 /* Locations.swift in Sources */,
 				8B08C6CC22567B3400B8DAD7 /* DailyTableViewCell.swift in Sources */,
 				8B7C665621B1AD9300047A36 /* HourlyCollectionViewCell.swift in Sources */,
 				8B5DE26421BD302F00DE8EC4 /* Location.swift in Sources */,
 				8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */,
 				8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */,
 				8B89836621FB363200162764 /* Globals.swift in Sources */,
-				8B3A2A0722306FF900CAFBF8 /* LocationsProtocol.swift in Sources */,
 				8B0995C922633CF0000852A5 /* GeoDBClient.swift in Sources */,
 				8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */,
 				8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */,

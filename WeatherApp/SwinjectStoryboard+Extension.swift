@@ -14,23 +14,20 @@ extension SwinjectStoryboard {
     @objc class func setup() {
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let favourites = Favourites(documentDirectory)
-        let locations = Locations(Globals.maxLocationsCount)
         
         defaultContainer.storyboardInitCompleted(HomeViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)
-            c.locations = r.resolve(LocationsProtocol.self)
         }
         defaultContainer.storyboardInitCompleted(FavouritesViewController.self) { (r, c) in
-            c.locations = r.resolve(LocationsProtocol.self)
             c.favourites = r.resolve(FavouritesProtocol.self)
         }
         defaultContainer.storyboardInitCompleted(LocationsViewController.self) { (r, c) in
-            c.locations = r.resolve(LocationsProtocol.self)
             c.favourites = r.resolve(FavouritesProtocol.self)
+            c.geoDBClient = r.resolve(GeoDBClientProtocol.self)
         }
         
         defaultContainer.register(FavouritesProtocol.self, factory: {_ in return favourites})
-        defaultContainer.register(LocationsProtocol.self, factory: {_ in return locations})
+        defaultContainer.register(GeoDBClientProtocol.self, factory: {_ in return GeoDBClient()})
         
         /*defaultContainer.autoregister(FavouritesProtocol.self, name: "Favourites", initializer: Favourites.init)
         defaultContainer.autoregister(LocationsProtocol.self, name: "Locations", initializer: Locations.init)

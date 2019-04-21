@@ -8,7 +8,21 @@
 
 import Foundation
 
-public class Location: NSObject, Codable {
+struct Location: Codable, Hashable {
+    var city: String?
+    var country: String?
+    var countryCode: String?
+    var id: Int?
+    var latitude: Float32?
+    var longitude: Float32?
+    var name: String?
+    var region: String?
+    var regionCode: String?
+    var type: String?
+    var wikiDataId: String?
+}
+ 
+/*public class Location: NSObject, Codable {
     var name = "undefined"
     var country: String?
     var id: Int
@@ -26,3 +40,4 @@ public class Location: NSObject, Codable {
         return rc
     }
 }
+*/

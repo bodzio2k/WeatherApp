@@ -15,4 +15,5 @@ protocol GeoDBClientProtocol {
     var urlString: String { get }
     
     func fetchCities(by prefix: String, completion: @escaping WebServiceResponse)
+    /*func fetchNearestCity(latitude: Float32, longtitude: Float32, completion: @escaping WebServiceResponse)*/
 }

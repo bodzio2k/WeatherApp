@@ -13,8 +13,9 @@ class LocationsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     var shouldShowSearchResults = false
-    var locations: LocationsProtocol?
+    var locations: [Location]?
     var favourites: FavouritesProtocol?
+    var geoDBClient: GeoDBClientProtocol?
     
     func configureSearchBar() {
         searchController.searchResultsUpdater = self
@@ -46,7 +47,7 @@ class LocationsViewController: UIViewController {
 extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
-        let l = locations!.getLocation(at: indexPath)
+        let l = locations![indexPath.row]
         
         cell.textLabel?.text = l.name
         
@@ -54,7 +55,7 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let location = locations!.getLocation(at: indexPath)
+        let location = locations![indexPath.row]
         
         favourites!.add(location)
         favourites!.save()
@@ -71,22 +72,22 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let rc = locations?.distinctCountries.count ?? 0
+        let rc = 1//locations?.distinctCountries.count ?? 0
         
         return rc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rc = locations!.getCityCount(in: section)
+        let rc = locations?.count ?? 0
         
         return rc
     }
-    
+    /*
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let rc = locations!.distinctCountries[section]
         
         return rc
-    }
+    }*/
 }
 
 extension LocationsViewController: UISearchBarDelegate {
@@ -100,7 +101,13 @@ extension LocationsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchFor = searchController.searchBar.text ?? ""
         
-        _ = locations!.filter(by: searchFor)
+        //_ = locations!.filter(by: searchFor)
+        
+        geoDBClient?.fetchCities(by: searchFor, completion: { (response, error) in
+            if let response = response, let data = response["data"] {
+                print(data)
+            }
+        })
         
         tableView.reloadData()
     }

@@ -25,15 +25,19 @@ class GeoDBCitiesTest: XCTestCase {
     }
 
     func testGetCities() {
+        let expectation = XCTestExpectation(description: "Get cities")
+        
         client!.fetchCities(by: "les") { (response, error) in
             if let error = error {
                 print(error.localizedDescription)
             }
             
-            if let response = response, let data = response["data"] {
-                print(data)
+            if let response = response, let _ = response["data"] {
+                expectation.fulfill()
             }
         }
+        
+        wait(for: [expectation], timeout: 10.0)
     }
 
     func testPerformanceExample() {

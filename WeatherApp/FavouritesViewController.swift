@@ -14,7 +14,7 @@ class FavouritesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
-    var locations: LocationsProtocol?
+    var locations: [Location]?
     //var favouritesCount: Int!
     var selectedItemIndex = 0
     
@@ -73,7 +73,13 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedId = favourites!.items[indexPath.row].id
-        selectedLocation = locations!.getLocation(by: selectedId)
+        selectedLocation = locations!.first { (location) -> Bool in
+            if location.id == selectedId! {
+                return true
+            }
+            
+            return false
+        }
         selectedItemIndex = indexPath.row
         
         performSegue(withIdentifier: "backToHome", sender: self)

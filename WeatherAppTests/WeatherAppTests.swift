@@ -10,33 +10,30 @@ import XCTest
 @testable import WeatherApp
 
 class WeatherAppTests: XCTestCase {
-    var locations: Locations!
     var favourites: Favourites!
     let favouritesDir = "/Users/bodzio2k"
     
     override func setUp() {
         super.setUp()
         
-        locations = Locations(Globals.maxLocationsCount)
         favourites = Favourites(favouritesDir)
     }
     
     override func tearDown() {
         super.tearDown()
         
-        locations = nil
         favourites = nil
     }
     
-    func testCreatingLocations() {
+    /*func testCreatingLocations() {
         let created: Int
         
         created = locations.items.count
         
         XCTAssertEqual(created, Globals.maxLocationsCount, "OK")
-    }
+    }*/
     
-    func testCreatingFavourites() {
+    /*func testCreatingFavourites() {
         XCTAssertNotNil(favourites, "Favourties is not nil.")
         
         for l in locations.items {
@@ -45,7 +42,7 @@ class WeatherAppTests: XCTestCase {
         
         XCTAssertEqual(favourites!.items.count, Globals.maxLocationsCount)
         favourites.save()
-    }
+    }*/
     
     func testLoadFavourites() {
         favourites.load()
@@ -53,7 +50,7 @@ class WeatherAppTests: XCTestCase {
         XCTAssertEqual(favourites!.items.count, Globals.maxLocationsCount)
     }
     
-    func testLocations() {
+    /*func testLocations() {
         let distinctCountries = locations!.distinctCountries.count
         let i = 0
         var citiesInCountryCount = 0
@@ -64,7 +61,7 @@ class WeatherAppTests: XCTestCase {
             citiesInCountryCount = locations!.getCityCount(in: i)
             XCTAssertNotEqual(citiesInCountryCount, 0)
         }
-    }
+    }*/
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -73,7 +70,7 @@ class WeatherAppTests: XCTestCase {
         }
     }
     
-    func testFilteringLocations() {
+    /*func testFilteringLocations() {
         var phrases: [String: Int] = [:]
         
         phrases["les"] = 9
@@ -85,7 +82,7 @@ class WeatherAppTests: XCTestCase {
             XCTAssertEqual(filteredCount, v)
         }
         
-    }
+    }*/
     
     func testDeletingFavourites() {
         var itemsCount: Int!
