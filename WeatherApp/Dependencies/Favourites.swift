@@ -67,12 +67,6 @@ class Favourites: FavouritesProtocol {
         }
         else
         {
-            locationManager = CLLocationManager()
-            //locationManager.delegate = self as? CLLocationManagerDelegate
-            
-            let initialLocation = Location()
-            
-            items.append(initialLocation)
             save()
         }
     }

@@ -47,7 +47,6 @@ class FavouritesViewController: UIViewController {
 }
 
 extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
-    // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (favourites?.items.count ?? 0) + 1
     }
@@ -58,7 +57,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
             let location = favourites!.items[indexPath.row]
             
             favoriteCell.hour.text = "23:59"
-            favoriteCell.location.text = location.name
+            favoriteCell.location.text = location.city
             favoriteCell.currentTemp.text = "21°"
             
             return favoriteCell
@@ -72,14 +71,14 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedId = favourites!.items[indexPath.row].id
+        /*let selectedId = favourites!.items[indexPath.row].id
         selectedLocation = locations!.first { (location) -> Bool in
             if location.id == selectedId! {
                 return true
             }
             
             return false
-        }
+        }*/
         selectedItemIndex = indexPath.row
         
         performSegue(withIdentifier: "backToHome", sender: self)

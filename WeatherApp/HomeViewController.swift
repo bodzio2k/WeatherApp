@@ -29,7 +29,6 @@ class HomeViewController: UIViewController {
     }
     var currentForecast: Forecast?
     var favourites: FavouritesProtocol?
-    var favouritesCount: Int?
     var scrollToFavourite = 0
     var locations: [Location]?
     var locationManager = CLLocationManager()
@@ -52,7 +51,8 @@ class HomeViewController: UIViewController {
         
         dateFormatter.timeStyle = .medium
         
-        setUpLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
         nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
@@ -68,31 +68,24 @@ class HomeViewController: UIViewController {
         dailyTableView.rowHeight = rowHeight
     }
     
-    private func setUpLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        
-        print("setUpLocationManager: ", dateFormatter.string(from: Date()))
-        
-        locationManager.requestLocation()
-        
-    }
     override func viewWillAppear(_ animated: Bool) {
         favourites?.load()
-        favouritesCount = favourites?.items.count ?? 0
+        let favouritesCount = favourites?.items.count ?? 0
         
         if favouritesCount == 0 {
-            let initialLocation = Location()
-            
-            favourites?.add(initialLocation)
-            favourites?.save()
+            DispatchQueue.main.async {
+                print("Getting current location: ", self.dateFormatter.string(from: Date()))
+                self.locationManager.requestLocation()
+            }
         }
+        else
+        {
+            favouritesCollectionView.reloadData()
+            favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
         
-        favouritesCollectionView.reloadData()
-        favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
-        
-        currentLocation = favourites?.items[scrollToFavourite]
-        //currentForecast = Forecast(for: currentLocation!)
+            currentLocation = favourites?.items[scrollToFavourite]
+            //currentForecast = Forecast(for: currentLocation!)
+        }
         
         hourlyCollectionView.reloadData()
         dailyTableView.reloadData()
@@ -155,7 +148,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let fav: Location = favourites!.items[indexPath.row]
             
             cell.currentConditions.text = "foggy"
-            cell.currentCity.text = fav.name
+            cell.currentCity.text = fav.city
             cell.currentTemp.text = "22°"
             
             return cell
@@ -170,7 +163,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         if collectionView == favouritesCollectionView {
-            rc = favourites?.items.count ?? 0
+            rc = favourites?.items.count ?? 1
         }
         
         return rc
@@ -192,11 +185,39 @@ extension HomeViewController: UIScrollViewDelegate {
 
 extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locationManager.stopUpdatingLocation()
+        let geocoder = CLGeocoder()
+        let timestamp = dateFormatter.string(from: Date())
+        var currentPlacemark: CLPlacemark?
+        
+        geocoder.reverseGeocodeLocation(locations[0]) { (placemark, error) in
+            if let error = error {
+                print("Cannot retrieve placemark: \(timestamp); \(error.localizedDescription)")
+                return
+            }
+            
+            currentPlacemark = placemark![0]
+            let locality = currentPlacemark?.locality ?? "none"
+            
+            var initialLocation = Location()
+            let newId = UUID()
+            initialLocation.city = locality
+            initialLocation.longitude = locations[0].coordinate.longitude
+            initialLocation.latitude = locations[0].coordinate.latitude
+            initialLocation.id = newId.uuidString
+            self.favourites?.add(initialLocation)
+            self.favourites?.save()
+            
+            self.favouritesCollectionView.reloadData()
+            self.hourlyCollectionView.reloadData()
+            self.dailyTableView.reloadData()
+            
+            print("Placemark retrieved: \(timestamp); \(locality)")
+        }
+        
+        print("didUpdateLocations: ", dateFormatter.string(from: Date()))
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("didFailWithError: ", dateFormatter.string(from: Date()))
-        print(error.localizedDescription)
+        print("didFailWithError: ", dateFormatter.string(from: Date()), "; ", error.localizedDescription)
     }
 }

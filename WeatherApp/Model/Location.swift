@@ -12,9 +12,9 @@ struct Location: Codable, Hashable {
     var city: String?
     var country: String?
     var countryCode: String?
-    var id: Int?
-    var latitude: Float32?
-    var longitude: Float32?
+    var id: String?
+    var latitude: Double?
+    var longitude: Double?
     var name: String?
     var region: String?
     var regionCode: String?
