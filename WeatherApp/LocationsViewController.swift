@@ -16,6 +16,9 @@ class LocationsViewController: UIViewController {
     var locations: [Location]?
     var favourites: FavouritesProtocol?
     var geoDBClient: GeoDBClientProtocol?
+    var searchFor: String!
+    let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
+    let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
     
     func configureSearchBar() {
         searchController.searchResultsUpdater = self
@@ -47,9 +50,17 @@ class LocationsViewController: UIViewController {
 extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
-        let l = locations![indexPath.row]
+        let location = locations![indexPath.row]
+        let locationName = location.city ?? ""
+        let highlightedPart = NSAttributedString(string: String(locationName.prefix(searchFor.count)), attributes: highlightedAttrs)
+        let otherPart = NSAttributedString(string: String(locationName.suffix(locationName.count - searchFor.count)), attributes: normalAttrs)
+        let attributedText = NSMutableAttributedString()
         
-        cell.textLabel?.text = l.name
+        attributedText.append(highlightedPart)
+        attributedText.append(otherPart)
+        
+        cell.textLabel?.attributedText = attributedText
+        cell.detailTextLabel?.text = (location.region ?? "") + ", " + (location.country ?? "")
         
         return cell
     }
@@ -92,14 +103,13 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension LocationsViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        shouldShowSearchResults = false
-        tableView.reloadData()
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension LocationsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        let searchFor = searchController.searchBar.text ?? ""
+        searchFor = searchController.searchBar.text ?? ""
         
         if searchFor.count < 3 {
             locations = []

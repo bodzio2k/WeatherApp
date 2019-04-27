@@ -22,7 +22,12 @@ struct Location: Codable, Hashable {
     var wikiDataId: String?
     
     init(jsonData: [String:Any]) {
-        self.name = jsonData["name"] as? String ?? "unknown"
+        self.city = jsonData["name"] as? String ?? "unknown"
+        self.region = jsonData["region"] as? String ?? "unknown"
+        self.country = jsonData["country"] as? String ?? "unknown"
+        self.id = jsonData["id"] as? String ?? "unknown"
+        self.longitude = jsonData["longitude"] as? Double ?? 0.00
+        self.latitude = jsonData["latitude"] as? Double ?? 0.00
     }
     
     init() {
