@@ -31,8 +31,22 @@ class GeoDBClient: GeoDBClientProtocol {
                 if let err = response.error {
                     print(err.localizedDescription)
                     completion(nil, err)
-                } else if let jsonDict = response.result.value as? [String: Any] {
-                    completion(jsonDict, nil)
+                }
+                
+                if var responseDict = response.result.value as? [String:Any] {
+                    let dataArray = responseDict["data"] as? [[String:Any]]
+                    
+                    let locations = dataArray.flatMap { locations -> [Location] in
+                        var rc: [Location] = []
+                        
+                        for l in locations {
+                            rc.append(Location(jsonData: l))
+                        }
+                        
+                        return rc
+                    }
+                
+                    completion(locations, nil)
                 }
             }
     }

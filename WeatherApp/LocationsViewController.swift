@@ -101,14 +101,18 @@ extension LocationsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchFor = searchController.searchBar.text ?? ""
         
-        //_ = locations!.filter(by: searchFor)
+        if searchFor.count < 3 {
+            locations = []
+            tableView.reloadData()
+            
+            return				
+        }
         
-        geoDBClient?.fetchCities(by: searchFor, completion: { (response, error) in
-            if let response = response, let data = response["data"] {
-                print(data)
+        geoDBClient?.fetchCities(by: searchFor, completion: { (locations, error) in
+            if let locations = locations {
+                self.locations = locations
+                self.tableView.reloadData()
             }
         })
-        
-        tableView.reloadData()
     }
 }

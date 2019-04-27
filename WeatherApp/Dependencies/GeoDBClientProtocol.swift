@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-typealias WebServiceResponse = ([String: Any]?, Error?) -> Void
+typealias WebServiceResponse = ([Location]?, Error?) -> Void
 
 protocol GeoDBClientProtocol {
     var urlString: String { get }

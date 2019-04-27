@@ -20,6 +20,14 @@ struct Location: Codable, Hashable {
     var regionCode: String?
     var type: String?
     var wikiDataId: String?
+    
+    init(jsonData: [String:Any]) {
+        self.name = jsonData["name"] as? String ?? "unknown"
+    }
+    
+    init() {
+        return
+    }
 }
  
 /*public class Location: NSObject, Codable {
