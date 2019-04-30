@@ -7,19 +7,25 @@
 //
 
 import Foundation
+import CoreLocation
 
-struct Location: Codable, Hashable {
+class Location: NSObject, Codable {
     var city: String?
     var country: String?
     var countryCode: String?
     var id: String?
-    var latitude: Double?
-    var longitude: Double?
+    var latitude: Double!
+    var longitude: Double!
     var name: String?
     var region: String?
     var regionCode: String?
     var type: String?
     var wikiDataId: String?
+    var timeZoneAbbr: String?
+
+    override init() {
+        super.init()
+    }
     
     init(jsonData: [String:Any]) {
         self.city = jsonData["name"] as? String ?? "unknown"
@@ -30,8 +36,18 @@ struct Location: Codable, Hashable {
         self.latitude = jsonData["latitude"] as? Double ?? 0.00
     }
     
-    init() {
-        return
+    func updateTimezoneAbbr() {
+        let gc = CLGeocoder()
+        
+        let location = CLLocation(latitude: CLLocationDegrees(self.latitude), longitude: CLLocationDegrees(self.longitude))
+        
+        gc.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+            if let placemarks = placemarks {
+                let placemark = placemarks[0]
+                self.timeZoneAbbr = placemark.timeZone?.abbreviation() ?? "UTC"
+            }
+        })
+        
     }
 }
  

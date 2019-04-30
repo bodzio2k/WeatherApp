@@ -198,7 +198,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             currentPlacemark = placemark![0]
             let locality = currentPlacemark?.locality ?? "none"
             
-            var initialLocation = Location()
+            let initialLocation = Location()
             let newId = UUID()
             initialLocation.city = locality
             initialLocation.longitude = locations[0].coordinate.longitude
