@@ -10,12 +10,12 @@ import XCTest
 @testable import WeatherApp
 
 class GeoDBCitiesTest: XCTestCase {
-    var client: GeoDBClient?
+    var client: networkClient?
     
     override func setUp() {
         super.setUp()
         
-        client = GeoDBClient()
+        client = networkClient()
     }
 
     override func tearDown() {

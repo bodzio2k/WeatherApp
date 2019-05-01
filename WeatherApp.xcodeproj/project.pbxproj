@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B08C6CC22567B3400B8DAD7 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B08C6CA22567B3400B8DAD7 /* DailyTableViewCell.swift */; };
-		8B0995C922633CF0000852A5 /* GeoDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0995C822633CF0000852A5 /* GeoDBClient.swift */; };
+		8B0995C922633CF0000852A5 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0995C822633CF0000852A5 /* NetworkClient.swift */; };
 		8B0995CA22634FC9000852A5 /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B596689223528F300B17BE2 /* WeatherAppTests.swift */; };
 		8B0995CC22635091000852A5 /* GeoDBCitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0995CB22635091000852A5 /* GeoDBCitiesTest.swift */; };
 		8B0B172121ADCB79001A3219 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B172021ADCB79001A3219 /* AppDelegate.swift */; };
@@ -33,7 +33,7 @@
 		8BA4941F21D0E1E100941AAF /* world-cities.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8BA4941E21D0E1E100941AAF /* world-cities.csv */; };
 		8BA4942121D0F37C00941AAF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8BA4942021D0F37C00941AAF /* Podfile */; };
 		8BA64C4522553AF100C568E2 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA64C4422553AF100C568E2 /* Daily.swift */; };
-		8BC1E1B2225BE8D500081D66 /* GeoDBClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC1E1B1225BE8D500081D66 /* GeoDBClientProtocol.swift */; };
+		8BC1E1B2225BE8D500081D66 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC1E1B1225BE8D500081D66 /* NetworkClientProtocol.swift */; };
 		8BDE6FF02255201900B8099E /* Hourly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDE6FEF2255201900B8099E /* Hourly.swift */; };
 		8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE057962207055D0081A615 /* FavouriteCollectionViewCell.swift */; };
 		8BE057992207055D0081A615 /* FavouriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE057972207055D0081A615 /* FavouriteCollectionViewCell.xib */; };
@@ -54,7 +54,7 @@
 		256692FC5E1CECA346AAD5F6 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		615C54A83E78F3C7795971B1 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		8B08C6CA22567B3400B8DAD7 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
-		8B0995C822633CF0000852A5 /* GeoDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDBClient.swift; sourceTree = "<group>"; };
+		8B0995C822633CF0000852A5 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		8B0995CB22635091000852A5 /* GeoDBCitiesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDBCitiesTest.swift; sourceTree = "<group>"; };
 		8B0B171D21ADCB79001A3219 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0B172021ADCB79001A3219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		8BA4941E21D0E1E100941AAF /* world-cities.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "world-cities.csv"; sourceTree = "<group>"; };
 		8BA4942021D0F37C00941AAF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8BA64C4422553AF100C568E2 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
-		8BC1E1B1225BE8D500081D66 /* GeoDBClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDBClientProtocol.swift; sourceTree = "<group>"; };
+		8BC1E1B1225BE8D500081D66 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
 		8BDE6FEF2255201900B8099E /* Hourly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hourly.swift; sourceTree = "<group>"; };
 		8BE057962207055D0081A615 /* FavouriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		8BE057972207055D0081A615 /* FavouriteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -177,8 +177,8 @@
 				8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */,
 				8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */,
 				8B0B645F2250CEDA00F4CB89 /* Forecast.swift */,
-				8BC1E1B1225BE8D500081D66 /* GeoDBClientProtocol.swift */,
-				8B0995C822633CF0000852A5 /* GeoDBClient.swift */,
+				8BC1E1B1225BE8D500081D66 /* NetworkClientProtocol.swift */,
+				8B0995C822633CF0000852A5 /* NetworkClient.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -393,12 +393,12 @@
 				8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */,
 				8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */,
 				8B89836621FB363200162764 /* Globals.swift in Sources */,
-				8B0995C922633CF0000852A5 /* GeoDBClient.swift in Sources */,
+				8B0995C922633CF0000852A5 /* NetworkClient.swift in Sources */,
 				8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */,
 				8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */,
 				8B3A2A052230636500CAFBF8 /* SwinjectStoryboard+Extension.swift in Sources */,
 				8B5DE26721BD3F8000DE8EC4 /* LocationsViewController.swift in Sources */,
-				8BC1E1B2225BE8D500081D66 /* GeoDBClientProtocol.swift in Sources */,
+				8BC1E1B2225BE8D500081D66 /* NetworkClientProtocol.swift in Sources */,
 				8B0B172321ADCB79001A3219 /* HomeViewController.swift in Sources */,
 				8B5DE25E21BD26F400DE8EC4 /* FavouritesViewController.swift in Sources */,
 				8BA64C4522553AF100C568E2 /* Daily.swift in Sources */,

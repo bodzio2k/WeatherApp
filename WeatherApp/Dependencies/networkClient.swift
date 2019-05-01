@@ -1,5 +1,5 @@
 //
-//  GeoDBClient.swift
+//  networkClient.swift
 //  WeatherApp
 //
 //  Created by Krzysztof Podolak on 14/04/2019.
@@ -9,19 +9,17 @@
 import Foundation
 import Alamofire
 
-class GeoDBClient: GeoDBClientProtocol {
-    var urlString = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities"
-    
-    func fetchCities(by prefix: String, completion: @escaping WebServiceResponse) {
+class NetworkClient: NetworkClientProtocol {
+    func fetchCities(by prefix: String, completion: @escaping ([Location]?, Error?) -> Void) {
         var httpHeaders: HTTPHeaders? = [:]
         var parameters: Parameters? = [:]
         
-        httpHeaders!["X-RapidAPI-Host"] = "wft-geo-db.p.rapidapi.com"
-        httpHeaders!["X-RapidAPI-Key"] = "c05671319cmsh32fbc39efc265bcp13a062jsn77e8c381d4ea"
+        httpHeaders!["X-RapidAPI-Host"] = Globals.geoDBCitiesApiHost
+        httpHeaders!["X-RapidAPI-Key"] = Globals.geoDBCitiesApiKey
         
         parameters!["namePrefix"] = prefix
         
-        Alamofire.request(urlString,
+        Alamofire.request(Globals.geoDBCitiesUrl,
                           method: HTTPMethod.get,
                           parameters: parameters,
                           encoding: URLEncoding.default,

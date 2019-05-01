@@ -15,7 +15,7 @@ class LocationsViewController: UIViewController {
     var shouldShowSearchResults = false
     var locations: [Location]?
     var favourites: FavouritesProtocol?
-    var geoDBClient: GeoDBClientProtocol?
+    var networkClient: NetworkClientProtocol?
     var searchFor: String!
     let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
     let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
@@ -120,7 +120,7 @@ extension LocationsViewController: UISearchResultsUpdating {
             return				
         }
         
-        geoDBClient?.fetchCities(by: searchFor, completion: { (locations, error) in
+        networkClient?.fetchCities(by: searchFor, completion: { (locations, error) in
             if let locations = locations {
                 self.locations = locations
                 self.tableView.reloadData()

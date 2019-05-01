@@ -8,12 +8,12 @@
 
 import Foundation
 import SwinjectStoryboard
-//import SwinjectAutoregistration
 
 extension SwinjectStoryboard {
     @objc class func setup() {
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let favourites = Favourites(documentDirectory)
+        let networkClient = NetworkClient()
         
         defaultContainer.storyboardInitCompleted(HomeViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)
@@ -23,11 +23,11 @@ extension SwinjectStoryboard {
         }
         defaultContainer.storyboardInitCompleted(LocationsViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)
-            c.geoDBClient = r.resolve(GeoDBClientProtocol.self)
+            c.networkClient = r.resolve(NetworkClientProtocol.self)
         }
         
-        defaultContainer.register(FavouritesProtocol.self, factory: {_ in return favourites})
-        defaultContainer.register(GeoDBClientProtocol.self, factory: {_ in return GeoDBClient()})
+        defaultContainer.register(FavouritesProtocol.self, factory: { _ in return favourites })
+        defaultContainer.register(NetworkClientProtocol.self, factory: { _ in return networkClient })
         
         /*defaultContainer.autoregister(FavouritesProtocol.self, name: "Favourites", initializer: Favourites.init)
         defaultContainer.autoregister(LocationsProtocol.self, name: "Locations", initializer: Locations.init)
