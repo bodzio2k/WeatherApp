@@ -19,6 +19,7 @@ class LocationsViewController: UIViewController {
     var searchFor: String!
     let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
     let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
+    var detailText: String?
     
     func configureSearchBar() {
         searchController.searchResultsUpdater = self
@@ -60,7 +61,16 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
         attributedText.append(otherPart)
         
         cell.textLabel?.attributedText = attributedText
-        cell.detailTextLabel?.text = (location.region ?? "") + ", " + (location.country ?? "")
+        
+        if let region = location.region {
+            detailText = region + ", " + (location.country ?? "")
+        }
+        else
+        {
+            detailText = location.country ?? ""
+        }
+        
+        cell.detailTextLabel?.text = detailText!
         
         return cell
     }
@@ -83,9 +93,7 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let rc = 1//locations?.distinctCountries.count ?? 0
-        
-        return rc
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,12 +101,6 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
         
         return rc
     }
-    /*
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let rc = locations!.distinctCountries[section]
-        
-        return rc
-    }*/
 }
 
 extension LocationsViewController: UISearchBarDelegate {

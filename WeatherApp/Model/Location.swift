@@ -31,7 +31,7 @@ class Location: NSObject, Codable {
         super.init()
         
         self.city = jsonData["name"] as? String ?? "unknown"
-        self.region = jsonData["region"] as? String ?? "unknown"
+        self.region = jsonData["region"] as? String
         self.country = jsonData["country"] as? String ?? "unknown"
         self.id = jsonData["id"] as? Int ?? Int.min
         self.longitude = jsonData["longitude"] as? Double ?? 0.00
