@@ -199,15 +199,17 @@ extension HomeViewController: CLLocationManagerDelegate {
             let locality = currentPlacemark?.locality ?? "none"
             
             let initialLocation = Location()
-            let newId = UUID()
+            
             initialLocation.city = locality
             initialLocation.longitude = locations[0].coordinate.longitude
             initialLocation.latitude = locations[0].coordinate.latitude
-            initialLocation.id = newId.uuidString
-            self.favourites?.add(initialLocation)
-            self.favourites?.save()
+            initialLocation.id = Int.min
+            initialLocation.updateTimezoneAbbr {
+                self.favourites?.add(initialLocation)
+                self.favourites?.save()
+                self.favouritesCollectionView.reloadData()
+            }
             
-            self.favouritesCollectionView.reloadData()
             self.hourlyCollectionView.reloadData()
             self.dailyTableView.reloadData()
             

@@ -15,8 +15,8 @@ class FavouritesViewController: UIViewController {
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
     var locations: [Location]?
-    //var favouritesCount: Int!
     var selectedItemIndex = 0
+    let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,8 @@ class FavouritesViewController: UIViewController {
         
         let nibCell = UINib(nibName: "FavoriteTableViewCell", bundle: nil)
         tableView.register(nibCell, forCellReuseIdentifier: "FavoriteCell")
+        
+        dateFormatter.timeStyle = .short
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,8 +57,12 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row < favourites?.items.count ?? 0 {
             let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
             let location = favourites!.items[indexPath.row]
+            let timeZone = TimeZone(abbreviation: location.timeZoneAbbr ?? "GMT")
+            let currentDate = Date()
             
-            favoriteCell.hour.text = "23:59"
+            dateFormatter.timeZone = timeZone
+            
+            favoriteCell.hour.text = dateFormatter.string(from: currentDate)
             favoriteCell.location.text = location.city
             favoriteCell.currentTemp.text = "21°"
             

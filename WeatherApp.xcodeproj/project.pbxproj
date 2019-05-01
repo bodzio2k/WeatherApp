@@ -154,9 +154,9 @@
 			children = (
 				8B0B172F21ADCB7E001A3219 /* Info.plist */,
 				8B0B172021ADCB79001A3219 /* AppDelegate.swift */,
-				8B5DE25D21BD26F400DE8EC4 /* FavouritesViewController.swift */,
 				8B89836521FB363200162764 /* Globals.swift */,
 				8B0B172221ADCB79001A3219 /* HomeViewController.swift */,
+				8B5DE25D21BD26F400DE8EC4 /* FavouritesViewController.swift */,
 				8B5DE26621BD3F8000DE8EC4 /* LocationsViewController.swift */,
 				8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */,
 				8B0B172A21ADCB7E001A3219 /* Assets.xcassets */,

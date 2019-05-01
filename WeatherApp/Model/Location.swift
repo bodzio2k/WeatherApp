@@ -13,7 +13,7 @@ class Location: NSObject, Codable {
     var city: String?
     var country: String?
     var countryCode: String?
-    var id: String?
+    var id: Int!
     var latitude: Double!
     var longitude: Double!
     var name: String?
@@ -33,14 +33,14 @@ class Location: NSObject, Codable {
         self.city = jsonData["name"] as? String ?? "unknown"
         self.region = jsonData["region"] as? String ?? "unknown"
         self.country = jsonData["country"] as? String ?? "unknown"
-        self.id = jsonData["id"] as? String ?? "unknown"
+        self.id = jsonData["id"] as? Int ?? Int.min
         self.longitude = jsonData["longitude"] as? Double ?? 0.00
         self.latitude = jsonData["latitude"] as? Double ?? 0.00
         
-        updateTimezoneAbbr()
+        updateTimezoneAbbr { return }
     }
     
-    private func updateTimezoneAbbr() {
+    func updateTimezoneAbbr(_ completionHandler: @escaping () -> Void) {
         let gc = CLGeocoder()
         
         let location = CLLocation(latitude: CLLocationDegrees(self.latitude), longitude: CLLocationDegrees(self.longitude))
@@ -49,9 +49,10 @@ class Location: NSObject, Codable {
             if let placemarks = placemarks {
                 let placemark = placemarks[0]
                 self.timeZoneAbbr = placemark.timeZone?.abbreviation() ?? "UTC"
+                
+                completionHandler()
             }
         })
-        
     }
 }
  
