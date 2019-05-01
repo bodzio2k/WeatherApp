@@ -28,15 +28,19 @@ class Location: NSObject, Codable {
     }
     
     init(jsonData: [String:Any]) {
+        super.init()
+        
         self.city = jsonData["name"] as? String ?? "unknown"
         self.region = jsonData["region"] as? String ?? "unknown"
         self.country = jsonData["country"] as? String ?? "unknown"
         self.id = jsonData["id"] as? String ?? "unknown"
         self.longitude = jsonData["longitude"] as? Double ?? 0.00
         self.latitude = jsonData["latitude"] as? Double ?? 0.00
+        
+        updateTimezoneAbbr()
     }
     
-    func updateTimezoneAbbr() {
+    private func updateTimezoneAbbr() {
         let gc = CLGeocoder()
         
         let location = CLLocation(latitude: CLLocationDegrees(self.latitude), longitude: CLLocationDegrees(self.longitude))
