@@ -8,7 +8,9 @@
 
 import Foundation
 import Alamofire
+import CoreLocation
 
 protocol NetworkClientProtocol {
     func fetchCities(by prefix: String, completion: @escaping ([Location]?, Error?) -> Void)
+    func fetchWeatherForecast(for location: CLLocationCoordinate2D, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void)
 }

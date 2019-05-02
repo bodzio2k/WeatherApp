@@ -34,6 +34,7 @@
 		8BA4942121D0F37C00941AAF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8BA4942021D0F37C00941AAF /* Podfile */; };
 		8BA64C4522553AF100C568E2 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA64C4422553AF100C568E2 /* Daily.swift */; };
 		8BC1E1B2225BE8D500081D66 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC1E1B1225BE8D500081D66 /* NetworkClientProtocol.swift */; };
+		8BCCFDA6227AE2FE0088D665 /* Currently.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCCFDA5227AE2FE0088D665 /* Currently.swift */; };
 		8BDE6FF02255201900B8099E /* Hourly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDE6FEF2255201900B8099E /* Hourly.swift */; };
 		8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE057962207055D0081A615 /* FavouriteCollectionViewCell.swift */; };
 		8BE057992207055D0081A615 /* FavouriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE057972207055D0081A615 /* FavouriteCollectionViewCell.xib */; };
@@ -85,6 +86,7 @@
 		8BA4942021D0F37C00941AAF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8BA64C4422553AF100C568E2 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		8BC1E1B1225BE8D500081D66 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
+		8BCCFDA5227AE2FE0088D665 /* Currently.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currently.swift; sourceTree = "<group>"; };
 		8BDE6FEF2255201900B8099E /* Hourly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hourly.swift; sourceTree = "<group>"; };
 		8BE057962207055D0081A615 /* FavouriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		8BE057972207055D0081A615 /* FavouriteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				8B92961C220C5A9100300230 /* WeatherConditions.swift */,
 				8BDE6FEF2255201900B8099E /* Hourly.swift */,
 				8BA64C4422553AF100C568E2 /* Daily.swift */,
+				8BCCFDA5227AE2FE0088D665 /* Currently.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				8B0B64602250CEDA00F4CB89 /* Forecast.swift in Sources */,
 				8B0B172121ADCB79001A3219 /* AppDelegate.swift in Sources */,
 				8BDE6FF02255201900B8099E /* Hourly.swift in Sources */,
+				8BCCFDA6227AE2FE0088D665 /* Currently.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

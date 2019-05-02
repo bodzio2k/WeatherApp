@@ -17,4 +17,7 @@ public struct Globals {
     static let geoDBCitiesUrl = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities"
     static let geoDBCitiesApiKey = "c05671319cmsh32fbc39efc265bcp13a062jsn77e8c381d4ea"
     static let geoDBCitiesApiHost = "wft-geo-db.p.rapidapi.com"
+ 
+    static let darkSkyUrl = "https://api.darksky.net/forecast"
+    static let darkSkySecretKey = "5cf22a2a8a7bdbb5d69820ed2522de52"
 }
