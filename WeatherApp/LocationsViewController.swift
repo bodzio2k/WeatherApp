@@ -52,7 +52,7 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
         let location = locations![indexPath.row]
-        let locationName = location.city ?? ""
+        let locationName = location.city
         let highlightedPart = NSAttributedString(string: String(locationName.prefix(searchFor.count)), attributes: highlightedAttrs)
         let otherPart = NSAttributedString(string: String(locationName.suffix(locationName.count - searchFor.count)), attributes: normalAttrs)
         let attributedText = NSMutableAttributedString()
@@ -63,11 +63,11 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.attributedText = attributedText
         
         if let region = location.region {
-            detailText = region + ", " + (location.country ?? "")
+            detailText = region + ", " + location.country
         }
         else
         {
-            detailText = location.country ?? ""
+            detailText = location.country
         }
         
         cell.detailTextLabel?.text = detailText!

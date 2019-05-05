@@ -17,6 +17,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.storyboardInitCompleted(HomeViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)
+            c.networkClient = r.resolve(NetworkClientProtocol.self)
         }
         defaultContainer.storyboardInitCompleted(FavouritesViewController.self) { (r, c) in
             c.favourites = r.resolve(FavouritesProtocol.self)

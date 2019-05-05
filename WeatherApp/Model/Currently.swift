@@ -7,13 +7,21 @@
 //
 
 import Foundation
-
+import UIKit
 struct Currently {
-    var summary: String?
-    var icon: String? {
-        didSet {
-            return
+    var summary: String
+    var icon: String {
+        willSet {
+            image = UIImage(named: newValue)
         }
     }
-    var temperature: Double?
+    private var image: UIImage!
+    
+    var temperature: Double
+    
+    init(jsonData: [String:Any]) {
+        self.summary = jsonData["summary"] as? String ?? "unknown"
+        self.icon = jsonData["icon"] as? String ?? "minus"
+        self.temperature = jsonData["temperature"] as? Double ?? -273.15
+    }
 }

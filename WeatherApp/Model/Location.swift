@@ -10,13 +10,13 @@ import Foundation
 import CoreLocation
 
 class Location: NSObject, Codable {
-    var city: String?
-    var country: String?
+    var city: String = "unknown"
+    var country: String = "unknown"
     var countryCode: String?
-    var id: Int!
-    var latitude: Double!
-    var longitude: Double!
-    var name: String?
+    var id: Int = Int.min
+    var latitude: Double = 0.00
+    var longitude: Double = 0.00
+    var name: String = "unknown"
     var region: String?
     var regionCode: String?
     var type: String?

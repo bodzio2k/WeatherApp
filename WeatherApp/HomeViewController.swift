@@ -21,9 +21,7 @@ class HomeViewController: UIViewController {
     var currentLocation: Location? {
         didSet (newValue) {
             currentForecast = Forecast(for: newValue ?? favourites!.items[0])
-            hourlyCollectionView.reloadData()
-            dailyTableView.reloadData()
-            
+
             return
         }
     }
@@ -33,6 +31,8 @@ class HomeViewController: UIViewController {
     var locations: [Location]?
     var locationManager = CLLocationManager()
     var dateFormatter = DateFormatter()
+    var networkClient: NetworkClientProtocol?
+    var currently: Currently?
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -145,12 +145,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
-            let fav: Location = favourites!.items[indexPath.row]
-            
-            cell.currentConditions.text = "foggy"
+            let fav = favourites!.items[indexPath.row]
+            let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
+        
+            self.networkClient?.fetchWeatherForecast(for: coordinate, completion: { (currently, hourly, daily, error) in
+                if let error = error {
+                    fatalError(error.localizedDescription)
+                }
+                
+                self.currently = currently!
+            })
+        
+            /*cell.currentConditions.text = currently!.summary
             cell.currentCity.text = fav.city
-            cell.currentTemp.text = "22°"
-            
+            cell.currentTemp.text = String(currently!.temperature) + "°"
+            */
             return cell
         }
     }

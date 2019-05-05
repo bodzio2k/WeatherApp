@@ -7,15 +7,16 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import WeatherApp
 
-class GeoDBCitiesTest: XCTestCase {
-    var client: networkClient?
+class NetworkClientTest: XCTestCase {
+    var client: NetworkClient?
     
     override func setUp() {
         super.setUp()
         
-        client = networkClient()
+        client = NetworkClient()
     }
 
     override func tearDown() {
@@ -32,14 +33,34 @@ class GeoDBCitiesTest: XCTestCase {
                 print(error.localizedDescription)
             }
             
-            if let response = response, let _ = response["data"] {
+            if let _ = response {
                 expectation.fulfill()
             }
         }
         
         wait(for: [expectation], timeout: 10.0)
     }
-
+    
+    func testGetWeatherForecast() {
+        let expectation = XCTestExpectation(description: "Get cities")
+        
+        let latitude = CLLocationDegrees(exactly: 23.01)
+        let longtitude = CLLocationDegrees(exactly: 52.99)
+        let coordinates = CLLocationCoordinate2D(latitude: latitude!, longitude: longtitude!)
+        
+        client!.fetchWeatherForecast(for: coordinates) { (currently, hourly, daily, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            if let _ = currently {
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

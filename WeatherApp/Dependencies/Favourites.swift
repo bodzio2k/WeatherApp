@@ -61,7 +61,7 @@ class Favourites: FavouritesProtocol {
             if let file = FileHandle(forReadingAtPath: filePath) {
                 let data = file.readDataToEndOfFile()
                 let favourites = try? decoder.decode([Location].self, from: data)
-                self.items = favourites!
+                self.items = favourites ?? []
                 file.closeFile()
             }
         }
