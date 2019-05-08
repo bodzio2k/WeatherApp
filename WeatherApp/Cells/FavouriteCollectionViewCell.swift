@@ -12,6 +12,7 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var currentConditions: UILabel!
     @IBOutlet weak var currentCity: UILabel!
     @IBOutlet weak var currentTemp: UILabel!
+    @IBOutlet weak var prefetchingIndicator: UIActivityIndicatorView!
     
     override init(frame: CGRect) {
        super.init(frame: frame)
@@ -21,5 +22,24 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func configure(with currently: Currently?, for location: Location?) -> Void {
+        var whilePrefetching = false
+        
+        if let currently = currently, let location = location {
+            currentConditions.text = currently.summary
+            currentCity.text = location.city
+            currentTemp.text = String(currently.temperature) + "°"
+        }
+        else
+        {
+            whilePrefetching = true
+        }
+        
+        currentConditions.isHidden = whilePrefetching
+        currentCity.isHidden = whilePrefetching
+        currentTemp.isHidden = whilePrefetching
+        prefetchingIndicator.isHidden = !whilePrefetching
     }
 }

@@ -21,18 +21,15 @@ class HomeViewController: UIViewController {
     var currentLocation: Location? {
         didSet (newValue) {
             currentForecast = Forecast(for: newValue ?? favourites!.items[0])
-
-            return
         }
     }
     var currentForecast: Forecast?
     var favourites: FavouritesProtocol?
     var scrollToFavourite = 0
-    var locations: [Location]?
     var locationManager = CLLocationManager()
     var dateFormatter = DateFormatter()
     var networkClient: NetworkClientProtocol?
-    var currently: Currently?
+    var prefetched: [Int:Currently?] = [:]
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -48,6 +45,7 @@ class HomeViewController: UIViewController {
         
         favouritesCollectionView.delegate = self
         favouritesCollectionView.dataSource = self
+        favouritesCollectionView.prefetchDataSource = self
         
         dateFormatter.timeStyle = .medium
         
@@ -131,11 +129,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
             
-            let row = currentForecast?.today[indexPath.row]
-            
-            cell.icon.image = row?.currentConditions
-            cell.now.text = row?.currentHour
-            cell.temp.text = row?.currentTemp
+            cell.icon.image = UIImage(named: "minus")
+            cell.now.text = "Chuj"
+            cell.temp.text = "-273.15" + "°"
             
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 0.1
@@ -145,21 +141,29 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
-            let fav = favourites!.items[indexPath.row]
-            let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
-        
-            self.networkClient?.fetchWeatherForecast(for: coordinate, completion: { (currently, hourly, daily, error) in
-                if let error = error {
-                    fatalError(error.localizedDescription)
-                }
+            
+            guard let fav = favourites?.items[indexPath.row] else {
+                fatalError("Cannot get fav...")
+            }
+            
+            if let currently = prefetched[fav.id] {
+                cell.configure(with: currently, for: fav)
+            }
+            else
+            {
+                let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
-                self.currently = currently!
-            })
-        
-            /*cell.currentConditions.text = currently!.summary
-            cell.currentCity.text = fav.city
-            cell.currentTemp.text = String(currently!.temperature) + "°"
-            */
+                networkClient?.fetchWeatherForecast(for: coordinates, completion: { (currently, hourly, daily, error) in
+                    if let error = error {
+                        fatalError(error.localizedDescription)
+                    }
+                    
+                    self.prefetched[fav.id] = currently!
+                    
+                    cell.configure(with: currently, for: nil)
+                })
+            }
+            
             return cell
         }
     }
@@ -231,4 +235,29 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError: ", dateFormatter.string(from: Date()), "; ", error.localizedDescription)
     }
+}
+
+extension HomeViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if collectionView != favouritesCollectionView { return }
+        
+        let rows = indexPaths.compactMap { i in return i.row }
+        print("Prefetching rows \(rows)...")
+        
+        for i in rows {
+            let fav = favourites!.items[i]
+            let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
+        
+            self.networkClient?.fetchWeatherForecast(for: coordinate, completion: { (currently, hourly, daily, error) in
+                if let error = error {
+                    fatalError(error.localizedDescription)
+                }
+                
+                print("Prefetched weather for row \(i)...")
+                
+                self.prefetched[fav.id] = currently!
+            })
+        }
+    }
+
 }

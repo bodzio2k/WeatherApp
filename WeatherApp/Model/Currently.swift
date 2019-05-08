@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 struct Currently {
     var summary: String
     var icon: String {
@@ -16,7 +17,6 @@ struct Currently {
         }
     }
     private var image: UIImage!
-    
     var temperature: Double
     
     init(jsonData: [String:Any]) {
