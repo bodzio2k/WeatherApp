@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Swinject
+import CoreLocation
 
 class FavouritesViewController: UIViewController {
     //MARK: Properties
@@ -17,6 +17,8 @@ class FavouritesViewController: UIViewController {
     var locations: [Location]?
     var selectedItemIndex = 0
     let dateFormatter = DateFormatter()
+    var networkClient: NetworkClientProtocol?
+    var currentTemps: [Int:Double] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,7 @@ class FavouritesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         favourites?.load()
-        tableView.reloadData()
+        getCurrentTemps()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -44,6 +46,29 @@ class FavouritesViewController: UIViewController {
             
             destVC.currentLocation = selectedLocation
             destVC.scrollToFavourite = selectedItemIndex
+        }
+    }
+    
+    func getCurrentTemps() {
+        guard let favourites = favourites else {
+            fatalError("Cannot get favourites...")
+        }
+        
+        for fav in favourites.items {
+            OperationQueue.main.addOperation {
+                let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
+                
+                self.networkClient?.fetchWeatherForecast(for: coordinates, completion: {(currently, hourly, daily, error) in
+                    if let error = error {
+                        print("Cannot ger current weather for \(fav.city)...\(error.localizedDescription)...")
+                    }
+                    
+                    self.currentTemps[fav.id] = currently!.temperature
+                    
+                    print("Getting current temp for \(fav.city)...")
+                    self.tableView.reloadData()
+                })
+            }
         }
     }
 }
@@ -64,7 +89,15 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
             
             favoriteCell.hour.text = dateFormatter.string(from: currentDate)
             favoriteCell.location.text = location.city
-            favoriteCell.currentTemp.text = "21°"
+            
+            if let currentTemp = currentTemps[location.id] {
+                favoriteCell.currentTemp.text = String(currentTemp) + "°"
+            }
+            else
+            {
+                favoriteCell.currentTemp.text = "--" + "°"
+            }
+            
             
             return favoriteCell
         }
@@ -119,4 +152,3 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         return rc
     }
 }
-
