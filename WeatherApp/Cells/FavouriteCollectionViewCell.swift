@@ -40,6 +40,12 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
         currentConditions.isHidden = whilePrefetching
         currentCity.isHidden = whilePrefetching
         currentTemp.isHidden = whilePrefetching
-        prefetchingIndicator.isHidden = !whilePrefetching
+        if !whilePrefetching {
+            prefetchingIndicator.stopAnimating()
+        }
+        else
+        {
+            prefetchingIndicator.startAnimating()
+        }
     }
 }

@@ -82,13 +82,7 @@ class HomeViewController: UIViewController {
             favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
         
             currentLocation = favourites?.items[scrollToFavourite]
-            //currentForecast = Forecast(for: currentLocation!)
         }
-        
-        hourlyCollectionView.reloadData()
-        dailyTableView.reloadData()
-        
-        return
     }
     
     //MARK: Navigation
@@ -160,6 +154,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     
                     self.prefetched[fav.id] = currently!
                     
+                    collectionView.reloadItems(at: [indexPath])
                     cell.configure(with: currently, for: nil)
                 })
             }
@@ -221,13 +216,26 @@ extension HomeViewController: CLLocationManagerDelegate {
                 self.favourites?.add(initialLocation)
                 self.favourites?.save()
                 self.favouritesCollectionView.reloadData()
+                
+                guard let fav = self.favourites?.items[self.scrollToFavourite] else {
+                    fatalError("Error while getting fav...")
+                }
+                
+                let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
+                self.networkClient?.fetchWeatherForecast(for: coordinates, completion: {(currently, hourly, daily, error) in
+                    if let error = error {
+                        fatalError("Error occured while getting forecast... \(error.localizedDescription)...")
+                    }
+                    
+                    self.prefetched[0] = currently!
+                })
+                
+                print("Placemark retrieved: \(timestamp); \(locality)")
+            }
             }
             
             self.hourlyCollectionView.reloadData()
             self.dailyTableView.reloadData()
-            
-            print("Placemark retrieved: \(timestamp); \(locality)")
-        }
         
         print("didUpdateLocations: ", dateFormatter.string(from: Date()))
     }
@@ -248,15 +256,18 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
             let fav = favourites!.items[i]
             let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
         
-            self.networkClient?.fetchWeatherForecast(for: coordinate, completion: { (currently, hourly, daily, error) in
-                if let error = error {
-                    fatalError(error.localizedDescription)
-                }
-                
-                print("Prefetched weather for row \(i)...")
-                
-                self.prefetched[fav.id] = currently!
-            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                self.networkClient?.fetchWeatherForecast(for: coordinate, completion: { (currently, hourly, daily, error) in
+                    if let error = error {
+                        fatalError(error.localizedDescription)
+                    }
+                    
+                    print("Prefetched weather for row \(i)...")
+                    
+                    self.prefetched[fav.id] = currently!
+                })
+            }
+            
         }
     }
 
