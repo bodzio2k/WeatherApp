@@ -18,7 +18,7 @@ class FavouritesViewController: UIViewController {
     var selectedItemIndex = 0
     let dateFormatter = DateFormatter()
     var networkClient: NetworkClientProtocol?
-    var currentTemps: [Int:Double] = [:]
+    var currentTemps: [Int:Int] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +26,8 @@ class FavouritesViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        let nibCell = UINib(nibName: "FavoriteTableViewCell", bundle: nil)
-        tableView.register(nibCell, forCellReuseIdentifier: "FavoriteCell")
+        let nibCell = UINib(nibName: "FavouriteTableViewCell", bundle: nil)
+        tableView.register(nibCell, forCellReuseIdentifier: "FavouriteTableViewCell")
         
         dateFormatter.timeStyle = .short
     }
@@ -80,7 +80,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < favourites?.items.count ?? 0 {
-            let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
+            let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavouriteTableViewCell", for: indexPath) as! FavouriteTableViewCell
             let location = favourites!.items[indexPath.row]
             let timeZone = TimeZone(abbreviation: location.timeZoneAbbr ?? "GMT")
             let currentDate = Date()

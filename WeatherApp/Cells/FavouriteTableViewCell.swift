@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteTableViewCell: UITableViewCell {
+class FavouriteTableViewCell: UITableViewCell {
     @IBOutlet weak var hour: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var currentTemp: UILabel!

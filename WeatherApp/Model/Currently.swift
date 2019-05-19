@@ -17,11 +17,11 @@ struct Currently {
         }
     }
     private var image: UIImage!
-    var temperature: Double
+    var temperature: Int
     
     init(jsonData: [String:Any]) {
         self.summary = jsonData["summary"] as? String ?? "unknown"
         self.icon = jsonData["icon"] as? String ?? "minus"
-        self.temperature = jsonData["temperature"] as? Double ?? -273.15
+        self.temperature = Int(jsonData["temperature"] as? Double ?? -273)
     }
 }
