@@ -64,6 +64,10 @@ class HomeViewController: UIViewController {
         
         let rowHeight = CGFloat(40.00)
         dailyTableView.rowHeight = rowHeight
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +75,12 @@ class HomeViewController: UIViewController {
         let favouritesCount = favourites?.items.count ?? 0
         
         if favouritesCount == 0 {
+            if !CLLocationManager.locationServicesEnabled() {
+                print("Cannot obtain current location...")
+                
+                return
+            }
+            
             DispatchQueue.main.async {
                 print("Getting current location: ", self.dateFormatter.string(from: Date()))
                 self.locationManager.requestLocation()
@@ -203,6 +213,10 @@ extension HomeViewController: CLLocationManagerDelegate {
                 return
             }
             
+            guard (self.favourites?.items.count ?? 0) == 0 else {
+                return
+            }
+                
             currentPlacemark = placemark![0]
             let locality = currentPlacemark?.locality ?? "none"
             
@@ -232,16 +246,28 @@ extension HomeViewController: CLLocationManagerDelegate {
                 
                 print("Placemark retrieved: \(timestamp); \(locality)")
             }
-            }
+        }
             
-            self.hourlyCollectionView.reloadData()
-            self.dailyTableView.reloadData()
+        self.hourlyCollectionView.reloadData()
+        self.dailyTableView.reloadData()
         
         print("didUpdateLocations: ", dateFormatter.string(from: Date()))
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError: ", dateFormatter.string(from: Date()), "; ", error.localizedDescription)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("didChangeAuthorization: \(status.rawValue)...")
+        
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            self.locationManager.requestLocation()
+        }
+    }
+    
+    func getCurrentLocation() {
+        return
     }
 }
 
