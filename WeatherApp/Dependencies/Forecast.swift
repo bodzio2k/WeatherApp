@@ -18,11 +18,11 @@ class Forecast {
     let iconCount = Globals.weatherConditions.count
     
     init(for location: Location) {
-        getHourly()
+        //getHourly()
         getDaily()
     }
     
-    private func getHourly () -> Void {
+    /*private func getHourly () -> Void {
         dateFormatter.timeStyle = .short
         
         for i in 0...Globals.maxHourlyCount {
@@ -34,7 +34,7 @@ class Forecast {
             
             today.append(element)
         }
-    }
+    }*/
     
     private func getDaily () -> Void {
         for i in 0...Globals.maxNextDaysCount {

@@ -10,7 +10,40 @@ import Foundation
 import UIKit
 
 struct Hourly {
-    var currentConditions: UIImage?
-    var currentTemp: String?
-    var currentHour: String?
+    var time: Date
+    var summary: String
+    var icon: String {
+        willSet {
+            image = UIImage(named: newValue)
+        }
+    }
+    private var image: UIImage!
+    var temperature: Int
+    
+    init(jsonData: [String:Any]) {
+        let time = jsonData["time"] as? Int64 ?? 0
+        self.time = Date(timeIntervalSince1970: TimeInterval(integerLiteral: time))
+        self.summary = jsonData["summary"] as? String ?? "unknown"
+        self.icon = jsonData["icon"] as? String ?? "minus"
+        self.temperature = Int(jsonData["temperature"] as? Double ?? -273)
+    }
 }
+//{
+//    "time": 1556704800,
+//    "summary": "Mostly Cloudy",
+//    "icon": "partly-cloudy-day",
+//    "precipIntensity": 0,
+//    "precipProbability": 0,
+//    "temperature": 62.09,
+//    "apparentTemperature": 62.09,
+//    "dewPoint": 36.36,
+//    "humidity": 0.38,
+//    "pressure": 1007,
+//    "windSpeed": 9.86,
+//    "windGust": 12.01,
+//    "windBearing": 329,
+//    "cloudCover": 0.72,
+//    "uvIndex": 3,
+//    "visibility": 6.22,
+//    "ozone": 418.74
+//},

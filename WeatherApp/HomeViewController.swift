@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
     var dateFormatter = DateFormatter()
     var networkClient: NetworkClientProtocol?
     var prefetched: [Int:Currently?] = [:]
+    var hourly: [Hourly]?
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -130,18 +131,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // HOURLY
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
             
-            cell.icon.image = UIImage(named: "minus")
-            cell.now.text = "Chuj"
-            cell.temp.text = "-273.15" + "°"
+            if let item = self.hourly?[indexPath.row] {
+                cell.icon.image = UIImage(named: "minus")
+                dateFormatter.timeStyle = .short
+                cell.now.text = dateFormatter.string(from: item.time).replacingOccurrences(of: ":00", with: "")
+                cell.temp.text = String(item.temperature) + "°"
+            }
             
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 0.1
             
             return cell
         }
+        // FAVOURITES COLLECTION VIEW
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
@@ -163,6 +169,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     }
                     
                     self.prefetched[fav.id] = currently!
+                    self.hourly = hourly!
                     
                     collectionView.reloadItems(at: [indexPath])
                     cell.configure(with: currently, for: nil)
@@ -291,6 +298,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                     print("Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
+                    self.hourly = hourly!
                 })
             }
             

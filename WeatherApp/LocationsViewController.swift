@@ -54,7 +54,9 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
         let location = locations![indexPath.row]
         let locationName = location.city
         let highlightedPart = NSAttributedString(string: String(locationName.prefix(searchFor.count)), attributes: highlightedAttrs)
-        let otherPart = NSAttributedString(string: String(locationName.suffix(locationName.count - searchFor.count)), attributes: normalAttrs)
+        var suffixLength = locationName.count - searchFor.count
+        suffixLength = suffixLength < 0 ? 0 : suffixLength
+        let otherPart = NSAttributedString(string: String(locationName.suffix(suffixLength)), attributes: normalAttrs)
         let attributedText = NSMutableAttributedString()
         
         attributedText.append(highlightedPart)
@@ -113,7 +115,7 @@ extension LocationsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchFor = searchController.searchBar.text ?? ""
         
-        if searchFor.count < 3 {
+        if searchFor.count < 3 || 1 == 0 {
             locations = []
             tableView.reloadData()
             

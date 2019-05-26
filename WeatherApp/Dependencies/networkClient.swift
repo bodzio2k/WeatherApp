@@ -24,16 +24,28 @@ class NetworkClient: NetworkClientProtocol {
                     completion(nil, nil, nil, error)
                 }
                 
-                if let responseDict = response.result.value as? [String:Any] {
-                    if let currentlyDict = responseDict["currently"] as? [String:Any] {
-                        currently = Currently(jsonData: currentlyDict)
+                guard let responseDict = response.result.value as? [String:Any] else {
+                    fatalError("Cannot get response from dark sky...")
+                }
+                
+                if let currentlyDict = responseDict["currently"] as? [String:Any],
+                    let hourlyDict = responseDict["hourly"] as? [String:Any],
+                    let hourlyDataArray = hourlyDict["data"] as? [[String:Any]] {
+                    
+                    currently = Currently(jsonData: currentlyDict)
+                    hourly = hourlyDataArray.compactMap { each in
+                        let h = Hourly(jsonData: each)
+                        return h
                     }
                     
                     completion(currently, hourly, daily, nil)
                 }
+                else
+                {
+                    fatalError("Error while getting current weather...")
+                }
             }
         }
-    
     
     func fetchCities(by prefix: String, completion: @escaping ([Location]?, Error?) -> Void) {
         var httpHeaders: HTTPHeaders? = [:]

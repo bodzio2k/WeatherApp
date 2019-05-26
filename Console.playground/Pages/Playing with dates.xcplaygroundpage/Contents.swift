@@ -23,3 +23,7 @@ for i in 0..<7 {
     print(nd)
 }
 
+let date = Date(timeIntervalSince1970: 1558873083)
+dateFormatter.timeStyle = .short
+dateFormatter.dateFormat = ""
+dateFormatter.string(from: date)
