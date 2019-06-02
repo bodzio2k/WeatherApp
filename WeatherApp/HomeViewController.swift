@@ -118,13 +118,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath) as! DailyTableViewCell
         
-        let row = currentForecast?.nextDays[indexPath.row]
-        
+        /*
         cell.dayOfWeek.text = row?.dayOfWeek
         cell.conditions.image = row?.conditions
         cell.maxTemp.text = (row?.maxTemp ?? "--") + "°"
         cell.minTemp.text = (row?.minTemp ?? "--") + "°"
-        
+        */
         return cell
     }
 }
@@ -136,10 +135,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
             
             if let item = self.hourly?[indexPath.row] {
-                cell.icon.image = UIImage(named: "minus")
+                cell.icon.image = item.image
                 dateFormatter.timeStyle = .short
                 cell.now.text = dateFormatter.string(from: item.time).replacingOccurrences(of: ":00", with: "")
                 cell.temp.text = String(item.temperature) + "°"
+                cell.icon.image = item.image
             }
             
             cell.layer.borderColor = UIColor.lightGray.cgColor

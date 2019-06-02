@@ -12,20 +12,18 @@ import UIKit
 struct Hourly {
     var time: Date
     var summary: String
-    var icon: String {
-        willSet {
-            image = UIImage(named: newValue)
-        }
-    }
-    private var image: UIImage!
+    var icon: String
+    var image: UIImage!
     var temperature: Int
     
     init(jsonData: [String:Any]) {
         let time = jsonData["time"] as? Int64 ?? 0
         self.time = Date(timeIntervalSince1970: TimeInterval(integerLiteral: time))
         self.summary = jsonData["summary"] as? String ?? "unknown"
-        self.icon = jsonData["icon"] as? String ?? "minus"
+        self.icon = jsonData["icon"] as? String ?? "refresh"
         self.temperature = Int(jsonData["temperature"] as? Double ?? -273)
+
+        self.image = UIImage(named: self.icon)
     }
 }
 //{

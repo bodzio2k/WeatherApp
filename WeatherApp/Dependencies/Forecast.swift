@@ -19,7 +19,7 @@ class Forecast {
     
     init(for location: Location) {
         //getHourly()
-        getDaily()
+        //getDaily()
     }
     
     /*private func getHourly () -> Void {
@@ -36,7 +36,7 @@ class Forecast {
         }
     }*/
     
-    private func getDaily () -> Void {
+    /*private func getDaily () -> Void {
         for i in 0...Globals.maxNextDaysCount {
             let nextDay = Calendar.current.date(byAdding: .day, value: i, to: currentDate)
             dateFormatter.dateFormat = "EE"
@@ -48,5 +48,5 @@ class Forecast {
             
             nextDays.append(element)
         }
-    }
+    }*/
 }

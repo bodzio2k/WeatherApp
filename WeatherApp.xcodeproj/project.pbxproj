@@ -15,9 +15,10 @@
 		8B0B172321ADCB79001A3219 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B172221ADCB79001A3219 /* HomeViewController.swift */; };
 		8B0B172621ADCB7A001A3219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B172421ADCB7A001A3219 /* Main.storyboard */; };
 		8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B172721ADCB7A001A3219 /* Weather_App.xcdatamodeld */; };
-		8B0B172B21ADCB7E001A3219 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B172A21ADCB7E001A3219 /* Assets.xcassets */; };
 		8B0B172E21ADCB7E001A3219 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B172C21ADCB7E001A3219 /* LaunchScreen.storyboard */; };
 		8B0B64602250CEDA00F4CB89 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0B645F2250CEDA00F4CB89 /* Forecast.swift */; };
+		8B2D308822A3ECD8007BF510 /* Climacons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2D308722A3ECD8007BF510 /* Climacons.xcassets */; };
+		8B2D308A22A3ED4F007BF510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2D308922A3ED4F007BF510 /* Assets.xcassets */; };
 		8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */; };
 		8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */; };
 		8B3A2A052230636500CAFBF8 /* SwinjectStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */; };
@@ -63,10 +64,11 @@
 		8B0B172221ADCB79001A3219 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8B0B172521ADCB7A001A3219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B0B172821ADCB7A001A3219 /* Weather_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weather_App.xcdatamodel; sourceTree = "<group>"; };
-		8B0B172A21ADCB7E001A3219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B0B172D21ADCB7E001A3219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B0B172F21ADCB7E001A3219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0B645F2250CEDA00F4CB89 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		8B2D308722A3ECD8007BF510 /* Climacons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Climacons.xcassets; sourceTree = "<group>"; };
+		8B2D308922A3ED4F007BF510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesProtocol.swift; sourceTree = "<group>"; };
 		8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
 		8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Extension.swift"; sourceTree = "<group>"; };
@@ -156,6 +158,8 @@
 		8B0B171F21ADCB79001A3219 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8B2D308922A3ED4F007BF510 /* Assets.xcassets */,
+				8B2D308722A3ECD8007BF510 /* Climacons.xcassets */,
 				8B3A2A01222BF09600CAFBF8 /* Dependencies */,
 				8B5DE26821BD6A4500DE8EC4 /* Model */,
 				8B5DE26521BD30DB00DE8EC4 /* Cells */,
@@ -166,7 +170,6 @@
 				8B5DE25D21BD26F400DE8EC4 /* FavouritesViewController.swift */,
 				8B5DE26621BD3F8000DE8EC4 /* LocationsViewController.swift */,
 				8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */,
-				8B0B172A21ADCB7E001A3219 /* Assets.xcassets */,
 				8BA4941D21D0E18200941AAF /* Data */,
 				8B0B172C21ADCB7E001A3219 /* LaunchScreen.storyboard */,
 				8B0B172421ADCB7A001A3219 /* Main.storyboard */,
@@ -320,9 +323,10 @@
 				8B0B172E21ADCB7E001A3219 /* LaunchScreen.storyboard in Resources */,
 				8B5DE26221BD288500DE8EC4 /* FavouriteTableViewCell.xib in Resources */,
 				8BE057992207055D0081A615 /* FavouriteCollectionViewCell.xib in Resources */,
-				8B0B172B21ADCB7E001A3219 /* Assets.xcassets in Resources */,
 				8BA4942121D0F37C00941AAF /* Podfile in Resources */,
 				8B0B172621ADCB7A001A3219 /* Main.storyboard in Resources */,
+				8B2D308A22A3ED4F007BF510 /* Assets.xcassets in Resources */,
+				8B2D308822A3ECD8007BF510 /* Climacons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +583,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 256692FC5E1CECA346AAD5F6 /* Pods-WeatherApp.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHN6385WQS;
 				ENABLE_TESTABILITY = YES;
@@ -599,7 +602,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 615C54A83E78F3C7795971B1 /* Pods-WeatherApp.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHN6385WQS;
 				ENABLE_TESTABILITY = YES;
