@@ -18,19 +18,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     @IBOutlet weak var favouritesButton: UIButton!
     
-    var currentLocation: Location? {
-        didSet (newValue) {
-            currentForecast = Forecast(for: newValue ?? favourites!.items[0])
-        }
-    }
-    var currentForecast: Forecast?
     var favourites: FavouritesProtocol?
     var scrollToFavourite = 0
     var locationManager = CLLocationManager()
     var dateFormatter = DateFormatter()
     var networkClient: NetworkClientProtocol?
     var prefetched: [Int:Currently?] = [:]
+    var prefetchedHourly: [Int:[Hourly]?] = [:]
     var hourly: [Hourly]?
+    var lastFavouriteIndex: Int = 0
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -91,8 +87,8 @@ class HomeViewController: UIViewController {
         {
             favouritesCollectionView.reloadData()
             favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
-        
-            currentLocation = favourites?.items[scrollToFavourite]
+            
+            lastFavouriteIndex = scrollToFavourite
         }
     }
     
@@ -158,6 +154,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             if let currently = prefetched[fav.id] {
                 cell.configure(with: currently, for: fav)
+                //self.hourly = prefetchedHourly[fav.id]!
+                self.hourlyCollectionView.reloadData()
             }
             else
             {
@@ -169,7 +167,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     }
                     
                     self.prefetched[fav.id] = currently!
-                    self.hourly = hourly!
+                    self.prefetchedHourly[fav.id] = hourly!
                     
                     collectionView.reloadItems(at: [indexPath])
                     cell.configure(with: currently, for: nil)
@@ -201,9 +199,19 @@ extension HomeViewController: UIScrollViewDelegate {
         if scrollView == favouritesCollectionView {
             let currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
             
-            self.currentLocation = self.favourites!.items[currentIndex]
+            guard let fav = favourites?.items[currentIndex] else {
+                fatalError("Cannot get fav...")
+            }
             
-            return
+            if prefetchedHourly.keys.contains(fav.id) && lastFavouriteIndex != currentIndex {
+                self.hourly = prefetchedHourly[fav.id]!
+                self.hourlyCollectionView.reloadData()
+                
+                let firstItem = IndexPath(item: 0, section: 0)
+                self.hourlyCollectionView.scrollToItem(at: firstItem, at: .left, animated: false)
+            }
+            
+            lastFavouriteIndex = currentIndex
         }
     }
 }
@@ -298,7 +306,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                     print("Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
-                    self.hourly = hourly!
+                    self.prefetchedHourly[fav.id] = hourly!
                 })
             }
             
