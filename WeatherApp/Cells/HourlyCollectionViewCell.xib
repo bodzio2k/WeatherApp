@@ -20,14 +20,14 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4w-0t-SLr">
-                        <rect key="frame" x="85" y="8" width="10" height="12"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <rect key="frame" x="84.5" y="8" width="11" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9q-OB-WUm">
-                        <rect key="frame" x="75.5" y="245.5" width="29" height="26.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <rect key="frame" x="77" y="248" width="26.5" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,7 +36,7 @@
                     </imageView>
                 </subviews>
             </view>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="6YD-6L-ull" firstAttribute="height" relation="lessThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="height" id="59S-6x-6XM"/>
                 <constraint firstItem="u9q-OB-WUm" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="BLz-h5-bRo"/>

@@ -26,47 +26,42 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WK1-gO-QvJ">
-                                <rect key="frame" x="8" y="28" width="304" height="187.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6vz-uQ-PYg">
-                                    <size key="itemSize" width="214" height="202"/>
+                                <rect key="frame" x="8" y="28" width="304" height="219"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rjn-YB-dZI">
+                                    <size key="itemSize" width="276" height="172"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="forecastDetails" id="kMS-Em-PCb">
-                                        <rect key="frame" x="0.0" y="-7.5" width="214" height="202"/>
+                                        <rect key="frame" x="0.0" y="23.5" width="276" height="172"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="214" height="202"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="276" height="172"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-xm-xWG">
-                                <rect key="frame" x="8" y="215.5" width="304" height="188.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7w2-YJ-3xl">
-                                    <size key="itemSize" width="50" height="120"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                            <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-xm-xWG">
+                                <rect key="frame" x="8" y="247" width="304" height="111"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewLayout key="collectionViewLayout" id="ZOQ-KZ-wXB" customClass="HourlyCollectionViewFlowLayout" customModule="WeatherApp" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HourlyCollectionViewCell" id="Eqh-Wa-iOo" customClass="HourlyCollectionViewCell" customModule="WeatherApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="34.5" width="50" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
-                                <rect key="frame" x="8" y="372.5" width="304" height="187.5"/>
+                                <rect key="frame" x="8" y="358" width="304" height="202"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="WeatherApp" customModuleProvider="target">
@@ -83,16 +78,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudy" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
-                                                    <rect key="frame" x="135.5" y="0.0" width="33" height="43.5"/>
+                                                    <rect key="frame" x="129.5" y="0.0" width="100" height="43.5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
-                                                    <rect key="frame" x="233.5" y="14" width="20" height="16"/>
+                                                    <rect key="frame" x="288.5" y="14" width="20" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Zk-wvE">
-                                                    <rect key="frame" x="261.5" y="14" width="20" height="16"/>
+                                                    <rect key="frame" x="316.5" y="14" width="20" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -131,12 +126,12 @@
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="G9Z-zx-wXy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" constant="8" id="KBh-ca-5Lq"/>
                             <constraint firstItem="WVj-Ov-mHO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="KjT-Lc-wvY"/>
-                            <constraint firstItem="lOX-6L-L5U" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" id="MOe-To-Lw9"/>
-                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" id="Nxc-JE-Rzi"/>
+                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.4" id="Nxc-JE-Rzi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WK1-gO-QvJ" secondAttribute="trailing" constant="8" id="XCG-FC-3MF"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="top" secondItem="WK1-gO-QvJ" secondAttribute="bottom" id="crv-CH-AA4"/>
-                            <constraint firstItem="ArT-xm-xWG" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" constant="1" id="dRo-RZ-Yrr"/>
+                            <constraint firstItem="ArT-xm-xWG" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.2" constant="1" id="dRo-RZ-Yrr"/>
                             <constraint firstItem="WK1-gO-QvJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="ncs-Mj-4IN"/>
+                            <constraint firstItem="lOX-6L-L5U" firstAttribute="top" secondItem="ArT-xm-xWG" secondAttribute="bottom" id="uoL-Bd-4at"/>
                             <constraint firstItem="WVj-Ov-mHO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="xVL-yM-Lrc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -146,7 +141,6 @@
                         <outlet property="dailyTableView" destination="lOX-6L-L5U" id="onP-JA-ENp"/>
                         <outlet property="favouritesButton" destination="WVj-Ov-mHO" id="gMW-Rt-fCk"/>
                         <outlet property="favouritesCollectionView" destination="WK1-gO-QvJ" id="xL7-aV-bWx"/>
-                        <outlet property="flowLayout" destination="7w2-YJ-3xl" id="9hj-p5-kvz"/>
                         <outlet property="hourlyCollectionView" destination="ArT-xm-xWG" id="2v5-S3-5W1"/>
                         <segue destination="PEh-Xk-Y3V" kind="show" identifier="showFavorites" id="fi4-Wk-Je3"/>
                     </connections>
@@ -183,7 +177,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Br-41-Jk5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <state key="normal" title="Add a location..."/>
                                                     <connections>
                                                         <segue destination="Ipr-q1-heh" kind="presentation" id="ezp-mC-y0r"/>
@@ -286,6 +280,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cloudy" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="cloudy" width="100" height="100"/>
     </resources>
 </document>

@@ -36,6 +36,8 @@ class HomeViewController: UIViewController {
             
         hourlyCollectionView.delegate = self
         hourlyCollectionView.dataSource = self
+        hourlyCollectionView.contentInsetAdjustmentBehavior = .never
+        hourlyCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         
         dailyTableView.delegate = self
         dailyTableView.dataSource = self
@@ -55,9 +57,15 @@ class HomeViewController: UIViewController {
         nibCell = UINib(nibName: "FavouriteCollectionViewCell", bundle: nil)
         favouritesCollectionView.register(nibCell, forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
         
-        let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        fl?.itemSize.width = self.view.frame.width - 16
-        fl?.minimumLineSpacing = 1
+        print("favouritesCollectionView.frame.height: \(favouritesCollectionView.frame.height)")
+        
+        if let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let width = favouritesCollectionView.frame.size.width
+            let height = favouritesCollectionView.frame.size.height
+            
+            fl.itemSize = CGSize(width: width, height: height)
+            fl.minimumLineSpacing = 1.0
+        }
         
         let rowHeight = CGFloat(40.00)
         dailyTableView.rowHeight = rowHeight
@@ -154,8 +162,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             if let currently = prefetched[fav.id] {
                 cell.configure(with: currently, for: fav)
-                //self.hourly = prefetchedHourly[fav.id]!
-                self.hourlyCollectionView.reloadData()
+                self.hourly = prefetchedHourly[fav.id]!
+                //self.hourlyCollectionView.reloadData()
             }
             else
             {
