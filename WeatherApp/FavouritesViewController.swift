@@ -41,10 +41,8 @@ class FavouritesViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ?? "" == "backToHome" {
-            
             let destVC = segue.destination as! HomeViewController
             
-            destVC.currentLocation = selectedLocation
             destVC.scrollToFavourite = selectedItemIndex
         }
     }

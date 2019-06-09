@@ -94,7 +94,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "Tokyo, Japan"
+         identifier = "Sydney, Australia"
          referenceType = "1">
       </LocationScenarioReference>
    </LaunchAction>
