@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
         favouritesCollectionView.delegate = self
         favouritesCollectionView.dataSource = self
         favouritesCollectionView.prefetchDataSource = self
-        
+    
         dateFormatter.timeStyle = .medium
         
         locationManager.delegate = self
@@ -57,15 +57,17 @@ class HomeViewController: UIViewController {
         nibCell = UINib(nibName: "FavouriteCollectionViewCell", bundle: nil)
         favouritesCollectionView.register(nibCell, forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
         
-        print("favouritesCollectionView.frame.height: \(favouritesCollectionView.frame.height)")
+        print(favouritesCollectionView.frame.size)
+        print(UIScreen.main.bounds)
+        print(self.view.frame.size)
         
-        if let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let width = favouritesCollectionView.frame.size.width
+        /*if let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let width = CGFloat(320)
             let height = favouritesCollectionView.frame.size.height
             
             fl.itemSize = CGSize(width: width, height: height)
-            fl.minimumLineSpacing = 1.0
-        }
+            fl.minimumLineSpacing = 0.0
+        }*/
         
         let rowHeight = CGFloat(40.00)
         dailyTableView.rowHeight = rowHeight
