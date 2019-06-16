@@ -1,5 +1,5 @@
 //
-//  HourlyCollectionViewFlowLayout.swift
+//  FavouritesCollectionViewFlowLayout.swift
 //  WeatherApp
 //
 //  Created by Krzysztof Podolak on 08/06/2019.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HourlyCollectionViewFlowLayout: UICollectionViewFlowLayout {
+class FavouritesCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() {
         guard let collectionView = self.collectionView else {
             print("Cannot get parent container...")
@@ -19,9 +19,8 @@ class HourlyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         scrollDirection = .horizontal
         
-        
         let collectionViewSize = collectionView.frame.size
-        let width = collectionViewSize.width / 7.0
+        let width = collectionViewSize.width
         let height = collectionViewSize.height
         
         itemSize = CGSize(width: width, height: height)

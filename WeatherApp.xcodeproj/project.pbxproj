@@ -32,6 +32,7 @@
 		8B7C665721B1AD9300047A36 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C665521B1AD9300047A36 /* HourlyCollectionViewCell.xib */; };
 		8B89836621FB363200162764 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89836521FB363200162764 /* Globals.swift */; };
 		8B92961D220C5A9100300230 /* WeatherConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92961C220C5A9100300230 /* WeatherConditions.swift */; };
+		8B9D4CEA22B642D400159808 /* FavouritesCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9D4CE922B642D400159808 /* FavouritesCollectionViewFlowLayout.swift */; };
 		8BA4941F21D0E1E100941AAF /* world-cities.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8BA4941E21D0E1E100941AAF /* world-cities.csv */; };
 		8BA4942121D0F37C00941AAF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8BA4942021D0F37C00941AAF /* Podfile */; };
 		8BA64C4522553AF100C568E2 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA64C4422553AF100C568E2 /* Daily.swift */; };
@@ -87,6 +88,7 @@
 		8B89836521FB363200162764 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		8B92961C220C5A9100300230 /* WeatherConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditions.swift; sourceTree = "<group>"; };
 		8B92961E221B40E700300230 /* Console.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Console.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8B9D4CE922B642D400159808 /* FavouritesCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8BA4941E21D0E1E100941AAF /* world-cities.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "world-cities.csv"; sourceTree = "<group>"; };
 		8BA4942021D0F37C00941AAF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8BA64C4422553AF100C568E2 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				8B5DE26621BD3F8000DE8EC4 /* LocationsViewController.swift */,
 				8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */,
 				8B0BDCEE22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift */,
+				8B9D4CE922B642D400159808 /* FavouritesCollectionViewFlowLayout.swift */,
 				8B0B172C21ADCB7E001A3219 /* LaunchScreen.storyboard */,
 				8B0B172421ADCB7A001A3219 /* Main.storyboard */,
 				8B0B172721ADCB7A001A3219 /* Weather_App.xcdatamodeld */,
@@ -400,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B9D4CEA22B642D400159808 /* FavouritesCollectionViewFlowLayout.swift in Sources */,
 				8B08C6CC22567B3400B8DAD7 /* DailyTableViewCell.swift in Sources */,
 				8B7C665621B1AD9300047A36 /* HourlyCollectionViewCell.swift in Sources */,
 				8B5DE26421BD302F00DE8EC4 /* Location.swift in Sources */,
