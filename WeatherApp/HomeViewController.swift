@@ -61,14 +61,6 @@ class HomeViewController: UIViewController {
         print(UIScreen.main.bounds)
         print(self.view.frame.size)
         
-        /*if let fl = favouritesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let width = CGFloat(320)
-            let height = favouritesCollectionView.frame.size.height
-            
-            fl.itemSize = CGSize(width: width, height: height)
-            fl.minimumLineSpacing = 0.0
-        }*/
-        
         let rowHeight = CGFloat(40.00)
         dailyTableView.rowHeight = rowHeight
         
@@ -99,6 +91,8 @@ class HomeViewController: UIViewController {
             favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
             
             lastFavouriteIndex = scrollToFavourite
+            
+            hourlyCollectionView.reloadData()
         }
     }
     
