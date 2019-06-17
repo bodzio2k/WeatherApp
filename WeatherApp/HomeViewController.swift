@@ -26,6 +26,8 @@ class HomeViewController: UIViewController {
     var prefetched: [Int:Currently?] = [:]
     var prefetchedHourly: [Int:[Hourly]?] = [:]
     var hourly: [Hourly]?
+    var daily: [Daily]?
+    var prefetchedDaily: [Int:[Daily]?] = [:]
     var lastFavouriteIndex: Int = 0
     
     override func viewDidLoad() {
@@ -93,6 +95,7 @@ class HomeViewController: UIViewController {
             lastFavouriteIndex = scrollToFavourite
             
             hourlyCollectionView.reloadData()
+//            dailyTableView.reloadData()
         }
     }
     
@@ -118,12 +121,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell", for: indexPath) as! DailyTableViewCell
         
-        /*
-        cell.dayOfWeek.text = row?.dayOfWeek
-        cell.conditions.image = row?.conditions
-        cell.maxTemp.text = (row?.maxTemp ?? "--") + "°"
-        cell.minTemp.text = (row?.minTemp ?? "--") + "°"
-        */
+        if let item = daily?[indexPath.row] {
+            dateFormatter.dateFormat = "EEEE"
+        
+            cell.dayOfWeek.text = dateFormatter.string(from: item.time)/*
+             cell.conditions.image = item.conditions
+             cell.maxTemp.text = (row?.maxTemp ?? "--") + "°"
+             cell.minTemp.text = (row?.minTemp ?? "--") + "°"*/
+        }
+        
         return cell
     }
 }
@@ -159,7 +165,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if let currently = prefetched[fav.id] {
                 cell.configure(with: currently, for: fav)
                 self.hourly = prefetchedHourly[fav.id]!
-                //self.hourlyCollectionView.reloadData()
+                self.daily = prefetchedDaily[fav.id]!
             }
             else
             {
@@ -172,6 +178,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     
                     self.prefetched[fav.id] = currently!
                     self.prefetchedHourly[fav.id] = hourly!
+                    self.prefetchedDaily[fav.id] = daily!
                     
                     collectionView.reloadItems(at: [indexPath])
                     cell.configure(with: currently, for: nil)
@@ -207,9 +214,12 @@ extension HomeViewController: UIScrollViewDelegate {
                 fatalError("Cannot get fav...")
             }
             
-            if prefetchedHourly.keys.contains(fav.id) && lastFavouriteIndex != currentIndex {
+            if prefetchedHourly.keys.contains(fav.id) && prefetchedDaily.keys.contains(fav.id) && lastFavouriteIndex != currentIndex {
                 self.hourly = prefetchedHourly[fav.id]!
                 self.hourlyCollectionView.reloadData()
+                
+                self.daily = prefetchedDaily[fav.id]!
+                self.dailyTableView.reloadData()
                 
                 let firstItem = IndexPath(item: 0, section: 0)
                 self.hourlyCollectionView.scrollToItem(at: firstItem, at: .left, animated: false)
@@ -311,6 +321,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                     
                     self.prefetched[fav.id] = currently!
                     self.prefetchedHourly[fav.id] = hourly!
+                    self.prefetchedDaily[fav.id] = daily!
                 })
             }
             
