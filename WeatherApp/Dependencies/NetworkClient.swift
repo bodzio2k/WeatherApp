@@ -30,12 +30,18 @@ class NetworkClient: NetworkClientProtocol {
                 
                 if let currentlyDict = responseDict["currently"] as? [String:Any],
                     let hourlyDict = responseDict["hourly"] as? [String:Any],
-                    let hourlyDataArray = hourlyDict["data"] as? [[String:Any]] {
-                    
+                    let hourlyDataArray = hourlyDict["data"] as? [[String:Any]],
+                    let dailyDict = responseDict["daily"] as? [String:Any],
+                    let dailyDataArray = dailyDict["data"] as? [[String:Any]]
+                {
                     currently = Currently(jsonData: currentlyDict)
                     hourly = hourlyDataArray.compactMap { each in
                         let h = Hourly(jsonData: each)
                         return h
+                    }
+                    daily = dailyDataArray.compactMap { each in
+                        let d = Daily(jsonData: each)
+                        return d
                     }
                     
                     completion(currently, hourly, daily, nil)
