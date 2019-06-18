@@ -108,14 +108,12 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*let selectedId = favourites!.items[indexPath.row].id
-        selectedLocation = locations!.first { (location) -> Bool in
-            if location.id == selectedId! {
-                return true
-            }
-            
-            return false
-        }*/
+        let rowCount = favourites?.items.count ?? 1
+        
+        if rowCount == indexPath.row {
+            return
+        }
+        
         selectedItemIndex = indexPath.row
         
         performSegue(withIdentifier: "backToHome", sender: self)
