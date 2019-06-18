@@ -35,11 +35,11 @@ class NetworkClient: NetworkClientProtocol {
                     let dailyDataArray = dailyDict["data"] as? [[String:Any]]
                 {
                     currently = Currently(jsonData: currentlyDict)
-                    hourly = hourlyDataArray.compactMap { each in
+                    hourly = hourlyDataArray.prefix(Globals.maxHourlyCount).compactMap { each in
                         let h = Hourly(jsonData: each)
                         return h
                     }
-                    daily = dailyDataArray.compactMap { each in
+                    daily = dailyDataArray.prefix(Globals.maxNextDaysCount).compactMap { each in
                         let d = Daily(jsonData: each)
                         return d
                     }

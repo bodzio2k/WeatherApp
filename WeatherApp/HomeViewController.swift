@@ -124,10 +124,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if let item = daily?[indexPath.row] {
             dateFormatter.dateFormat = "EEEE"
         
-            cell.dayOfWeek.text = dateFormatter.string(from: item.time)/*
-             cell.conditions.image = item.conditions
-             cell.maxTemp.text = (row?.maxTemp ?? "--") + "°"
-             cell.minTemp.text = (row?.minTemp ?? "--") + "°"*/
+            cell.dayOfWeek.text = dateFormatter.string(from: item.time)
+            cell.conditions.image = item.image
+            cell.maxTemp.text = String(item.temperatureHigh) + "°"
+            cell.minTemp.text = String(item.temperatureLow) + "°"
+            
+            cell.dayOfWeek.isHidden = false
+            cell.conditions.isHidden = false
+            cell.maxTemp.isHidden = false
+            cell.minTemp.isHidden = false
         }
         
         return cell
@@ -145,8 +150,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 dateFormatter.timeStyle = .short
                 cell.now.text = dateFormatter.string(from: item.time).replacingOccurrences(of: ":00", with: "")
                 cell.temp.text = String(item.temperature) + "°"
-                cell.icon.image = item.image
-            }
+                
+                cell.icon.isHidden = false
+                cell.now.isHidden = false
+                cell.temp.isHidden = false
+                }
             
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.borderWidth = 0.1
