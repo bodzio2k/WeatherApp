@@ -10,14 +10,25 @@ import UIKit
 import CoreLocation
 
 class FavouritesViewController: UIViewController {
-    //MARK: Properties
+    //MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    
+    //MARK: IBActions
     @IBAction func changeDegreeScale(_ sender: UITapGestureRecognizer) {
         Globals.degreeScale = (Globals.degreeScale == .fahrenheit ? .celsius : .fahrenheit)
         getCurrentTemps()
         tableView.reloadData()
     }
     
+    @IBAction func addLocation(_ sender: UITapGestureRecognizer) {
+        guard let destVC = storyboard!.instantiateViewController(withIdentifier: "LocationsViewController") as? LocationsViewController else {
+            fatalError("Cannot get destintation VC...")
+        }
+        
+        present(destVC, animated: true, completion: nil)
+    }
+    
+    //MARK: Properties
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
     var locations: [Location]?

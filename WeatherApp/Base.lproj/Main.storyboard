@@ -176,13 +176,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Br-41-Jk5">
-                                                    <rect key="frame" x="104.5" y="7" width="111" height="30"/>
-                                                    <state key="normal" title="Add a location..."/>
-                                                    <connections>
-                                                        <segue destination="Ipr-q1-heh" kind="presentation" id="ezp-mC-y0r"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C/°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-zJ-2Jt">
                                                     <rect key="frame" x="15" y="0.0" width="41" height="43.5"/>
                                                     <gestureRecognizers/>
@@ -193,20 +186,21 @@
                                                         <outletCollection property="gestureRecognizers" destination="1RD-XK-gai" appends="YES" id="rdl-ED-RNU"/>
                                                     </connections>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-plus" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-n9-xqa">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-plus" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-n9-xqa">
                                                     <rect key="frame" x="267.5" y="3" width="37.5" height="37.5"/>
                                                     <gestureRecognizers/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="d7G-7E-HSH" appends="YES" id="yCz-tG-kFe"/>
+                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="top" secondItem="PfZ-g0-lIi" secondAttribute="top" id="Cd9-Rp-f0C"/>
-                                                <constraint firstItem="3Br-41-Jk5" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="Cja-jR-FTP"/>
                                                 <constraint firstItem="PBJ-n9-xqa" firstAttribute="trailing" secondItem="PfZ-g0-lIi" secondAttribute="trailingMargin" id="KSa-CH-bWi"/>
                                                 <constraint firstAttribute="bottom" secondItem="5Z0-zJ-2Jt" secondAttribute="bottom" id="Kwf-iX-eot"/>
                                                 <constraint firstItem="PBJ-n9-xqa" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="aR9-Rv-bZn"/>
                                                 <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="leading" secondItem="PfZ-g0-lIi" secondAttribute="leadingMargin" id="cLw-sa-U6j"/>
                                                 <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="kua-kt-5fp"/>
-                                                <constraint firstItem="3Br-41-Jk5" firstAttribute="centerX" secondItem="PfZ-g0-lIi" secondAttribute="centerX" id="ze6-JH-AIx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
@@ -237,13 +231,18 @@
                         <action selector="changeDegreeScale:" destination="PEh-Xk-Y3V" id="2eH-Pz-6aM"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="d7G-7E-HSH">
+                    <connections>
+                        <action selector="addLocation:" destination="PEh-Xk-Y3V" id="aA3-H3-IYt"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3202.5" y="132.04225352112675"/>
         </scene>
         <!--Locations View Controller-->
         <scene sceneID="yFQ-nP-aYe">
             <objects>
-                <viewController id="Ipr-q1-heh" customClass="LocationsViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationsViewController" id="Ipr-q1-heh" customClass="LocationsViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GrB-YE-kpo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
