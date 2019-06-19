@@ -179,7 +179,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             {
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
-                networkClient?.fetchWeatherForecast(for: coordinates, completion: { (currently, hourly, daily, error) in
+                networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
                     if let error = error {
                         fatalError(error.localizedDescription)
                     }
@@ -273,7 +273,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 }
                 
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
-                self.networkClient?.fetchWeatherForecast(for: coordinates, completion: {(currently, hourly, daily, error) in
+                self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(),completion: {(currently, hourly, daily, error) in
                     if let error = error {
                         fatalError("Error occured while getting forecast... \(error.localizedDescription)...")
                     }
@@ -320,7 +320,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
             let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
         
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                self.networkClient?.fetchWeatherForecast(for: coordinate, completion: { (currently, hourly, daily, error) in
+                self.networkClient?.fetchWeatherForecast(for: coordinate, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
                     if let error = error {
                         fatalError(error.localizedDescription)
                     }

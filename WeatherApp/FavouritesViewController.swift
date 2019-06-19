@@ -14,7 +14,7 @@ class FavouritesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBAction func changeDegreeScale(_ sender: UITapGestureRecognizer) {
         Globals.degreeScale = (Globals.degreeScale == .fahrenheit ? .celsius : .fahrenheit)
-        
+        getCurrentTemps()
         tableView.reloadData()
     }
     
@@ -62,7 +62,7 @@ class FavouritesViewController: UIViewController {
             OperationQueue.main.addOperation {
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
-                self.networkClient?.fetchWeatherForecast(for: coordinates, completion: {(currently, hourly, daily, error) in
+                self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: {(currently, hourly, daily, error) in
                     if let error = error {
                         print("Cannot ger current weather for \(fav.city)...\(error.localizedDescription)...")
                     }

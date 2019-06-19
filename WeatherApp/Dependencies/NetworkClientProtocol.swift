@@ -12,5 +12,5 @@ import CoreLocation
 
 protocol NetworkClientProtocol {
     func fetchCities(by prefix: String, completion: @escaping ([Location]?, Error?) -> Void)
-    func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void)
+    func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, units: String, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void)
 }

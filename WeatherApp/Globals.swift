@@ -26,5 +26,14 @@ public struct Globals {
     enum DegreeScale {
         case celsius
         case fahrenheit
+        
+        func toString() -> String {
+            switch self {
+            case .celsius:
+                return "si"
+            case .fahrenheit:
+                return "us"
+            }
+        }
     }
 }

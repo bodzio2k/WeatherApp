@@ -11,7 +11,7 @@ import Alamofire
 import CoreLocation
 
 class NetworkClient: NetworkClientProtocol {
-    func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void) {
+    func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, units: String, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void) {
         let units = Globals.degreeScale == .celsius ? "si" : "us"
         let urlString = "\(Globals.darkSkyUrl)/\(Globals.darkSkySecretKey)/\(String(coordinate.latitude)),\(String(coordinate.longitude))?units=\(units)"
         var currently: Currently?
