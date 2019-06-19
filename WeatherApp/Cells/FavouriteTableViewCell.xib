@@ -20,33 +20,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-F8-Rty">
-                        <rect key="frame" x="28" y="19" width="42.5" height="19.5"/>
+                        <rect key="frame" x="20" y="11" width="42.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" text="Sheremet’yevskiy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrG-xC-Frr">
-                        <rect key="frame" x="28" y="75" width="265" height="39"/>
+                        <rect key="frame" x="20" y="75" width="272.5" height="39"/>
                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="22°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P71-NN-g3E">
-                        <rect key="frame" x="293" y="19" width="72" height="95"/>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="48"/>
+                        <rect key="frame" x="292.5" y="11" width="80.5" height="103"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="54"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="VrG-xC-Frr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9cF-iT-42N"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="VrG-xC-Frr" secondAttribute="bottom" constant="8" id="FNK-6R-wEr"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="P71-NN-g3E" secondAttribute="bottom" constant="8" id="Tqb-qg-VeJ"/>
-                    <constraint firstItem="iVh-F8-Rty" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Vtj-qJ-6GN"/>
+                    <constraint firstItem="VrG-xC-Frr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="9cF-iT-42N"/>
+                    <constraint firstItem="VrG-xC-Frr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="-8" id="FNK-6R-wEr"/>
+                    <constraint firstItem="P71-NN-g3E" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="-8" id="Tqb-qg-VeJ"/>
+                    <constraint firstItem="iVh-F8-Rty" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Vtj-qJ-6GN"/>
                     <constraint firstItem="VrG-xC-Frr" firstAttribute="trailing" secondItem="P71-NN-g3E" secondAttribute="leading" id="Xf6-Oc-Ucp"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="P71-NN-g3E" secondAttribute="trailing" constant="8" id="fzB-yU-E2D"/>
-                    <constraint firstItem="P71-NN-g3E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="qpq-3c-9pf"/>
-                    <constraint firstItem="iVh-F8-Rty" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="w70-zm-q3x"/>
+                    <constraint firstItem="P71-NN-g3E" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fzB-yU-E2D"/>
+                    <constraint firstItem="P71-NN-g3E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="qpq-3c-9pf"/>
+                    <constraint firstItem="iVh-F8-Rty" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="w70-zm-q3x"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -78,7 +78,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
-                                                    <rect key="frame" x="102" y="0.0" width="100" height="43.5"/>
+                                                    <rect key="frame" x="144" y="0.0" width="16" height="43.5"/>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
                                                     <rect key="frame" x="236.5" y="14" width="18.5" height="16"/>
@@ -169,7 +169,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" id="2fV-Jk-vK1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" id="2fV-Jk-vK1" customClass="FavouriteAddTableViewCell" customModule="WeatherApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2fV-Jk-vK1" id="PfZ-g0-lIi">
@@ -183,30 +183,37 @@
                                                         <segue destination="Ipr-q1-heh" kind="presentation" id="ezp-mC-y0r"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-zJ-2Jt">
-                                                    <rect key="frame" x="15" y="11.5" width="42" height="21"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment content="°C/°F">
-                                                            <attributes>
-                                                                <font key="NSFont" metaFont="system" size="17"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C/°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-zJ-2Jt">
+                                                    <rect key="frame" x="15" y="0.0" width="41" height="43.5"/>
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="1RD-XK-gai" appends="YES" id="rdl-ED-RNU"/>
+                                                    </connections>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-plus" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-n9-xqa">
-                                                    <rect key="frame" x="266.5" y="3" width="37.5" height="37.5"/>
+                                                    <rect key="frame" x="267.5" y="3" width="37.5" height="37.5"/>
+                                                    <gestureRecognizers/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="top" secondItem="PfZ-g0-lIi" secondAttribute="top" id="Cd9-Rp-f0C"/>
                                                 <constraint firstItem="3Br-41-Jk5" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="Cja-jR-FTP"/>
-                                                <constraint firstAttribute="trailing" secondItem="PBJ-n9-xqa" secondAttribute="trailing" constant="16" id="KSa-CH-bWi"/>
+                                                <constraint firstItem="PBJ-n9-xqa" firstAttribute="trailing" secondItem="PfZ-g0-lIi" secondAttribute="trailingMargin" id="KSa-CH-bWi"/>
+                                                <constraint firstAttribute="bottom" secondItem="5Z0-zJ-2Jt" secondAttribute="bottom" id="Kwf-iX-eot"/>
                                                 <constraint firstItem="PBJ-n9-xqa" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="aR9-Rv-bZn"/>
                                                 <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="leading" secondItem="PfZ-g0-lIi" secondAttribute="leadingMargin" id="cLw-sa-U6j"/>
                                                 <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="kua-kt-5fp"/>
                                                 <constraint firstItem="3Br-41-Jk5" firstAttribute="centerX" secondItem="PfZ-g0-lIi" secondAttribute="centerX" id="ze6-JH-AIx"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="degreeSelection" destination="5Z0-zJ-2Jt" id="X3q-WK-qK7"/>
+                                            <outlet property="plusButton" destination="PBJ-n9-xqa" id="bME-bo-S5N"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -229,6 +236,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYZ-fC-DSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JVf-RJ-mOv" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="1RD-XK-gai">
+                    <connections>
+                        <action selector="changeDegreeScale:" destination="PEh-Xk-Y3V" id="2eH-Pz-6aM"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3202.5" y="132.04225352112675"/>
         </scene>

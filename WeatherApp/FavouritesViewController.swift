@@ -12,6 +12,12 @@ import CoreLocation
 class FavouritesViewController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
+    @IBAction func changeDegreeScale(_ sender: UITapGestureRecognizer) {
+        Globals.degreeScale = (Globals.degreeScale == .fahrenheit ? .celsius : .fahrenheit)
+        
+        tableView.reloadData()
+    }
+    
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
     var locations: [Location]?
@@ -102,6 +108,8 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         else
         {
             let addLocationCell = tableView.dequeueReusableCell(withIdentifier: "AddLocationCell")!
+            
+            print(Globals.degreeScale)
             
             return addLocationCell
         }

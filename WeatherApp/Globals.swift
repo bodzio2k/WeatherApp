@@ -20,4 +20,11 @@ public struct Globals {
  
     static let darkSkyUrl = "https://api.darksky.net/forecast"
     static let darkSkySecretKey = "5cf22a2a8a7bdbb5d69820ed2522de52"
+    
+    static var degreeScale: DegreeScale = .celsius
+    
+    enum DegreeScale {
+        case celsius
+        case fahrenheit
+    }
 }
