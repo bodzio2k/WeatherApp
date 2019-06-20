@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct Globals {
     static let maxLocationsCount = 200
@@ -36,4 +37,7 @@ public struct Globals {
             }
         }
     }
+    
+    static let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
+    static let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
 }

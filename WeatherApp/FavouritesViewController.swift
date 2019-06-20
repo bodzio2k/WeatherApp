@@ -118,9 +118,29 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else
         {
-            let addLocationCell = tableView.dequeueReusableCell(withIdentifier: "AddLocationCell")!
+            guard let addLocationCell = tableView.dequeueReusableCell(withIdentifier: "AddLocationCell") as? FavouriteOptionsTableViewCell else {
+                fatalError("Cannot get FavouriteOptionsTableViewCell..." )
+            }
+            let celsiusSelected, fahrenheitSelected, celsiusUnselected, fahrenheitUnselected: NSAttributedString
+            let resultText = NSMutableAttributedString(string: "")
             
-            print(Globals.degreeScale)
+            celsiusSelected = NSAttributedString(string: "C°", attributes: Globals.highlightedAttrs)
+            fahrenheitUnselected = NSAttributedString(string: "\\F°", attributes: Globals.normalAttrs)
+            
+            celsiusUnselected = NSAttributedString(string: "C°", attributes: Globals.normalAttrs)
+            fahrenheitSelected = NSAttributedString(string: "\\F°", attributes: Globals.highlightedAttrs)
+            
+            if Globals.degreeScale == .celsius {
+                resultText.append(celsiusSelected)
+                resultText.append(fahrenheitUnselected)
+            }
+            else
+            {
+                resultText.append(celsiusUnselected)
+                resultText.append(fahrenheitSelected)
+            }
+            
+            addLocationCell.degreeScaleIndicator.attributedText = resultText
             
             return addLocationCell
         }

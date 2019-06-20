@@ -17,8 +17,6 @@ class LocationsViewController: UIViewController {
     var favourites: FavouritesProtocol?
     var networkClient: NetworkClientProtocol?
     var searchFor: String!
-    let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
-    let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
     var detailText: String?
     
     func configureSearchBar() {
@@ -53,10 +51,10 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
         let location = locations![indexPath.row]
         let locationName = location.city
-        let highlightedPart = NSAttributedString(string: String(locationName.prefix(searchFor.count)), attributes: highlightedAttrs)
+        let highlightedPart = NSAttributedString(string: String(locationName.prefix(searchFor.count)), attributes: Globals.highlightedAttrs)
         var suffixLength = locationName.count - searchFor.count
         suffixLength = suffixLength < 0 ? 0 : suffixLength
-        let otherPart = NSAttributedString(string: String(locationName.suffix(suffixLength)), attributes: normalAttrs)
+        let otherPart = NSAttributedString(string: String(locationName.suffix(suffixLength)), attributes: Globals.normalAttrs)
         let attributedText = NSMutableAttributedString()
         
         attributedText.append(highlightedPart)
