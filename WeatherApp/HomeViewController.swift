@@ -59,10 +59,6 @@ class HomeViewController: UIViewController {
         nibCell = UINib(nibName: "FavouriteCollectionViewCell", bundle: nil)
         favouritesCollectionView.register(nibCell, forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
         
-        print(favouritesCollectionView.frame.size)
-        print(UIScreen.main.bounds)
-        print(self.view.frame.size)
-        
         let rowHeight = CGFloat(40.00)
         dailyTableView.rowHeight = rowHeight
         
@@ -89,13 +85,58 @@ class HomeViewController: UIViewController {
         }
         else
         {
-            favouritesCollectionView.reloadData()
-            favouritesCollectionView.scrollToItem(at: IndexPath(item: scrollToFavourite, section: 0), at: .right, animated: true)
+            let itemToReload = IndexPath(item: scrollToFavourite, section: 0)
+            favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
+        
+            if let currentFav = favourites?.items[scrollToFavourite] {
+                reloadDetails(for: currentFav)
+            }
             
             lastFavouriteIndex = scrollToFavourite
+        }
+    }
+    
+    func reloadDetails(for fav: Location) {
+        if prefetchedHourly.keys.contains(fav.id) {
+            self.hourly = prefetchedHourly[fav.id]!
+            self.hourlyCollectionView.reloadData()
             
-            hourlyCollectionView.reloadData()
-//            dailyTableView.reloadData()
+            let firstItem = IndexPath(item: 0, section: 0)
+            self.hourlyCollectionView.scrollToItem(at: firstItem, at: .left, animated: false)
+        }
+        else
+        {
+            print("Cannot find prefeched details...")
+        }
+        
+        if prefetchedDaily.keys.contains(fav.id) {
+            self.daily = prefetchedDaily[fav.id]!
+            self.dailyTableView.reloadData()
+            
+            let firstRow = IndexPath(item: 0, section: 0)
+            self.dailyTableView.scrollToRow(at: firstRow, at: .top, animated: false)
+        }
+        else
+        {
+            print("Cannot find prefeched details...")
+            let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
+            
+            networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (_, hourly, daily, error) in
+                if let _ = error {
+                    fatalError("Error while getting details...")
+                }
+                
+                if let hourly = hourly {
+                    self.hourly = hourly
+                }
+                
+                if let daily = daily {
+                    self.daily = daily
+                }
+                
+                self.hourlyCollectionView.reloadData()
+                self.dailyTableView.reloadData()
+            })
         }
     }
     
@@ -188,8 +229,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     self.prefetchedHourly[fav.id] = hourly!
                     self.prefetchedDaily[fav.id] = daily!
                     
-                    collectionView.reloadItems(at: [indexPath])
                     cell.configure(with: currently, for: nil)
+                    collectionView.reloadItems(at: [indexPath])
                 })
             }
             
@@ -210,7 +251,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return rc
     }
- 
 }
 
 extension HomeViewController: UIScrollViewDelegate {
@@ -222,16 +262,23 @@ extension HomeViewController: UIScrollViewDelegate {
                 fatalError("Cannot get fav...")
             }
             
-            if prefetchedHourly.keys.contains(fav.id) && prefetchedDaily.keys.contains(fav.id) && lastFavouriteIndex != currentIndex {
+            reloadDetails(for: fav)
+            
+            /*if prefetchedHourly.keys.contains(fav.id) {
                 self.hourly = prefetchedHourly[fav.id]!
                 self.hourlyCollectionView.reloadData()
-                
-                self.daily = prefetchedDaily[fav.id]!
-                self.dailyTableView.reloadData()
                 
                 let firstItem = IndexPath(item: 0, section: 0)
                 self.hourlyCollectionView.scrollToItem(at: firstItem, at: .left, animated: false)
             }
+            
+            if prefetchedDaily.keys.contains(fav.id) {
+                self.daily = prefetchedDaily[fav.id]!
+                self.dailyTableView.reloadData()
+                
+                let firstRow = IndexPath(item: 0, section: 0)
+                self.dailyTableView.scrollToRow(at: firstRow, at: .top, animated: false)
+            }*/
             
             lastFavouriteIndex = currentIndex
         }
@@ -273,7 +320,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 }
                 
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
-                self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(),completion: {(currently, hourly, daily, error) in
+                self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(),completion: { (currently, hourly, daily, error) in
                     if let error = error {
                         fatalError("Error occured while getting forecast... \(error.localizedDescription)...")
                     }
@@ -332,8 +379,6 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                     self.prefetchedDaily[fav.id] = daily!
                 })
             }
-            
         }
     }
-
 }
