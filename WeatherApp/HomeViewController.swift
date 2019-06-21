@@ -85,6 +85,8 @@ class HomeViewController: UIViewController {
         }
         else
         {
+            favouritesCollectionView.reloadData()
+            
             let itemToReload = IndexPath(item: scrollToFavourite, section: 0)
             favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
         
