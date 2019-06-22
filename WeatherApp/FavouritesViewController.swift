@@ -97,7 +97,8 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row < favourites?.items.count ?? 0 {
             let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavouriteTableViewCell", for: indexPath) as! FavouriteTableViewCell
             let location = favourites!.items[indexPath.row]
-            let timeZone = TimeZone(abbreviation: location.timeZoneAbbr ?? "GMT")
+            let timeZoneIdUnescaped = (location.timeZoneId ?? "GMT").replacingOccurrences(of: "\\", with: "")
+            let timeZone = TimeZone(identifier: timeZoneIdUnescaped)
             let currentDate = Date()
             
             dateFormatter.timeZone = timeZone

@@ -21,8 +21,8 @@ class Location: NSObject, Codable {
     var regionCode: String?
     var type: String?
     var wikiDataId: String?
-    var timeZoneAbbr: String?
-
+    var timeZoneId: String?
+    
     override init() {
         super.init()
     }
@@ -37,10 +37,10 @@ class Location: NSObject, Codable {
         self.longitude = jsonData["longitude"] as? Double ?? 0.00
         self.latitude = jsonData["latitude"] as? Double ?? 0.00
         
-        updateTimezoneAbbr { return }
+        updateTimeZoneId { return }
     }
     
-    func updateTimezoneAbbr(_ completionHandler: @escaping () -> Void) {
+    func updateTimeZoneId(_ completionHandler: @escaping () -> Void) {
         let gc = CLGeocoder()
         
         let location = CLLocation(latitude: CLLocationDegrees(self.latitude), longitude: CLLocationDegrees(self.longitude))
@@ -48,7 +48,7 @@ class Location: NSObject, Codable {
         gc.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
             if let placemarks = placemarks {
                 let placemark = placemarks[0]
-                self.timeZoneAbbr = placemark.timeZone?.abbreviation() ?? "UTC"
+                self.timeZoneId = placemark.timeZone?.identifier
                 
                 completionHandler()
             }

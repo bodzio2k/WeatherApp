@@ -266,22 +266,6 @@ extension HomeViewController: UIScrollViewDelegate {
             
             reloadDetails(for: fav)
             
-            /*if prefetchedHourly.keys.contains(fav.id) {
-                self.hourly = prefetchedHourly[fav.id]!
-                self.hourlyCollectionView.reloadData()
-                
-                let firstItem = IndexPath(item: 0, section: 0)
-                self.hourlyCollectionView.scrollToItem(at: firstItem, at: .left, animated: false)
-            }
-            
-            if prefetchedDaily.keys.contains(fav.id) {
-                self.daily = prefetchedDaily[fav.id]!
-                self.dailyTableView.reloadData()
-                
-                let firstRow = IndexPath(item: 0, section: 0)
-                self.dailyTableView.scrollToRow(at: firstRow, at: .top, animated: false)
-            }*/
-            
             lastFavouriteIndex = currentIndex
         }
     }
@@ -312,7 +296,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             initialLocation.longitude = locations[0].coordinate.longitude
             initialLocation.latitude = locations[0].coordinate.latitude
             initialLocation.id = Int.min
-            initialLocation.updateTimezoneAbbr {
+            initialLocation.updateTimeZoneId {
                 self.favourites?.add(initialLocation)
                 self.favourites?.save()
                 self.favouritesCollectionView.reloadData()
@@ -350,10 +334,6 @@ extension HomeViewController: CLLocationManagerDelegate {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             self.locationManager.requestLocation()
         }
-    }
-    
-    func getCurrentLocation() {
-        return
     }
 }
 
