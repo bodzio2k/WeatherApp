@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
     var daily: [Daily]?
     var prefetchedDaily: [Int:[Daily]?] = [:]
     var lastFavouriteIndex: Int = 0
+    var lastSelectedDegreeScale: Globals.DegreeScale!
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -65,6 +66,8 @@ class HomeViewController: UIViewController {
         if CLLocationManager.authorizationStatus() == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
+        
+        lastSelectedDegreeScale = .celsius
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +88,10 @@ class HomeViewController: UIViewController {
         }
         else
         {
+            if lastSelectedDegreeScale != Globals.degreeScale {
+                invalidatePrefetched()
+            }
+            
             favouritesCollectionView.reloadData()
             
             let itemToReload = IndexPath(item: scrollToFavourite, section: 0)
@@ -96,6 +103,12 @@ class HomeViewController: UIViewController {
             
             lastFavouriteIndex = scrollToFavourite
         }
+    }
+    
+    func invalidatePrefetched() {
+        prefetched = [:]
+        prefetchedHourly = [:]
+        prefetchedDaily = [:]
     }
     
     func reloadDetails(for fav: Location) {
