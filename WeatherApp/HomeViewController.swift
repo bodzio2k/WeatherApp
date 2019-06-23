@@ -325,6 +325,11 @@ extension HomeViewController: CLLocationManagerDelegate {
                     }
                     
                     self.prefetched[0] = currently!
+                    self.prefetchedHourly[Int.min] = hourly!
+                    self.prefetchedDaily[Int.min] = daily!
+                    
+                    self.hourlyCollectionView.reloadData()
+                    self.dailyTableView.reloadData()
                 })
                 
                 print("Placemark retrieved: \(timestamp); \(locality)")
@@ -343,9 +348,17 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("didChangeAuthorization: \(status.rawValue)...")
-        
+    
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             self.locationManager.requestLocation()
+        }
+        
+        let favCount = favourites?.items.count ?? 0
+        
+        if (status == .denied || status == .restricted) && favCount < 1 {
+            print("Loction services not available...")
+            
+            self.performSegue(withIdentifier: "showFavorites", sender: self)
         }
     }
 }
