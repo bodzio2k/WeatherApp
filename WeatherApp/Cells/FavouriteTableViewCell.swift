@@ -12,6 +12,7 @@ class FavouriteTableViewCell: UITableViewCell {
     @IBOutlet weak var hour: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var currentTemp: UILabel!
+    @IBOutlet weak var currentLocationIndicator: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

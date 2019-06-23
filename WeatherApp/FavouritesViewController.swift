@@ -114,6 +114,9 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
                 favoriteCell.currentTemp.text = "--" + "°"
             }
             
+            if location.id == Int.min {
+                favoriteCell.currentLocationIndicator.isHidden = false
+            }
             
             return favoriteCell
         }

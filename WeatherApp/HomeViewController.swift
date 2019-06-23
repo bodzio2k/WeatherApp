@@ -11,13 +11,14 @@ import Swinject
 import CoreLocation
 
 class HomeViewController: UIViewController {
-    //MARK: Properties
+    //MARK: IBOutlets
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    //@IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     @IBOutlet weak var favouritesButton: UIButton!
     
+    //MARK: Properties
     var favourites: FavouritesProtocol?
     var scrollToFavourite = 0
     var locationManager = CLLocationManager()
