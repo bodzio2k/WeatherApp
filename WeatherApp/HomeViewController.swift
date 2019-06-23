@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
-    //@IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     @IBOutlet weak var favouritesButton: UIButton!
     

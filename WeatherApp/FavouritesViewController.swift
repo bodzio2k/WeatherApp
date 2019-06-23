@@ -36,6 +36,7 @@ class FavouritesViewController: UIViewController {
     let dateFormatter = DateFormatter()
     var networkClient: NetworkClientProtocol?
     var currentTemps: [Int:Int] = [:]
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,9 @@ class FavouritesViewController: UIViewController {
         tableView.register(nibCell, forCellReuseIdentifier: "FavouriteTableViewCell")
         
         dateFormatter.timeStyle = .short
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +58,20 @@ class FavouritesViewController: UIViewController {
         
         favourites?.load()
         getCurrentTemps()
+        
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        
+        if authorizationStatus == .denied {
+            print("authorizationStatus is .denied...")
+            return
+        }
+        
+        if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            print("significantLocationChangeMonitoringAvailable is false...")
+            return
+        }
+        
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -189,5 +207,25 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         rc = 90
         
         return rc
+    }
+}
+
+extension FavouritesViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let lastLocation = locations[0]
+        
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(lastLocation) { (placemarks, error) in
+            if let error = error {
+                print("Failed to decore lastLocation: \(error.localizedDescription)...")
+                
+                return
+            }
+            
+            if let newPlacemark = placemarks?[0], let locality = newPlacemark.locality {
+                print("Received new location \(locality)...")
+            }
+        }
     }
 }
