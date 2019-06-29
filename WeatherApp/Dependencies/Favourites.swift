@@ -14,6 +14,30 @@ class Favourites: FavouritesProtocol {
     var filePath = ""
     var locationManager: CLLocationManager!
     
+    func delete(id: Int, commit: Bool) -> Int {
+        if let itemToDelete = items.first(where: { l in
+            return l.id == id ? true : false
+        }), let indexOfItemToDelete = items.index(of: itemToDelete) {
+            items.remove(at: indexOfItemToDelete)
+            
+            if commit == true {
+                self.save()
+            }
+        }
+        
+        let returnValue = items.count
+        
+        return returnValue
+    }
+
+    func insert(_ newLocation: Location, at index: Int) {
+        let alreadyInFavourties = items.contains(newLocation)
+        
+        if !alreadyInFavourties {
+            items.insert(newLocation, at: index)
+        }
+    }
+    
     func delete(at index: Int, commit: Bool = false) -> Int {
         if index > items.count || index < 0 {
             return -1
