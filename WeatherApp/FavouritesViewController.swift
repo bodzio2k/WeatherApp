@@ -212,6 +212,8 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FavouritesViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("\(type(of: self)) didUpdateLocations...")
+        
         let lastLocation = locations[0]
         
         let geocoder = CLGeocoder()
@@ -223,8 +225,31 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                 return
             }
             
-            if let newPlacemark = placemarks?[0], let locality = newPlacemark.locality {
+            if let newPlacemark = placemarks?[0] {
+                let locality = newPlacemark.locality ?? "none"
                 print("Received new location \(locality)...")
+                
+                let currentLocation = self.favourites!.items[0]
+                
+                if currentLocation.city == locality {
+                    return
+                }
+                
+                let newLocation = Location()
+                
+                newLocation.city = locality
+                newLocation.country = newPlacemark.country ?? "none"
+                newLocation.latitude = lastLocation.coordinate.latitude
+                newLocation.longitude = lastLocation.coordinate.longitude
+                newLocation.id = Int.min
+                newLocation.updateTimeZoneId {
+                    newLocation.timeZoneId = newPlacemark.timeZone?.identifier
+                    self.favourites!.delete(id: Int.min, commit: true)
+                    self.favourites!.insert(newLocation, at: 0)
+                    self.favourites!.save()
+                    self.getCurrentTemps()
+                }
+                
             }
         }
     }
