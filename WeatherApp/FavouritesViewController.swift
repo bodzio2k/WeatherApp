@@ -93,8 +93,9 @@ class FavouritesViewController: UIViewController {
                 
                 self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: {(currently, hourly, daily, error) in
                     if let error = error {
-                        print("Cannot ger current weather for \(fav.city)...\(error.localizedDescription)...")
+                        fatalError("Cannot ger current weather for \(fav.city)...\(error.localizedDescription)...")
                     }
+                    
                     
                     self.currentTemps[fav.id] = currently!.temperature
                     
@@ -118,6 +119,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
             let timeZoneIdUnescaped = (location.timeZoneId ?? "GMT").replacingOccurrences(of: "\\", with: "")
             let timeZone = TimeZone(identifier: timeZoneIdUnescaped)
             let currentDate = Date()
+            let authorizationStatus = CLLocationManager.authorizationStatus()
             
             dateFormatter.timeZone = timeZone
             
@@ -132,9 +134,11 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
                 favoriteCell.currentTemp.text = "--" + "°"
             }
             
-            if location.id == Int.min {
-                favoriteCell.currentLocationIndicator.isHidden = false
-            }
+//            if location.id == Int.min && authorizationStatus == .authorizedWhenInUse {
+//                favoriteCell.currentLocationIndicator.isHidden = false
+//            }
+            let isCurrentLocationIndicatorVisible = location.id == Int.min && authorizationStatus == .authorizedWhenInUse
+            favoriteCell.currentLocationIndicator.isHidden = !isCurrentLocationIndicatorVisible
             
             return favoriteCell
         }
@@ -182,8 +186,9 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let itemsCount = tableView.dataSource?.tableView(tableView, numberOfRowsInSection: 0) ?? 0
+        let authorizationStatus = CLLocationManager.authorizationStatus()
         
-        if indexPath.row == 0 || indexPath.row == itemsCount - 1 {
+        if (indexPath.row == 0 && authorizationStatus == .authorizedWhenInUse) || indexPath.row == itemsCount - 1 {
             return false
         }
         
@@ -227,13 +232,18 @@ extension FavouritesViewController: CLLocationManagerDelegate {
             
             if let newPlacemark = placemarks?[0] {
                 let locality = newPlacemark.locality ?? "none"
+                var favouritesCurrentLocation: Location?
+                
                 print("Received new location \(locality)...")
                 
-                let currentLocation = self.favourites!.items[0]
-                
-                if currentLocation.city == locality {
-                    return
+                if self.favourites!.items.count > 0 {
+                    favouritesCurrentLocation = self.favourites!.items[0]
+                    
+                    if (favouritesCurrentLocation!.city) == locality {
+                        return
+                    }
                 }
+                
                 
                 let newLocation = Location()
                 
@@ -249,8 +259,20 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                     self.favourites!.save()
                     self.getCurrentTemps()
                 }
-                
             }
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("\(type(of: self)) didChangeAuthorization: \(status.rawValue)...")
+        
+        /*guard favourites!.items.count < 1 || status == .authorizedWhenInUse else {
+            print("No need to reload first item in the tableView. Exiting...")
+            
+            return
+        }*/
+        
+        let firstItem = IndexPath(item: 0, section: 0)
+        tableView.reloadRows(at: [firstItem], with: .fade)
     }
 }

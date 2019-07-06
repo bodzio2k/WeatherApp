@@ -356,7 +356,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         let favCount = favourites?.items.count ?? 0
         
         if (status == .denied || status == .restricted) && favCount < 1 {
-            print("Loction services not available...")
+            print("Location services not available...")
             
             self.performSegue(withIdentifier: "showFavorites", sender: self)
         }
