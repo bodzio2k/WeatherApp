@@ -244,7 +244,6 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                     }
                 }
                 
-                
                 let newLocation = Location()
                 
                 newLocation.city = locality

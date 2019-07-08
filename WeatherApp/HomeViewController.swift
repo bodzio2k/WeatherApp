@@ -72,37 +72,29 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         favourites?.load()
+        
+        locationManager.startMonitoringSignificantLocationChanges()
+        
         let favouritesCount = favourites?.items.count ?? 0
         
-        if favouritesCount == 0 {
-            if !CLLocationManager.locationServicesEnabled() {
-                print("Cannot obtain current location...")
-                
-                return
-            }
-            
-            DispatchQueue.main.async {
-                print("Getting current location: ", self.dateFormatter.string(from: Date()))
-                self.locationManager.requestLocation()
-            }
+        guard favouritesCount > 0 else {
+            return
         }
-        else
-        {
-            if lastSelectedDegreeScale != Globals.degreeScale {
-                invalidatePrefetched()
-            }
-            
-            favouritesCollectionView.reloadData()
-            
-            let itemToReload = IndexPath(item: scrollToFavourite, section: 0)
-            favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
         
-            if let currentFav = favourites?.items[scrollToFavourite] {
-                reloadDetails(for: currentFav)
-            }
-            
-            lastFavouriteIndex = scrollToFavourite
+        if lastSelectedDegreeScale != Globals.degreeScale {
+            invalidatePrefetched()
         }
+        
+        favouritesCollectionView.reloadData()
+        
+        let itemToReload = IndexPath(item: scrollToFavourite, section: 0)
+        favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
+        
+        if let currentFav = favourites?.items[scrollToFavourite] {
+            reloadDetails(for: currentFav)
+        }
+        
+        lastFavouriteIndex = scrollToFavourite
     }
     
     func invalidatePrefetched() {
@@ -290,15 +282,17 @@ extension HomeViewController: CLLocationManagerDelegate {
         let timestamp = dateFormatter.string(from: Date())
         var currentPlacemark: CLPlacemark?
         
+        print("\(type(of: self)) didUpdateLocations...")
+        
         geocoder.reverseGeocodeLocation(locations[0]) { (placemark, error) in
             if let error = error {
                 print("Cannot retrieve placemark: \(timestamp); \(error.localizedDescription)")
                 return
             }
             
-            guard (self.favourites?.items.count ?? 0) == 0 else {
+            /*guard (self.favourites?.items.count ?? 0) == 0 else {
                 return
-            }
+            }*/
                 
             currentPlacemark = placemark![0]
             let locality = currentPlacemark?.locality ?? "none"
@@ -310,7 +304,9 @@ extension HomeViewController: CLLocationManagerDelegate {
             initialLocation.latitude = locations[0].coordinate.latitude
             initialLocation.id = Int.min
             initialLocation.updateTimeZoneId {
-                self.favourites?.add(initialLocation)
+                self.favourites?.delete(id: Int.min, commit: false)
+                self.favourites?.insert(initialLocation, at: 0)
+                //self.favourites?.add(initialLocation)
                 self.favourites?.save()
                 self.favouritesCollectionView.reloadData()
                 
