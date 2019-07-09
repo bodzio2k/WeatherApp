@@ -51,6 +51,10 @@ class FavouritesViewController: UIViewController {
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(getCurrentTemps), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +86,7 @@ class FavouritesViewController: UIViewController {
         }
     }
     
-    func getCurrentTemps() {
+    @objc func getCurrentTemps() {
         guard let favourites = favourites else {
             fatalError("Cannot get favourites...")
         }
@@ -100,8 +104,11 @@ class FavouritesViewController: UIViewController {
                     self.currentTemps[fav.id] = currently!.temperature
                     
                     print("Getting current temp for \(fav.city)...")
-                    self.tableView.reloadData()
                 })
+            }
+            OperationQueue.main.addOperation {
+                self.tableView.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
             }
         }
     }
@@ -134,9 +141,6 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
                 favoriteCell.currentTemp.text = "--" + "°"
             }
             
-//            if location.id == Int.min && authorizationStatus == .authorizedWhenInUse {
-//                favoriteCell.currentLocationIndicator.isHidden = false
-//            }
             let isCurrentLocationIndicatorVisible = location.id == Int.min && authorizationStatus == .authorizedWhenInUse
             favoriteCell.currentLocationIndicator.isHidden = !isCurrentLocationIndicatorVisible
             
