@@ -17,8 +17,10 @@ class FavouritesViewController: UIViewController {
     @IBAction func changeDegreeScale(_ sender: UITapGestureRecognizer) {
         Globals.degreeScale = (Globals.degreeScale == .fahrenheit ? .celsius : .fahrenheit)
         getCurrentTemps()
-        tableView.reloadData()
     }
+    
+    //MARL: Properties
+    var pendingOperations = 0
     
     @IBAction func addLocation(_ sender: UITapGestureRecognizer) {
         guard let destVC = storyboard!.instantiateViewController(withIdentifier: "LocationsViewController") as? LocationsViewController else {
@@ -60,6 +62,8 @@ class FavouritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        pendingOperations = 0
+        
         favourites?.load()
         getCurrentTemps()
         
@@ -92,6 +96,8 @@ class FavouritesViewController: UIViewController {
         }
         
         for fav in favourites.items {
+            pendingOperations += 1
+            
             OperationQueue.main.addOperation {
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
@@ -100,15 +106,21 @@ class FavouritesViewController: UIViewController {
                         fatalError("Cannot ger current weather for \(fav.city)...\(error.localizedDescription)...")
                     }
                     
-                    
                     self.currentTemps[fav.id] = currently!.temperature
                     
                     print("Getting current temp for \(fav.city)...")
+                    
+                    self.pendingOperations += -1
+                    
+                    if self.pendingOperations == 1 {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { () -> Void in
+                            self.tableView.refreshControl?.endRefreshing()
+                            self.tableView.reloadData()
+                     
+                            print("endRefreshing...")
+                        })
+                    }
                 })
-            }
-            OperationQueue.main.addOperation {
-                self.tableView.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
             }
         }
     }
