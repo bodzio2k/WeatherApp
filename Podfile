@@ -8,7 +8,6 @@ target 'WeatherApp' do
   use_frameworks!
 
   # Pods for Weather App
-  pod 'CSV.swift', '~> 2.3.1'
   pod 'Swinject'
   pod 'SwinjectStoryboard'
   # pod 'SwinjectAutoregistration'

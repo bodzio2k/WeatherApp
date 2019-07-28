@@ -192,11 +192,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         // HOURLY
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
+            let currentLocationTimeZoneId = favourites!.items[lastFavouriteIndex].timeZoneId
             
             if let item = self.hourly?[indexPath.row] {
                 cell.icon.image = item.image
-                dateFormatter.timeStyle = .short
-                cell.now.text = dateFormatter.string(from: item.time).replacingOccurrences(of: ":00", with: "")
+                let now = indexPath.row == 0 ? "Now" : Date().getFullHourString(from: item.time, in: currentLocationTimeZoneId)
+                cell.now.text = now
                 cell.temp.text = String(item.temperature) + "°"
                 
                 cell.icon.isHidden = false

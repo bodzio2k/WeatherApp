@@ -35,7 +35,6 @@ class FavouritesViewController: UIViewController {
     var favourites: FavouritesProtocol?
     var locations: [Location]?
     var selectedItemIndex = 0
-    let dateFormatter = DateFormatter()
     var networkClient: NetworkClientProtocol?
     var currentTemps: [Int:Int] = [:]
     var locationManager = CLLocationManager()
@@ -48,8 +47,6 @@ class FavouritesViewController: UIViewController {
         
         let nibCell = UINib(nibName: "FavouriteTableViewCell", bundle: nil)
         tableView.register(nibCell, forCellReuseIdentifier: "FavouriteTableViewCell")
-        
-        dateFormatter.timeStyle = .short
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -135,14 +132,9 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row < favourites?.items.count ?? 0 {
             let favoriteCell = tableView.dequeueReusableCell(withIdentifier: "FavouriteTableViewCell", for: indexPath) as! FavouriteTableViewCell
             let location = favourites!.items[indexPath.row]
-            let timeZoneIdUnescaped = (location.timeZoneId ?? "GMT").replacingOccurrences(of: "\\", with: "")
-            let timeZone = TimeZone(identifier: timeZoneIdUnescaped)
-            let currentDate = Date()
             let authorizationStatus = CLLocationManager.authorizationStatus()
             
-            dateFormatter.timeZone = timeZone
-            
-            favoriteCell.hour.text = dateFormatter.string(from: currentDate)
+            favoriteCell.hour.text = Date().getCurrentTimeString(in: location.timeZoneId)
             favoriteCell.location.text = location.city
             
             if let currentTemp = currentTemps[location.id] {
