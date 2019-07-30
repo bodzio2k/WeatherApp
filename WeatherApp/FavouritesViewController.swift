@@ -92,6 +92,17 @@ class FavouritesViewController: UIViewController {
             fatalError("Cannot get favourites...")
         }
         
+        if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime) {
+            print("No need to refresh...")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.tableView.refreshControl?.endRefreshing()
+            })
+            
+            return
+        }
+        
+        
         for fav in favourites.items {
             pendingOperations += 1
             
@@ -115,6 +126,8 @@ class FavouritesViewController: UIViewController {
                             self.tableView.reloadData()
                      
                             print("endRefreshing...")
+                            
+                            Globals.lastRefreshTime = Date()
                         })
                     }
                 })

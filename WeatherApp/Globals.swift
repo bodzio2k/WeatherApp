@@ -40,4 +40,7 @@ public struct Globals {
     
     static let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
     static let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
+    
+    static var lastRefreshTime: Date?
+    static let minRefreshInterval = 3600.0 // 1h
 }
