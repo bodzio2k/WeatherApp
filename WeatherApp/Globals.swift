@@ -43,4 +43,9 @@ public struct Globals {
     
     static var lastRefreshTime: Date?
     static let minRefreshInterval = 3600.0 // 1h
+    
+    static var needToRefresh: Date {
+        return Date(timeInterval: -1 * minRefreshInterval + 1, since: Date())
+    }
+    
 }

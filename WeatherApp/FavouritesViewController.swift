@@ -79,6 +79,12 @@ class FavouritesViewController: UIViewController {
         locationManager.startMonitoringSignificantLocationChanges()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Globals.lastRefreshTime = Globals.needToRefresh
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ?? "" == "backToHome" {
             let destVC = segue.destination as! HomeViewController
