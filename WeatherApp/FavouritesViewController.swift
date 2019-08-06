@@ -16,6 +16,8 @@ class FavouritesViewController: UIViewController {
     //MARK: IBActions
     @IBAction func changeDegreeScale(_ sender: UITapGestureRecognizer) {
         Globals.degreeScale = (Globals.degreeScale == .fahrenheit ? .celsius : .fahrenheit)
+        Globals.lastRefreshTime = Globals.needToRefresh
+        
         getCurrentTemps()
     }
     
