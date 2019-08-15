@@ -96,6 +96,7 @@ class HomeViewController: UIViewController {
         
         if lastSelectedDegreeScale != Globals.degreeScale {
             invalidatePrefetched()
+            lastSelectedDegreeScale = Globals.degreeScale
         }
         
         favouritesCollectionView.reloadData()
