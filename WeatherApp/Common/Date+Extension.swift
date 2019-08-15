@@ -26,6 +26,21 @@ extension Date {
     }
     
     func getFullHourString(from time: Date, in timeZoneId: String?) -> String {
-        return String(getTimeString(from: time, in: timeZoneId).prefix(2))
+        let currentTimeString = getTimeString(from: time, in: timeZoneId)
+        var rc: String?
+        let fullHour = currentTimeString.prefix { c -> Bool in
+            return c != ":"
+        }
+        
+        switch Locale.current.identifier {
+        case "en_US":
+            let suffx = currentTimeString.contains("PM") ? "PM" : "AM"
+            
+            rc = String(fullHour) + suffx
+        default:
+            rc = String(fullHour)
+        }
+        
+        return rc ?? "--"
     }
 }

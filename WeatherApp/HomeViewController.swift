@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
     var prefetchedDaily: [Int:[Daily]?] = [:]
     var lastFavouriteIndex: Int = 0
     var lastSelectedDegreeScale: Globals.DegreeScale!
+    var currentLocationTimeZoneId: String?
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -68,6 +69,18 @@ class HomeViewController: UIViewController {
         }
         
         lastSelectedDegreeScale = .celsius
+        
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+//        let parentView = view as! UIScrollView
+//        parentView.refreshControl = refreshControl
+//        
+//        (view as! UIScrollView).refreshControl?.beginRefreshing()
+    }
+    
+    @objc func didPullToRefresh() {
+        print("didPullToRefresh...")
+        (view as! UIScrollView).refreshControl?.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,11 +205,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         // HOURLY
         if collectionView == hourlyCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
-            let currentLocationTimeZoneId = favourites!.items[lastFavouriteIndex].timeZoneId
             
             if let item = self.hourly?[indexPath.row] {
                 cell.icon.image = item.image
-                let now = indexPath.row == 0 ? "Now" : Date().getFullHourString(from: item.time, in: currentLocationTimeZoneId)
+                let now = indexPath.row == 0 ? "Now" : Date().getFullHourString(from: item.time, in: self.currentLocationTimeZoneId)
                 cell.now.text = now
                 cell.temp.text = String(item.temperature) + "°"
                 
@@ -269,6 +281,8 @@ extension HomeViewController: UIScrollViewDelegate {
             guard let fav = favourites?.items[currentIndex] else {
                 fatalError("Cannot get fav...")
             }
+            
+            currentLocationTimeZoneId = fav.timeZoneId
             
             reloadDetails(for: fav)
             
