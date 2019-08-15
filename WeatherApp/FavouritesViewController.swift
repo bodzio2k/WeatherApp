@@ -18,7 +18,9 @@ class FavouritesViewController: UIViewController {
         Globals.degreeScale = (Globals.degreeScale == .fahrenheit ? .celsius : .fahrenheit)
         Globals.lastRefreshTime = Globals.needToRefresh
         
-        getCurrentTemps()
+        DispatchQueue.main.async {
+            self.getCurrentTemps()
+        }
     }
     
     //MARL: Properties
@@ -128,7 +130,7 @@ class FavouritesViewController: UIViewController {
                     
                     self.pendingOperations += -1
                     
-                    if self.pendingOperations == 1 {
+                    if self.pendingOperations == 0 {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { () -> Void in
                             self.tableView.refreshControl?.endRefreshing()
                             self.tableView.reloadData()
