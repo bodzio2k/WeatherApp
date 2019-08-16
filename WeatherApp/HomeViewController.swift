@@ -105,6 +105,7 @@ class HomeViewController: UIViewController {
         favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
         
         if let currentFav = favourites?.items[scrollToFavourite] {
+            currentLocationTimeZoneId = currentFav.timeZoneId ?? Globals.defaultTimeZoneId
             reloadDetails(for: currentFav)
         }
         
@@ -231,6 +232,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let fav = favourites?.items[indexPath.row] else {
                 fatalError("Cannot get fav...")
             }
+            
+            self.currentLocationTimeZoneId = fav.timeZoneId ?? Globals.defaultTimeZoneId
             
             if let currently = prefetched[fav.id] {
                 cell.configure(with: currently, for: fav)

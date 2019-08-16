@@ -51,4 +51,8 @@ public struct Globals {
         return rc
     }
     
+    static var defaultTimeZoneId: String {
+        return "Europe/London"
+    }
+    
 }
