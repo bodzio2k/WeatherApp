@@ -97,12 +97,12 @@ class FavouritesViewController: UIViewController {
         }
     }
     
-    @objc func getCurrentTemps() {
+    @objc func getCurrentTemps(force: Bool = false) {
         guard let favourites = favourites else {
             fatalError("Cannot get favourites...")
         }
         
-        if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime) {
+        if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime), !force {
             print("No need to refresh...")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
@@ -287,7 +287,7 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                     self.favourites!.delete(id: Int.min, commit: true)
                     self.favourites!.insert(newLocation, at: 0)
                     self.favourites!.save()
-                    self.getCurrentTemps()
+                    self.getCurrentTemps(force: true)
                 }
             }
         }
