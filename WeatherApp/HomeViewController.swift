@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var dailyTableView: UITableView!
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
     @IBOutlet weak var favouritesButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     //MARK: Properties
     var favourites: FavouritesProtocol?
@@ -101,15 +102,23 @@ class HomeViewController: UIViewController {
         
         favouritesCollectionView.reloadData()
         
-        let itemToReload = IndexPath(item: scrollToFavourite, section: 0)
+        scrollTo(scrollToFavourite)
+        
+        pageControl.numberOfPages = favouritesCount
+        pageControl.currentPage = scrollToFavourite
+        
+        lastFavouriteIndex = scrollToFavourite
+    }
+    
+    func scrollTo(_ itemNo: Int) -> Void {
+        let itemToReload = IndexPath(item: itemNo, section: 0)
+        
         favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
         
         if let currentFav = favourites?.items[scrollToFavourite] {
             currentLocationTimeZoneId = currentFav.timeZoneId ?? Globals.defaultTimeZoneId
             reloadDetails(for: currentFav)
         }
-        
-        lastFavouriteIndex = scrollToFavourite
     }
     
     func invalidatePrefetched() {
@@ -170,6 +179,11 @@ class HomeViewController: UIViewController {
     @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
         return
     }
+    
+    @IBAction func didChangeValue(_ sender: UIPageControl) {
+        scrollTo(sender.currentPage)
+    }
+    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -291,6 +305,7 @@ extension HomeViewController: UIScrollViewDelegate {
             reloadDetails(for: fav)
             
             lastFavouriteIndex = currentIndex
+            pageControl.currentPage = currentIndex
         }
     }
 }
