@@ -8,8 +8,8 @@ target 'WeatherApp' do
   use_frameworks!
 
   # Pods for Weather App
-  pod 'Swinject'
-  pod 'SwinjectStoryboard'
+  pod 'Swinject', '= 2.6.2'
+  pod 'SwinjectStoryboard', '= 2.2.0'
   # pod 'SwinjectAutoregistration'
   pod 'Alamofire'
 end
