@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WK1-gO-QvJ">
-                                <rect key="frame" x="8" y="20" width="304" height="226"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="226"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rjn-YB-dZI" customClass="FavouritesCollectionViewFlowLayout" customModule="WeatherApp" customModuleProvider="target">
                                     <size key="itemSize" width="276" height="172"/>
@@ -39,7 +39,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-xm-xWG">
-                                <rect key="frame" x="8" y="246" width="304" height="117.5"/>
+                                <rect key="frame" x="0.0" y="246" width="320" height="117.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="ZOQ-KZ-wXB" customClass="HourlyCollectionViewFlowLayout" customModule="WeatherApp" customModuleProvider="target"/>
                                 <cells>
@@ -54,18 +54,18 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
-                                <rect key="frame" x="8" y="363.5" width="304" height="170.5"/>
+                                <rect key="frame" x="0.0" y="363.5" width="320" height="170.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="WeatherApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="304" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9dd-6m-o7V" id="qvR-bQ-YjA">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day of week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyN-WB-EPs">
-                                                    <rect key="frame" x="-1" y="11.5" width="94" height="20.5"/>
+                                                    <rect key="frame" x="15" y="11.5" width="94" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
                                                 <constraint firstItem="slD-J7-ykh" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="TPS-C4-MfF"/>
                                                 <constraint firstAttribute="bottom" secondItem="RuO-Im-jbl" secondAttribute="bottom" id="Wj3-sb-ghg"/>
                                                 <constraint firstAttribute="trailing" secondItem="rhA-Zk-wvE" secondAttribute="trailing" constant="22.5" id="X4R-tC-HYa"/>
-                                                <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" constant="-16" id="Z7B-ck-mv6"/>
+                                                <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" id="Z7B-ck-mv6"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="fOj-44-7s7"/>
                                                 <constraint firstItem="rhA-Zk-wvE" firstAttribute="leading" secondItem="slD-J7-ykh" secondAttribute="trailing" constant="8" id="wge-9F-86C"/>
                                             </constraints>
@@ -118,7 +118,7 @@
                                 </connections>
                             </pageControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powerd_by" translatesAutoresizingMaskIntoConstraints="NO" id="tUz-jD-vzC">
-                                <rect key="frame" x="8" y="534" width="84.500000000000455" height="26"/>
+                                <rect key="frame" x="8" y="534" width="80.500000000000455" height="26"/>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-menu_filled" translatesAutoresizingMaskIntoConstraints="NO" id="PkT-J8-94x">
                                 <rect key="frame" x="274.5" y="534" width="37.5" height="26"/>
@@ -130,17 +130,17 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="lOX-6L-L5U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="1Sc-tt-u4J"/>
+                            <constraint firstItem="lOX-6L-L5U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1Sc-tt-u4J"/>
                             <constraint firstItem="WK1-gO-QvJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5fs-9J-KoB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ArT-xm-xWG" secondAttribute="trailing" constant="8" id="75F-8p-WXD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ArT-xm-xWG" secondAttribute="trailing" id="75F-8p-WXD"/>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="Co6-3S-tQp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PkT-J8-94x" secondAttribute="trailing" constant="8" id="F9n-9c-nbK"/>
-                            <constraint firstItem="ArT-xm-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="G9Z-zx-wXy"/>
+                            <constraint firstItem="ArT-xm-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G9Z-zx-wXy"/>
                             <constraint firstItem="tUz-jD-vzC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="GJt-3I-04B"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" constant="8" id="KBh-ca-5Lq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" id="KBh-ca-5Lq"/>
                             <constraint firstItem="WK1-gO-QvJ" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.4125" id="Nxc-JE-Rzi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PkT-J8-94x" secondAttribute="bottom" constant="8" id="Vvh-jn-2cp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WK1-gO-QvJ" secondAttribute="trailing" constant="8" id="XCG-FC-3MF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WK1-gO-QvJ" secondAttribute="trailing" id="XCG-FC-3MF"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="top" secondItem="WK1-gO-QvJ" secondAttribute="bottom" id="crv-CH-AA4"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.2125" constant="1" id="dRo-RZ-Yrr"/>
                             <constraint firstItem="PkT-J8-94x" firstAttribute="height" secondItem="0Ox-ma-cBe" secondAttribute="height" id="eKJ-14-ISl"/>
@@ -148,8 +148,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0Ox-ma-cBe" secondAttribute="bottom" constant="8" id="fU7-04-SQt"/>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="baseline" secondItem="0Ox-ma-cBe" secondAttribute="firstBaseline" id="g9k-MC-CiG"/>
                             <constraint firstItem="tUz-jD-vzC" firstAttribute="centerY" secondItem="0Ox-ma-cBe" secondAttribute="centerY" id="iFo-KP-guL"/>
-                            <constraint firstItem="0Ox-ma-cBe" firstAttribute="leading" secondItem="tUz-jD-vzC" secondAttribute="trailing" constant="48" id="lxK-l6-MBh"/>
-                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="ncs-Mj-4IN"/>
+                            <constraint firstItem="0Ox-ma-cBe" firstAttribute="leading" secondItem="tUz-jD-vzC" secondAttribute="trailing" constant="52" id="lxK-l6-MBh"/>
+                            <constraint firstItem="WK1-gO-QvJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ncs-Mj-4IN"/>
                             <constraint firstItem="tUz-jD-vzC" firstAttribute="height" secondItem="0Ox-ma-cBe" secondAttribute="height" id="ofv-1P-Dia"/>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="top" secondItem="ArT-xm-xWG" secondAttribute="bottom" id="uoL-Bd-4at"/>
                         </constraints>
