@@ -15,8 +15,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyTableView: UITableView!
     @IBOutlet weak var favouritesCollectionView: UICollectionView!
-    @IBOutlet weak var favouritesButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
+   
+    //MARK: Actions
+    @IBAction func goToFavouritesView(_ sender: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "showFavorites", sender: self)
+    }
     
     //MARK: Properties
     var favourites: FavouritesProtocol?
@@ -37,7 +41,7 @@ class HomeViewController: UIViewController {
         var nibCell: UINib?
         super.viewDidLoad()
         
-        self.view.bringSubviewToFront(favouritesButton)
+        //self.view.bringSubviewToFront(favouritesButton)
             
         hourlyCollectionView.delegate = self
         hourlyCollectionView.dataSource = self
@@ -172,10 +176,6 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: Navigation
-    @IBAction func onShowFavorites() {
-        self.performSegue(withIdentifier: "showFavorites", sender: self)
-    }
-    
     @IBAction func unwindBackToHome(segue: UIStoryboardSegue) {
         return
     }
