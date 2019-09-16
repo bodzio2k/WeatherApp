@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
     var lastFavouriteIndex: Int = 0
     var lastSelectedDegreeScale: Globals.DegreeScale!
     var currentLocationTimeZoneId: String?
+    var separatorLineWidth: CGFloat = 0
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -112,6 +113,9 @@ class HomeViewController: UIViewController {
         pageControl.currentPage = scrollToFavourite
         
         lastFavouriteIndex = scrollToFavourite
+        
+        self.separatorLineWidth = self.view.frame.width * CGFloat(favouritesCount)
+        hourlyCollectionView.addSeparatorLines(width: self.separatorLineWidth)
     }
     
     func scrollTo(_ itemNo: Int) -> Void {
