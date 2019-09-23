@@ -12,6 +12,7 @@ import CoreLocation
 class FavouritesViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: IBActions
     @IBAction func changeDegreeScale(_ sender: UITapGestureRecognizer) {
@@ -97,6 +98,16 @@ class FavouritesViewController: UIViewController {
         }
     }
     
+    func showActivityIndicator() {
+        self.view.bringSubviewToFront(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        self.view.sendSubviewToBack(activityIndicator)
+        activityIndicator.stopAnimating()
+    }
+    
     @objc func getCurrentTemps(force: Bool = false) {
         guard let favourites = favourites else {
             fatalError("Cannot get favourites...")
@@ -112,6 +123,7 @@ class FavouritesViewController: UIViewController {
             return
         }
         
+        showActivityIndicator()
         
         for fav in favourites.items {
             pendingOperations += 1
@@ -138,6 +150,8 @@ class FavouritesViewController: UIViewController {
                             print("endRefreshing...")
                             
                             Globals.lastRefreshTime = Date()
+                            
+                            self.hideActivityIndicator()
                         })
                     }
                 })
