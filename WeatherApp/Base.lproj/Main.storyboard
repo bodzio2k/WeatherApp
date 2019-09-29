@@ -118,10 +118,10 @@
                                 </connections>
                             </pageControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powerd_by" translatesAutoresizingMaskIntoConstraints="NO" id="tUz-jD-vzC">
-                                <rect key="frame" x="8" y="534" width="64.000000000000455" height="26"/>
+                                <rect key="frame" x="8" y="534" width="64" height="26"/>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-menu_filled" translatesAutoresizingMaskIntoConstraints="NO" id="PkT-J8-94x">
-                                <rect key="frame" x="274.5" y="534" width="37.5" height="26"/>
+                                <rect key="frame" x="296" y="534" width="16" height="26"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="kc8-zO-Ko2" appends="YES" id="5DB-8U-KFc"/>
@@ -233,6 +233,7 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="degreeScaleIndicator" destination="5Z0-zJ-2Jt" id="pKA-RP-Tl0"/>
+                                            <outlet property="plusButton" destination="PBJ-n9-xqa" id="IbF-jp-MgE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -213,6 +213,8 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
             
             addLocationCell.degreeScaleIndicator.attributedText = resultText
             
+            addLocationCell.plusButton.isHidden = (favourites?.items.count ?? 0) >= 10
+            
             return addLocationCell
         }
     }

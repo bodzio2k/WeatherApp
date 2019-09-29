@@ -60,7 +60,7 @@ class Location: NSObject, Codable {
             return false
         }
         
-        let rc = (self.city == location.city && self.country == location.country) || self.id == location.id
+        let rc = (self.city == location.city && self.country == location.country && self.region == location.region) || self.id == location.id
         
         return rc
     }

@@ -10,7 +10,8 @@ import UIKit
 
 class FavouriteOptionsTableViewCell: UITableViewCell {
     @IBOutlet weak var degreeScaleIndicator: UILabel!
-
+    @IBOutlet weak var plusButton: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
