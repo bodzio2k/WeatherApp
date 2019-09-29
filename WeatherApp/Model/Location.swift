@@ -54,4 +54,14 @@ class Location: NSObject, Codable {
             }
         })
     }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let location = object as? Location else {
+            return false
+        }
+        
+        let rc = (self.city == location.city && self.country == location.country) || self.id == location.id
+        
+        return rc
+    }
 }
