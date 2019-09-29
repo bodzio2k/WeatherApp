@@ -21,6 +21,7 @@
 		8B0BDCEF22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0BDCEE22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift */; };
 		8B2D308822A3ECD8007BF510 /* Climacons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2D308722A3ECD8007BF510 /* Climacons.xcassets */; };
 		8B2D308A22A3ED4F007BF510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2D308922A3ED4F007BF510 /* Assets.xcassets */; };
+		8B2F84022340FAC3001EDF34 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2F84012340FAC3001EDF34 /* UIView+Extension.swift */; };
 		8B34FCA2232514AF00A0116E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B34FCA1232514AF00A0116E /* Date+Extension.swift */; };
 		8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */; };
 		8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */; };
@@ -83,6 +84,7 @@
 		8B0BDCEE22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8B2D308722A3ECD8007BF510 /* Climacons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Climacons.xcassets; sourceTree = "<group>"; };
 		8B2D308922A3ED4F007BF510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B2F84012340FAC3001EDF34 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8B34FCA1232514AF00A0116E /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesProtocol.swift; sourceTree = "<group>"; };
 		8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		8B0B171F21ADCB79001A3219 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8B2F84012340FAC3001EDF34 /* UIView+Extension.swift */,
 				8B34FCA02325146B00A0116E /* Common */,
 				8B2D308922A3ED4F007BF510 /* Assets.xcassets */,
 				8B2D308722A3ECD8007BF510 /* Climacons.xcassets */,
@@ -486,6 +489,7 @@
 				8B0BDCEF22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift in Sources */,
 				8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */,
 				8B04BAC622BB7A10008A06D8 /* FavouriteOptionsTableViewCell.swift in Sources */,
+				8B2F84022340FAC3001EDF34 /* UIView+Extension.swift in Sources */,
 				8B3A2A052230636500CAFBF8 /* SwinjectStoryboard+Extension.swift in Sources */,
 				8BB0A7CC2299DB160019A8F3 /* Icon.swift in Sources */,
 				8B5DE26721BD3F8000DE8EC4 /* LocationsViewController.swift in Sources */,
