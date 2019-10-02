@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreLocation
+import UIKit
+import MobileCoreServices
 
 class Favourites: FavouritesProtocol {
     var items: [Location] = []
@@ -96,4 +98,22 @@ class Favourites: FavouritesProtocol {
             items.append(newLocation)
         }
     }
+    
+    func dragItems(_ indexPath : IndexPath) -> [UIDragItem] {
+        let item = self.items[indexPath.row]
+        
+        let itemProvider = NSItemProvider()
+        
+        let data = item.city.data(using: .utf8)
+        
+        itemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypePlainText as String, visibility: .all) { completion in
+            completion(data, nil)
+            
+            return nil
+        }
+        
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        
+        return [dragItem]
+    }    
 }

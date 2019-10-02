@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 protocol FavouritesProtocol {
     var items: [Location] { get }
@@ -19,4 +20,5 @@ protocol FavouritesProtocol {
     func delete(at index: Int, commit: Bool) -> Void
     func delete(id: Int, commit: Bool) -> Void
     func insert(_ newLocation: Location, at index: Int) -> Void
+    func dragItems(_: IndexPath) -> [UIDragItem]
 }
