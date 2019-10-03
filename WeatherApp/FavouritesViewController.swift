@@ -50,15 +50,19 @@ class FavouritesViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        self.tableView.dragDelegate = self
+        self.tableView.dragInteractionEnabled = true
+        self.tableView.dropDelegate = self
+        
         let nibCell = UINib(nibName: "FavouriteTableViewCell", bundle: nil)
         tableView.register(nibCell, forCellReuseIdentifier: "FavouriteTableViewCell")
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        let refreshControl = UIRefreshControl()
+        /*let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getCurrentTemps), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl*/
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -320,5 +324,32 @@ extension FavouritesViewController: CLLocationManagerDelegate {
         
         let firstItem = IndexPath(item: 0, section: 0)
         tableView.reloadRows(at: [firstItem], with: .fade)
+    }
+}
+
+extension FavouritesViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let rc = favourites?.dragItems(indexPath) ?? []
+        
+        return rc
+    }
+}
+
+extension FavouritesViewController: UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return true
+    }
+  
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        
+        if destinationIndexPath?.row == 0 || destinationIndexPath?.row == (favourites?.items.count ?? 0) + 1 {
+            return UITableViewDropProposal(operation: .forbidden)
+        }
+        
+        return UITableViewDropProposal(operation: .cancel)
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        return
     }
 }
