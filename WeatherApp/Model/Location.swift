@@ -8,8 +8,9 @@
 
 import Foundation
 import CoreLocation
+import MobileCoreServices
 
-class Location: NSObject, Codable {
+final class Location: NSObject, Codable {
     var city: String = "unknown"
     var country: String = "unknown"
     var countryCode: String?
@@ -63,5 +64,40 @@ class Location: NSObject, Codable {
         let rc = (self.city == location.city && self.country == location.country && self.region == location.region) || self.id == location.id
         
         return rc
+    }
+}
+
+extension Location: NSItemProviderReading {
+    static var readableTypeIdentifiersForItemProvider: [String] {
+        return [kUTTypeData as String]
+    }
+    
+    static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Location {
+        let decoder = JSONDecoder()
+        
+        do {
+            return try decoder.decode(Location.self, from: data)
+        } catch {
+            fatalError("Cannot decode Location while dropping...")
+        }
+    }
+}
+
+extension Location: NSItemProviderWriting {
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return [kUTTypeData as String]
+    }
+    
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        let encoder = JSONEncoder()
+        
+        do {
+            let data = try encoder.encode(self)
+            completionHandler(data, nil)
+        } catch {
+            completionHandler(nil, error)
+        }
+        
+        return nil
     }
 }

@@ -60,9 +60,9 @@ class FavouritesViewController: UIViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        /*let refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getCurrentTemps), for: .valueChanged)
-        tableView.refreshControl = refreshControl*/
+        tableView.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -264,6 +264,12 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         
         return rc
     }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        favourites?.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        favourites?.save()
+        tableView.reloadData()
+    }
 }
 
 extension FavouritesViewController: CLLocationManagerDelegate {
@@ -329,9 +335,14 @@ extension FavouritesViewController: CLLocationManagerDelegate {
 
 extension FavouritesViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let rc = favourites?.dragItems(indexPath) ?? []
+        /*let rc = favourites?.dragItems(indexPath) ?? []
         
-        return rc
+        return rc*/
+        let item = favourites?.items[indexPath.row]
+        let itemProvider = NSItemProvider(object: item!)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        
+        return [dragItem]
     }
 }
 
@@ -342,14 +353,29 @@ extension FavouritesViewController: UITableViewDropDelegate {
   
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         
-        if destinationIndexPath?.row == 0 || destinationIndexPath?.row == (favourites?.items.count ?? 0) + 1 {
-            return UITableViewDropProposal(operation: .forbidden)
+        if tableView.hasActiveDrag {
+            if destinationIndexPath?.row == 0 || destinationIndexPath?.row == (favourites?.items.count ?? 0) + 1 {
+                return UITableViewDropProposal(operation: .forbidden)
+            }
+        
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
         
-        return UITableViewDropProposal(operation: .cancel)
+        return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
     }
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        return
+        let jsonDecorer = JSONDecoder()
+        let destinationIndexPath: IndexPath
+        
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        }
+        
+        coordinator.session.loadObjects(ofClass: Location.self as! NSItemProviderReading.Type) { items in
+            let location = (items as? [Location])?.first!
+            
+            return
+        }
     }
 }

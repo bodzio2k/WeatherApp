@@ -20,5 +20,5 @@ protocol FavouritesProtocol {
     func delete(at index: Int, commit: Bool) -> Void
     func delete(id: Int, commit: Bool) -> Void
     func insert(_ newLocation: Location, at index: Int) -> Void
-    func dragItems(_: IndexPath) -> [UIDragItem]
+    func swapAt(_ a: Int, _ b: Int)
 }

@@ -99,21 +99,7 @@ class Favourites: FavouritesProtocol {
         }
     }
     
-    func dragItems(_ indexPath : IndexPath) -> [UIDragItem] {
-        let item = self.items[indexPath.row]
-        
-        let itemProvider = NSItemProvider()
-        
-        let data = item.city.data(using: .utf8)
-        
-        itemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypePlainText as String, visibility: .all) { completion in
-            completion(data, nil)
-            
-            return nil
-        }
-        
-        let dragItem = UIDragItem(itemProvider: itemProvider)
-        
-        return [dragItem]
-    }    
+    func swapAt(_ a: Int, _ b: Int) {
+        self.items.swapAt(a, b)
+    }
 }
