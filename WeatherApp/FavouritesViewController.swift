@@ -32,6 +32,8 @@ class FavouritesViewController: UIViewController {
             fatalError("Cannot get destintation VC...")
         }
         
+        destVC.modalPresentationStyle = .fullScreen
+        
         present(destVC, animated: true, completion: nil)
     }
     
