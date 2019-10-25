@@ -42,8 +42,6 @@ class HomeViewController: UIViewController {
         var nibCell: UINib?
         super.viewDidLoad()
         
-        //self.view.bringSubviewToFront(favouritesButton)
-            
         hourlyCollectionView.delegate = self
         hourlyCollectionView.dataSource = self
         hourlyCollectionView.contentInsetAdjustmentBehavior = .never
@@ -114,8 +112,10 @@ class HomeViewController: UIViewController {
         
         lastFavouriteIndex = scrollToFavourite
         
-        self.separatorLineWidth = self.view.frame.width * CGFloat(favouritesCount)
+        self.separatorLineWidth = self.view.frame.width * CGFloat(Globals.maxHourlyCount)
         hourlyCollectionView.addSeparatorLines(width: self.separatorLineWidth)
+        
+        dailyTableView.addSeparatorLines(width: self.separatorLineWidth)
     }
     
     func scrollTo(_ itemNo: Int) -> Void {
