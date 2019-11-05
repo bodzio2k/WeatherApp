@@ -13,7 +13,7 @@ extension UIView {
     func addSeparatorLines(width: CGFloat) {
         let topLine = CALayer()
         let bottomLine = CALayer()
-        let borderWidth: CGFloat = 1.0
+        let borderWidth: CGFloat = 0.5
         let borderColor: CGColor!
         let bottomLineY: CGFloat!
         let size: CGSize = frame.size
