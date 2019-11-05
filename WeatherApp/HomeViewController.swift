@@ -111,11 +111,13 @@ class HomeViewController: UIViewController {
         pageControl.currentPage = scrollToFavourite
         
         lastFavouriteIndex = scrollToFavourite
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         self.separatorLineWidth = self.view.frame.width * CGFloat(Globals.maxHourlyCount)
         hourlyCollectionView.addSeparatorLines(width: self.separatorLineWidth)
-        
-        dailyTableView.addSeparatorLines(width: self.separatorLineWidth)
     }
     
     func scrollTo(_ itemNo: Int) -> Void {
