@@ -367,7 +367,6 @@ extension FavouritesViewController: UITableViewDropDelegate {
     }
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        let jsonDecorer = JSONDecoder()
         let destinationIndexPath: IndexPath
         
         if let indexPath = coordinator.destinationIndexPath {

@@ -239,7 +239,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="kap-JX-NLc" firstAttribute="centerX" secondItem="wna-YE-gRh" secondAttribute="centerX" id="Cpz-tQ-KK9"/>
                             <constraint firstItem="wna-YE-gRh" firstAttribute="trailing" secondItem="1HK-VR-hfn" secondAttribute="trailing" id="HdA-M9-dhc"/>
@@ -317,7 +317,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="0GF-L8-rh5" firstAttribute="bottom" secondItem="QCL-67-MTF" secondAttribute="bottom" id="Jb5-yK-K4s"/>
                             <constraint firstItem="QCL-67-MTF" firstAttribute="leading" secondItem="0GF-L8-rh5" secondAttribute="leading" id="RcF-rc-z9j"/>

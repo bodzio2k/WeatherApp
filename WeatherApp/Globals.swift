@@ -38,8 +38,25 @@ public struct Globals {
         }
     }
     
-    static let highlightedAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
-    static let normalAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.lightGray]
+    static var highlightedAttrs: [NSAttributedString.Key: Any] {
+        if #available(iOS 13, *) {
+            return [.foregroundColor: UIColor.label.cgColor]
+        }
+        else
+        {
+            return [.foregroundColor: UIColor.black]
+        }
+    }
+    
+    static var normalAttrs: [NSAttributedString.Key: Any] {
+        if #available(iOS 13, *) {
+            return [.foregroundColor: UIColor.secondaryLabel.cgColor]
+         }
+         else
+         {
+             return [.foregroundColor: UIColor.lightGray]
+         }
+    }
     
     static var lastRefreshTime: Date?
     static let minRefreshInterval = 3600.0 // 1h
