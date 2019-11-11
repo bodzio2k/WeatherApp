@@ -117,7 +117,9 @@ class HomeViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         self.separatorLineWidth = self.view.frame.width * CGFloat(Globals.maxHourlyCount)
-        hourlyCollectionView.addSeparatorLines(width: self.separatorLineWidth)
+        hourlyCollectionView.addSeparator(at: .both, width: self.separatorLineWidth)
+        let bottomSeparatorY = dailyTableView.frame.origin.y + dailyTableView.frame.height
+        view.addSeparator(at: bottomSeparatorY)
     }
     
     func scrollTo(_ itemNo: Int) -> Void {

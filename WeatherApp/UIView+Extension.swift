@@ -10,15 +10,19 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func addSeparatorLines(width: CGFloat) {
-        let topLine = CALayer()
-        let bottomLine = CALayer()
-        let borderWidth: CGFloat = 0.5
+    enum SeparatorPosition {
+        case top
+        case bottom
+        case both
+    }
+    
+    var borderWidth: CGFloat {
+        return 0.5
+    }
+    
+    func addSeparator(at y: CGFloat, width: CGFloat? = nil) {
+        let borderLine = CALayer()
         let borderColor: CGColor!
-        let bottomLineY: CGFloat!
-        let size: CGSize = frame.size
-        
-        print("\(self); \(size)")
         
         if #available(iOS 13, *) {
             borderColor = UIColor.systemGray.cgColor
@@ -28,22 +32,51 @@ extension UIView {
             borderColor = UIColor.black.cgColor
         }
         
+        borderLine.borderColor = borderColor
+        borderLine.borderWidth = borderWidth
+        borderLine.frame = CGRect(x: 0, y: y, width: width ?? frame.size.width, height: borderWidth)
+        
+        self.layer.addSublayer(borderLine)
+    }
+    
+    func addSeparator(at position: SeparatorPosition, width: CGFloat? = nil) {
+        let borderLineY: CGFloat!
+        
+        switch position {
+        case .top:
+            borderLineY = 0
+        case .bottom:
+            borderLineY = frame.size.height - borderWidth
+        default:
+            addSeparator(at: .bottom, width: width)
+            addSeparator(at: .top, width: width)
+            return
+        }
+        
+        addSeparator(at: borderLineY, width: width)
+    }
+    
+ /*   func addSeparatorLines(width: CGFloat) {
+        let topLine = CALayer()
+        let bottomLine = CALayer()
+        let borderWidth: CGFloat = 0.5
+        let borderColor: CGColor!
+        
+        print("\(self); \(size)")
+    
+        
         bottomLineY = size.height - borderWidth
         
         print("bottomLineY is\(bottomLineY!)")
         
-        topLine.borderColor = borderColor
-        topLine.frame = CGRect(x: 0, y: 0, width: width, height: borderWidth)
-        topLine.borderWidth = borderWidth
         
         bottomLine.borderColor = borderColor
         bottomLine.frame = CGRect(x: 0, y: bottomLineY, width: width, height: borderWidth)
         bottomLine.borderWidth = borderWidth
         
-        self.layer.addSublayer(topLine)
         self.layer.addSublayer(bottomLine)
         
         self.layer.masksToBounds = true
-        
-    }
+   
+    }*/
 }
