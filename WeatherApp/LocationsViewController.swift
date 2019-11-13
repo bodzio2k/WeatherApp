@@ -51,10 +51,12 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
         let location = locations![indexPath.row]
         let locationName = location.city
-        let highlightedPart = NSAttributedString(string: String(locationName.prefix(searchFor.count)), attributes: Globals.highlightedAttrs)
+        let locationNamePrefix = String(locationName.prefix(searchFor.count))
+        let highlightedPart = NSMutableAttributedString(string: locationNamePrefix, attributes: Globals.highlightedAttrs)
         var suffixLength = locationName.count - searchFor.count
         suffixLength = suffixLength < 0 ? 0 : suffixLength
-        let otherPart = NSAttributedString(string: String(locationName.suffix(suffixLength)), attributes: Globals.normalAttrs)
+        let locationNameSuffix = String(locationName.suffix(suffixLength))
+        let otherPart = NSMutableAttributedString(string: locationNameSuffix, attributes: Globals.normalAttrs)
         let attributedText = NSMutableAttributedString()
         
         attributedText.append(highlightedPart)

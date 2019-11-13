@@ -40,7 +40,7 @@ public struct Globals {
     
     static var highlightedAttrs: [NSAttributedString.Key: Any] {
         if #available(iOS 13, *) {
-            return [.foregroundColor: UIColor.label.cgColor]
+            return [.foregroundColor: UIColor.label]
         }
         else
         {
@@ -50,7 +50,7 @@ public struct Globals {
     
     static var normalAttrs: [NSAttributedString.Key: Any] {
         if #available(iOS 13, *) {
-            return [.foregroundColor: UIColor.secondaryLabel.cgColor]
+            return [.foregroundColor: UIColor.secondaryLabel]
          }
          else
          {
