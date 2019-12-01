@@ -21,7 +21,6 @@ class LocationsViewController: UIViewController {
     
     func configureSearchBar() {
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "SEARCH"
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
@@ -36,10 +35,11 @@ class LocationsViewController: UIViewController {
         tableView.delegate = self
         
         configureSearchBar()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //searchController.isActive = true
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }

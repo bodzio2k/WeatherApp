@@ -11,6 +11,9 @@ import Alamofire
 import CoreLocation
 
 class NetworkClient: NetworkClientProtocol {
+    let nc = NotificationCenter.default
+    var userInfo: [AnyHashable: Any] = ["error": ""]
+    
     func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, units: String, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void) {
         let units = Globals.degreeScale == .celsius ? "si" : "us"
         let urlString = "\(Globals.darkSkyUrl)/\(Globals.darkSkySecretKey)/\(String(coordinate.latitude)),\(String(coordinate.longitude))?units=\(units)"
@@ -22,11 +25,18 @@ class NetworkClient: NetworkClientProtocol {
             .validate()
             .responseJSON { response in
                 if let error = response.result.error {
-                    completion(nil, nil, nil, error)
+                    self.userInfo["error"] = error
+                    self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
+                    
+                    
+                    return
                 }
                 
                 guard let responseDict = response.result.value as? [String:Any] else {
-                    fatalError("Cannot get response from dark sky...")
+                    self.userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+                    self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
+                    
+                    return
                 }
                 
                 if let currentlyDict = responseDict["currently"] as? [String:Any],
@@ -49,7 +59,8 @@ class NetworkClient: NetworkClientProtocol {
                 }
                 else
                 {
-                    fatalError("Error while getting current weather...")
+                    self.userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+                    self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                 }
             }
         }
@@ -70,9 +81,11 @@ class NetworkClient: NetworkClientProtocol {
                           headers: httpHeaders)
             .validate()
             .responseJSON { response in
-                if let err = response.error {
-                    print(err.localizedDescription)
-                    completion(nil, err)
+                if let error = response.error {
+                    self.userInfo["error"] = error
+                    self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
+                    
+                    return
                 }
                 
                 if let responseDict = response.result.value as? [String:Any] {

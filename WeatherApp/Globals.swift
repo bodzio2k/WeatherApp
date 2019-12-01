@@ -11,7 +11,7 @@ import UIKit
 
 public struct Globals {
     static let maxLocationsCount = 200
-    static let maxHourlyCount = 11
+    static let maxHourlyCount = 23
     static let maxNextDaysCount = 7
     static let weatherConditions: WeatherConditions = ["cloudy", "hail", "heavy_rain", "partly_cloudy", "rain", "storm", "snow", "sunny", "windy"]
     
@@ -71,5 +71,7 @@ public struct Globals {
     static var defaultTimeZoneId: String {
         return "Europe/London"
     }
+    
+    static let errorOccured = "ERROR_OCCURED"
     
 }

@@ -55,28 +55,4 @@ extension UIView {
         
         addSeparator(at: borderLineY, width: width)
     }
-    
- /*   func addSeparatorLines(width: CGFloat) {
-        let topLine = CALayer()
-        let bottomLine = CALayer()
-        let borderWidth: CGFloat = 0.5
-        let borderColor: CGColor!
-        
-        print("\(self); \(size)")
-    
-        
-        bottomLineY = size.height - borderWidth
-        
-        print("bottomLineY is\(bottomLineY!)")
-        
-        
-        bottomLine.borderColor = borderColor
-        bottomLine.frame = CGRect(x: 0, y: bottomLineY, width: width, height: borderWidth)
-        bottomLine.borderWidth = borderWidth
-        
-        self.layer.addSublayer(bottomLine)
-        
-        self.layer.masksToBounds = true
-   
-    }*/
 }

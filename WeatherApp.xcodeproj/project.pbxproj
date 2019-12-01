@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,8 @@
 		8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE057962207055D0081A615 /* FavouriteCollectionViewCell.swift */; };
 		8BE057992207055D0081A615 /* FavouriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE057972207055D0081A615 /* FavouriteCollectionViewCell.xib */; };
 		8BEFBFD622BCE9BA00FD675A /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFBFD522BCE9BA00FD675A /* WeatherAppUITests.swift */; };
+		DE9B12A023887A9A0017956F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B129F23887A9A0017956F /* UIViewController+Extension.swift */; };
+		DEEB695F2393D20B00A68221 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEB695E2393D20B00A68221 /* CommonViewController.swift */; };
 		FF17BCB6E45053CC38363FA6 /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF78235CC638F3E1C7601ADD /* Pods_WeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +118,9 @@
 		8BEFBFD522BCE9BA00FD675A /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		8BEFBFD722BCE9BA00FD675A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF78235CC638F3E1C7601ADD /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE9B129F23887A9A0017956F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		DEDC2AEF2393CC3500F36D5A /* SandboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SandboxViewController.swift; path = /Users/krzysztof.podolak/Projects/WeatherApp/WeatherApp/SandboxViewController.swift; sourceTree = "<absolute>"; };
+		DEEB695E2393D20B00A68221 /* CommonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,10 +193,9 @@
 		8B0B171F21ADCB79001A3219 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				8B2F84012340FAC3001EDF34 /* UIView+Extension.swift */,
-				8B34FCA02325146B00A0116E /* Common */,
 				8B2D308922A3ED4F007BF510 /* Assets.xcassets */,
 				8B2D308722A3ECD8007BF510 /* Climacons.xcassets */,
+				8B34FCA02325146B00A0116E /* Common */,
 				8B3A2A01222BF09600CAFBF8 /* Dependencies */,
 				8B5DE26821BD6A4500DE8EC4 /* Model */,
 				8B5DE26521BD30DB00DE8EC4 /* Cells */,
@@ -205,6 +209,7 @@
 				8B3A2A042230636500CAFBF8 /* SwinjectStoryboard+Extension.swift */,
 				8B0BDCEE22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift */,
 				8B9D4CE922B642D400159808 /* FavouritesCollectionViewFlowLayout.swift */,
+				DEDC2AEF2393CC3500F36D5A /* SandboxViewController.swift */,
 				8B0B172C21ADCB7E001A3219 /* LaunchScreen.storyboard */,
 				8B0B172421ADCB7A001A3219 /* Main.storyboard */,
 				8B0B172721ADCB7A001A3219 /* Weather_App.xcdatamodeld */,
@@ -215,6 +220,9 @@
 		8B34FCA02325146B00A0116E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DEEB695E2393D20B00A68221 /* CommonViewController.swift */,
+				DE9B129F23887A9A0017956F /* UIViewController+Extension.swift */,
+				8B2F84012340FAC3001EDF34 /* UIView+Extension.swift */,
 				8B34FCA1232514AF00A0116E /* Date+Extension.swift */,
 			);
 			path = Common;
@@ -357,9 +365,11 @@
 				TargetAttributes = {
 					8B0B171C21ADCB79001A3219 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 					};
 					8B59669A22355A0A00B17BE2 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 						TestTargetID = 8B0B171C21ADCB79001A3219;
 					};
 					8BEFBFD222BCE9B900FD675A = {
@@ -472,12 +482,14 @@
 				8B08C6CC22567B3400B8DAD7 /* DailyTableViewCell.swift in Sources */,
 				8B7C665621B1AD9300047A36 /* HourlyCollectionViewCell.swift in Sources */,
 				8B5DE26421BD302F00DE8EC4 /* Location.swift in Sources */,
+				DE9B12A023887A9A0017956F /* UIViewController+Extension.swift in Sources */,
 				8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */,
 				8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */,
 				8B89836621FB363200162764 /* Globals.swift in Sources */,
 				8B0995C922633CF0000852A5 /* NetworkClient.swift in Sources */,
 				8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */,
 				8B0BDCEF22ABC8B000AA6718 /* HourlyCollectionViewFlowLayout.swift in Sources */,
+				DEEB695F2393D20B00A68221 /* CommonViewController.swift in Sources */,
 				8B3A2A03222BF0C100CAFBF8 /* Favourites.swift in Sources */,
 				8B04BAC622BB7A10008A06D8 /* FavouriteOptionsTableViewCell.swift in Sources */,
 				8B2F84022340FAC3001EDF34 /* UIView+Extension.swift in Sources */,

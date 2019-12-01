@@ -139,7 +139,10 @@ class FavouritesViewController: UIViewController {
                 
                 self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: {(currently, hourly, daily, error) in
                     if let error = error {
-                        fatalError("Cannot ger current weather for \(fav.city)...\(error.localizedDescription)...")
+                        //let msg = "Cannot ger current weather for \(fav.city)...\(error.localizedDescription)..."
+                        //self.errorOccured(error)
+                        
+                        return
                     }
                     
                     self.currentTemps[fav.id] = currently!.temperature
@@ -284,7 +287,7 @@ extension FavouritesViewController: CLLocationManagerDelegate {
         
         geocoder.reverseGeocodeLocation(lastLocation) { (placemarks, error) in
             if let error = error {
-                print("Failed to decore lastLocation: \(error.localizedDescription)...")
+                //self.errorOccured(error)
                 
                 return
             }
@@ -373,7 +376,7 @@ extension FavouritesViewController: UITableViewDropDelegate {
             destinationIndexPath = indexPath
         }
         
-        coordinator.session.loadObjects(ofClass: Location.self as! NSItemProviderReading.Type) { items in
+        coordinator.session.loadObjects(ofClass: Location.self) { items in
             let location = (items as? [Location])?.first!
             
             return

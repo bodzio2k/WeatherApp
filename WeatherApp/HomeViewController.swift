@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
     var lastSelectedDegreeScale: Globals.DegreeScale!
     var currentLocationTimeZoneId: String?
     var separatorLineWidth: CGFloat = 0
+    var errorOccured = false
     
     override func viewDidLoad() {
         var nibCell: UINib?
@@ -74,17 +75,7 @@ class HomeViewController: UIViewController {
         
         lastSelectedDegreeScale = .celsius
         
-//        let refreshControl = UIRefreshControl()
-//        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
-//        let parentView = view as! UIScrollView
-//        parentView.refreshControl = refreshControl
-//        
-//        (view as! UIScrollView).refreshControl?.beginRefreshing()
-    }
-    
-    @objc func didPullToRefresh() {
-        print("didPullToRefresh...")
-        (view as! UIScrollView).refreshControl?.endRefreshing()
+        NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,10 +156,6 @@ class HomeViewController: UIViewController {
             let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
             
             networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (_, hourly, daily, error) in
-                if let _ = error {
-                    fatalError("Error while getting details...")
-                }
-                
                 if let hourly = hourly {
                     self.hourly = hourly
                 }
@@ -192,6 +179,11 @@ class HomeViewController: UIViewController {
         scrollTo(sender.currentPage)
     }
     
+    //MARK: Network Client error handling
+    /*@objc func ErrorOccured() {
+        self.displayMessage("error.localizedDescription")
+        
+    }*/
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -267,10 +259,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
                 networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
-                    if let error = error {
-                        fatalError(error.localizedDescription)
-                    }
-                    
                     self.prefetched[fav.id] = currently!
                     self.prefetchedHourly[fav.id] = hourly!
                     self.prefetchedDaily[fav.id] = daily!
@@ -328,13 +316,12 @@ extension HomeViewController: CLLocationManagerDelegate {
         
         geocoder.reverseGeocodeLocation(locations[0]) { (placemark, error) in
             if let error = error {
-                print("Cannot retrieve placemark: \(timestamp); \(error.localizedDescription)")
+                let userInfo: [String: Any] = ["error": error]
+                
+                NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
+                
                 return
             }
-            
-            /*guard (self.favourites?.items.count ?? 0) == 0 else {
-                return
-            }*/
                 
             currentPlacemark = placemark![0]
             let locality = currentPlacemark?.locality ?? "none"
@@ -358,10 +345,6 @@ extension HomeViewController: CLLocationManagerDelegate {
                 
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(),completion: { (currently, hourly, daily, error) in
-                    if let error = error {
-                        fatalError("Error occured while getting forecast... \(error.localizedDescription)...")
-                    }
-                    
                     self.prefetched[0] = currently!
                     self.prefetchedHourly[Int.min] = hourly!
                     self.prefetchedDaily[Int.min] = daily!
@@ -414,10 +397,6 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 self.networkClient?.fetchWeatherForecast(for: coordinate, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
-                    if let error = error {
-                        fatalError(error.localizedDescription)
-                    }
-                    
                     print("Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
