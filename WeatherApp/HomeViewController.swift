@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
             return
         }
         
-        if lastSelectedDegreeScale != Globals.degreeScale {
+        if lastSelectedDegreeScale != Globals.degreeScale || 1 == 1 {
             invalidatePrefetched()
             lastSelectedDegreeScale = Globals.degreeScale
         }
