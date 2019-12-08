@@ -12,7 +12,7 @@ import UIKit
 import MobileCoreServices
 
 class Favourites: FavouritesProtocol {
-    var items: [Location] = []
+    internal var items: [Location] = []
     var filePath = ""
     var locationManager: CLLocationManager!
     
@@ -101,5 +101,15 @@ class Favourites: FavouritesProtocol {
     
     func swapAt(_ a: Int, _ b: Int) {
         self.items.swapAt(a, b)
+    }
+    
+    func `subscript`(index: Int) -> Location? {
+        guard index > 0 && index <= items.count else {
+            return nil
+        }
+        
+        let l = self.items[index]
+        
+        return l
     }
 }
