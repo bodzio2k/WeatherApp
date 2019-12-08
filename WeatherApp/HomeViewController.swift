@@ -83,7 +83,7 @@ class HomeViewController: UIViewController {
         
         locationManager.startMonitoringSignificantLocationChanges()
         
-        let favouritesCount = favourites?.items.count ?? 0
+        let favouritesCount = favourites?.count ?? 0
         
         guard favouritesCount > 0 else {
             return
@@ -118,7 +118,7 @@ class HomeViewController: UIViewController {
         
         favouritesCollectionView.scrollToItem(at: itemToReload, at: .right, animated: true)
         
-        if let currentFav = favourites?.items[scrollToFavourite] {
+        if let currentFav = favourites?[scrollToFavourite] {
             currentLocationTimeZoneId = currentFav.timeZoneId ?? Globals.defaultTimeZoneId
             reloadDetails(for: currentFav)
         }
@@ -243,8 +243,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
             
-            guard let fav = favourites?.items[indexPath.row] else {
-                fatalError("Cannot get fav...")
+            guard let fav = favourites?[indexPath.row] else {
+                fatalError("Cannot get fav for \(indexPath.row)...")
             }
             
             self.currentLocationTimeZoneId = fav.timeZoneId ?? Globals.defaultTimeZoneId
@@ -280,7 +280,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         if collectionView == favouritesCollectionView {
-            rc = favourites?.items.count ?? 1
+            rc = favourites?.count ?? 1
         }
         
         return rc
@@ -292,7 +292,7 @@ extension HomeViewController: UIScrollViewDelegate {
         if scrollView == favouritesCollectionView {
             let currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
             
-            guard let fav = favourites?.items[currentIndex] else {
+            guard let fav = favourites?[currentIndex] else {
                 fatalError("Cannot get fav...")
             }
             
@@ -339,7 +339,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 self.favourites?.save()
                 self.favouritesCollectionView.reloadData()
                 
-                guard let fav = self.favourites?.items[self.scrollToFavourite] else {
+                guard let fav = self.favourites?[self.scrollToFavourite] else {
                     fatalError("Error while getting fav...")
                 }
                 
@@ -374,7 +374,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             self.locationManager.requestLocation()
         }
         
-        let favCount = favourites?.items.count ?? 0
+        let favCount = favourites?.count ?? 0
         
         if (status == .denied || status == .restricted) && favCount < 1 {
             print("Location services not available...")
@@ -391,8 +391,12 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         let rows = indexPaths.compactMap { i in return i.row }
         print("Prefetching rows \(rows)...")
         
+        guard let favourites = favourites else {
+            fatalError("Cannot get favourites...")
+        }
+        
         for i in rows {
-            let fav = favourites!.items[i]
+            let fav = favourites[i]!
             let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
         
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {

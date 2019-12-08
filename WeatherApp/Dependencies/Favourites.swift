@@ -107,7 +107,9 @@ class Favourites: FavouritesProtocol {
     }
     
     subscript(index: Int) -> Location? {
-        guard index > 0 && index <= items.count else {
+        let outOfRange = index < 0 || index > self.count
+        
+        guard !outOfRange else {
             return nil
         }
         
