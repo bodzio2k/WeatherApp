@@ -15,6 +15,9 @@ class Favourites: FavouritesProtocol {
     internal var items: [Location] = []
     var filePath = ""
     var locationManager: CLLocationManager!
+    var count: Int {
+        return self.items.count
+    }
     
     func delete(id: Int, commit: Bool) -> Void {
         if let itemToDelete = items.first(where: { l in
@@ -103,7 +106,7 @@ class Favourites: FavouritesProtocol {
         self.items.swapAt(a, b)
     }
     
-    func `subscript`(index: Int) -> Location? {
+    subscript(index: Int) -> Location? {
         guard index > 0 && index <= items.count else {
             return nil
         }

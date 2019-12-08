@@ -13,6 +13,7 @@ import UIKit
 protocol FavouritesProtocol {
     var items: [Location] { get }
     var filePath: String { get set }
+    var count: Int { get }
     
     func save() -> Void
     func load() -> Void
@@ -21,4 +22,5 @@ protocol FavouritesProtocol {
     func delete(id: Int, commit: Bool) -> Void
     func insert(_ newLocation: Location, at index: Int) -> Void
     func swapAt(_ a: Int, _ b: Int)
+    subscript(index: Int) -> Location? { get }
 }
