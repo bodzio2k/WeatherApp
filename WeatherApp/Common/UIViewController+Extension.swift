@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Network
 
 extension UIViewController {
     @objc func errorOccured(_ notification: NSNotification) {
@@ -26,6 +27,32 @@ extension UIViewController {
             let alert = UIAlertController(title: "An error occured", message: message, preferredStyle: .alert)
             
             self.show(alert, sender: self)
+            
+            let pathMonitor = NWPathMonitor()
+            let monitorQueue = DispatchQueue(label: "NetworkMonitor")
+            
+            pathMonitor.start(queue: monitorQueue)
+            pathMonitor.pathUpdateHandler = self.pathUpdateHandler
+        }
+    }
+    
+    func pathUpdateHandler(path: NWPath) -> Void {
+        if path.status == NWPath.Status.satisfied{
+            DispatchQueue.main.async {
+                self.dismissAlertController()
+            }
+        }
+    }
+    
+    func dismissAlertController() {
+        /*guard isAlertPresent() else {
+            print("AlertController dismissed already...")
+            
+            return
+        }*/
+        
+        if let vc = self.presentedViewController {
+            vc.dismiss(animated: true, completion: nil)
         }
     }
     
