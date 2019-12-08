@@ -287,7 +287,8 @@ extension FavouritesViewController: CLLocationManagerDelegate {
         
         geocoder.reverseGeocodeLocation(lastLocation) { (placemarks, error) in
             if let error = error {
-                //self.errorOccured(error)
+                let userInfo: [String: Any] = ["error": error]
+                NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
                 
                 return
             }
