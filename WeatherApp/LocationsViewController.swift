@@ -21,6 +21,7 @@ class LocationsViewController: UIViewController {
     
     func configureSearchBar() {
         searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "SEARCH"
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
@@ -79,10 +80,10 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let location = locations![indexPath.row]
-        
+
         favourites!.add(location)
         favourites!.save()
-        
+
         if searchController.isActive {
             searchController.dismiss(animated: false, completion: {
                 self.dismiss(animated: true, completion: nil)
