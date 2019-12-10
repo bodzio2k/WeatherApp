@@ -73,5 +73,6 @@ public struct Globals {
     }
     
     static let errorOccured = "ERROR_OCCURED"
+    static let didEnterForeground = "DID_ENTER_FOREGROUND"
     
 }

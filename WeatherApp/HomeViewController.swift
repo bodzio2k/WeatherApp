@@ -76,6 +76,13 @@ class HomeViewController: UIViewController {
         lastSelectedDegreeScale = .celsius
         
         NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground), name: Notification.Name(Globals.didEnterForeground), object: nil)
+    }
+    
+    @objc func didEnterForeground() {
+        invalidatePrefetched()
+        favouritesCollectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,12 +185,6 @@ class HomeViewController: UIViewController {
     @IBAction func didChangeValue(_ sender: UIPageControl) {
         scrollTo(sender.currentPage)
     }
-    
-    //MARK: Network Client error handling
-    /*@objc func ErrorOccured() {
-        self.displayMessage("error.localizedDescription")
-        
-    }*/
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
