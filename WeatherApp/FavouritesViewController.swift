@@ -265,9 +265,14 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        favourites?.swapAt(sourceIndexPath.row, destinationIndexPath.row)
-        favourites?.save()
-        tableView.reloadData()
+        tableView.performBatchUpdates({
+            if let movedItem = favourites?[sourceIndexPath.row] {
+                favourites?.delete(at: sourceIndexPath.row, commit: false)
+                favourites?.insert(movedItem, at: destinationIndexPath.row)
+                favourites?.save()
+            }
+            
+        }, completion: nil)
     }
 }
 
@@ -343,6 +348,7 @@ extension FavouritesViewController: UITableViewDragDelegate {
         
         guard allowToDrag else {
             canHandle = false
+        
             return []
         }
         
@@ -351,6 +357,7 @@ extension FavouritesViewController: UITableViewDragDelegate {
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
         canHandle = true
+        
         return [dragItem]
     }
 }
