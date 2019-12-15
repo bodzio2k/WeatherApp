@@ -27,13 +27,14 @@ class FavouritesViewController: UIViewController {
     //MARL: Properties
     var pendingOperations = 0
     var canHandle = false
+    var maxLocationCount: Int?
     
     @IBAction func addLocation(_ sender: UITapGestureRecognizer) {
         guard let destVC = storyboard!.instantiateViewController(withIdentifier: "LocationsViewController") as? LocationsViewController else {
             fatalError("Cannot get destintation VC...")
         }
         
-        destVC.modalPresentationStyle = .automatic
+        destVC.modalPresentationStyle = .fullScreen
         
         present(destVC, animated: true, completion: nil)
     }
@@ -66,6 +67,15 @@ class FavouritesViewController: UIViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getCurrentTemps), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        
+        let horizontalSizeClass = self.traitCollection.horizontalSizeClass.rawValue
+        Globals.log.debugMessage("horizontalSizeClass is \(horizontalSizeClass)...")
+        switch horizontalSizeClass {
+        case 0, 1:
+            maxLocationCount = 9
+        default:
+            maxLocationCount = 13
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -216,7 +226,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
             
             addLocationCell.degreeScaleIndicator.attributedText = resultText
             
-            addLocationCell.plusButton.isHidden = (favourites?.items.count ?? 0) >= 10
+            addLocationCell.plusButton.isHidden = (favourites?.items.count ?? 0) >= maxLocationCount!
             
             return addLocationCell
         }
