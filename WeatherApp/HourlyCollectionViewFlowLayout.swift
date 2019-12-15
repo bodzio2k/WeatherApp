@@ -11,16 +11,9 @@ import UIKit
 
 class HourlyCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() {
-        guard let collectionView = self.collectionView else {
-            print("Cannot get parent container...")
-            
-            return
-        }
-        
         scrollDirection = .horizontal
         
-        
-        let collectionViewSize = collectionView.frame.size
+        let collectionViewSize = collectionView!.frame.size
         let width = collectionViewSize.width / 7.0
         let height = collectionViewSize.height
         
@@ -28,7 +21,5 @@ class HourlyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         minimumLineSpacing = 0.0
         sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-    
-        print("\(self); \(collectionViewSize)")
     }
 }

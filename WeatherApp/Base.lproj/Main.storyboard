@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,30 +70,36 @@
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
                                                     <rect key="frame" x="110" y="0.0" width="100" height="100.5"/>
                                                 </imageView>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
-                                                    <rect key="frame" x="252.5" y="42.5" width="18.5" height="16"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Zk-wvE">
-                                                    <rect key="frame" x="279" y="42.5" width="18.5" height="16"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="z1Q-fu-Lor">
+                                                    <rect key="frame" x="248" y="0.0" width="64" height="100.5"/>
+                                                    <subviews>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Zk-wvE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="z1Q-fu-Lor" secondAttribute="bottom" id="5Mz-uF-eMe"/>
                                                 <constraint firstItem="MyN-WB-EPs" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="99B-4m-rX6"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="centerX" secondItem="qvR-bQ-YjA" secondAttribute="centerX" id="ARd-gl-Hvw"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="top" secondItem="qvR-bQ-YjA" secondAttribute="top" id="E4a-ex-FVX"/>
-                                                <constraint firstItem="rhA-Zk-wvE" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="QLd-Eq-vSK"/>
-                                                <constraint firstItem="slD-J7-ykh" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="TPS-C4-MfF"/>
+                                                <constraint firstItem="z1Q-fu-Lor" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="TTS-25-7dO"/>
+                                                <constraint firstItem="z1Q-fu-Lor" firstAttribute="width" secondItem="qvR-bQ-YjA" secondAttribute="width" multiplier="0.2" id="UAJ-pE-uZo"/>
+                                                <constraint firstAttribute="trailing" secondItem="z1Q-fu-Lor" secondAttribute="trailingMargin" constant="8" id="UNK-Hz-hbq"/>
                                                 <constraint firstAttribute="bottom" secondItem="RuO-Im-jbl" secondAttribute="bottom" id="Wj3-sb-ghg"/>
-                                                <constraint firstAttribute="trailing" secondItem="rhA-Zk-wvE" secondAttribute="trailing" constant="22.5" id="X4R-tC-HYa"/>
                                                 <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" id="Z7B-ck-mv6"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="fOj-44-7s7"/>
-                                                <constraint firstItem="rhA-Zk-wvE" firstAttribute="leading" secondItem="slD-J7-ykh" secondAttribute="trailing" constant="8" id="wge-9F-86C"/>
+                                                <constraint firstItem="z1Q-fu-Lor" firstAttribute="top" secondItem="qvR-bQ-YjA" secondAttribute="top" id="pgo-xE-7di"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

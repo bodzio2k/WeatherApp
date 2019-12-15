@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     var currentLocationTimeZoneId: String?
     var separatorLineWidth: CGFloat = 0
     var errorOccured = false
-    
+     
     override func viewDidLoad() {
         var nibCell: UINib?
         super.viewDidLoad()
@@ -78,11 +78,18 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground), name: Notification.Name(Globals.didEnterForeground), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: Notification.Name(Globals.didEnterBackground), object: nil)
     }
     
     @objc func didEnterForeground() {
         invalidatePrefetched()
         favouritesCollectionView.reloadData()
+        fadeIn()
+    }
+    
+    @objc func didEnterBackground() {
+        fadeOut()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +116,8 @@ class HomeViewController: UIViewController {
         pageControl.currentPage = scrollToFavourite
         
         lastFavouriteIndex = scrollToFavourite
+        
+        fadeIn()
     }
     
     override func viewDidLayoutSubviews() {
@@ -147,7 +156,7 @@ class HomeViewController: UIViewController {
         }
         else
         {
-            print("Cannot find prefeched details...")
+            Globals.log.debugMessage("Cannot find prefeched details...")
         }
         
         if prefetchedDaily.keys.contains(fav.id) {
@@ -159,7 +168,7 @@ class HomeViewController: UIViewController {
         }
         else
         {
-            print("Cannot find prefeched details...")
+            Globals.log.debugMessage("Cannot find prefeched details...")
             let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
             
             networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (_, hourly, daily, error) in
@@ -232,13 +241,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.icon.isHidden = false
                 cell.now.isHidden = false
                 cell.temp.isHidden = false
-                }
+            }
             
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.borderWidth = 0.1
+            cell.layoutIfNeeded()
             
             return cell
         }
+            
         // FAVOURITES COLLECTION VIEW
         else
         {
@@ -313,7 +322,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         let timestamp = dateFormatter.string(from: Date())
         var currentPlacemark: CLPlacemark?
         
-        print("\(type(of: self)) didUpdateLocations...")
+        Globals.log.debugMessage("\(type(of: self)) didUpdateLocations...")
         
         geocoder.reverseGeocodeLocation(locations[0]) { (placemark, error) in
             if let error = error {
@@ -336,7 +345,6 @@ extension HomeViewController: CLLocationManagerDelegate {
             initialLocation.updateTimeZoneId {
                 self.favourites?.delete(id: Int.min, commit: false)
                 self.favourites?.insert(initialLocation, at: 0)
-                //self.favourites?.add(initialLocation)
                 self.favourites?.save()
                 self.favouritesCollectionView.reloadData()
                 
@@ -354,22 +362,22 @@ extension HomeViewController: CLLocationManagerDelegate {
                     self.dailyTableView.reloadData()
                 })
                 
-                print("Placemark retrieved: \(timestamp); \(locality)")
+                Globals.log.debugMessage("Placemark retrieved: \(timestamp); \(locality)")
             }
         }
             
         self.hourlyCollectionView.reloadData()
         self.dailyTableView.reloadData()
         
-        print("didUpdateLocations: ", dateFormatter.string(from: Date()))
+        Globals.log.debugMessage { "didUpdateLocations: " + self.dateFormatter.string(from: Date()) }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("didFailWithError: ", dateFormatter.string(from: Date()), "; ", error.localizedDescription)
+        Globals.log.debugMessage { "didFailWithError: " + self.dateFormatter.string(from: Date()) + "; " + error.localizedDescription }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("didChangeAuthorization: \(status.rawValue)...")
+        Globals.log.debugMessage("didChangeAuthorization: \(status.rawValue)...")
     
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             self.locationManager.requestLocation()
@@ -378,7 +386,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         let favCount = favourites?.count ?? 0
         
         if (status == .denied || status == .restricted) && favCount < 1 {
-            print("Location services not available...")
+            Globals.log.debugMessage("Location services not available...")
             
             self.performSegue(withIdentifier: "showFavorites", sender: self)
         }
@@ -390,7 +398,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         if collectionView != favouritesCollectionView { return }
         
         let rows = indexPaths.compactMap { i in return i.row }
-        print("Prefetching rows \(rows)...")
+        Globals.log.debugMessage("Prefetching rows \(rows)...")
         
         guard let favourites = favourites else {
             fatalError("Cannot get favourites...")
@@ -402,7 +410,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 self.networkClient?.fetchWeatherForecast(for: coordinate, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
-                    print("Prefetched weather for row \(i)...")
+                    Globals.log.debugMessage("Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
                     self.prefetchedHourly[fav.id] = hourly!

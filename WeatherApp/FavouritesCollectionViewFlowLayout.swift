@@ -12,8 +12,6 @@ import UIKit
 class FavouritesCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() {
         guard let collectionView = self.collectionView else {
-            print("Cannot get parent container...")
-            
             return
         }
         
@@ -27,7 +25,11 @@ class FavouritesCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         minimumLineSpacing = 0.0
         sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
     
-        print("\(self); \(collectionViewSize)")
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attr = layoutAttributesForItem(at: itemIndexPath)
+        attr?.alpha = 1.0
+        return attr
     }
 }

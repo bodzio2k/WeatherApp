@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Willow
 
 public struct Globals {
     static let maxLocationsCount = 200
@@ -74,5 +75,7 @@ public struct Globals {
     
     static let errorOccured = "ERROR_OCCURED"
     static let didEnterForeground = "DID_ENTER_FOREGROUND"
+    static let didEnterBackground = "DID_ENTER_BACKGROUND"
     
+    static var log = Logger(logLevels: .all, writers: [ConsoleWriter()])
 }

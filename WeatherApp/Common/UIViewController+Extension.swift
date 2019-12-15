@@ -65,4 +65,20 @@ extension UIViewController {
         
         return false
     }
+    
+    fileprivate func fadeInDuration() -> Double {
+        return 0.5
+    }
+    
+    func fadeIn() {
+       UIView.animate(withDuration: fadeInDuration(), animations: {
+        self.view.alpha = 1.0
+       })
+    }
+       
+    func fadeOut() {
+       UIView.animate(withDuration: fadeInDuration(), animations: {
+        self.view.alpha = 0.0
+       })
+   }
 }

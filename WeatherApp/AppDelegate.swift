@@ -15,4 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         NotificationCenter.default.post(name: Notification.Name(Globals.didEnterForeground), object: nil)
     }
+
+//    func applicationWillResignActive(_ application: UIApplication) {
+//        NotificationCenter.default.post(name: Notification.Name(Globals.didEnterBackground), object: nil)
+//    }
+//
+//    func applicationDidEnterBackground(_ application: UIApplication) {
+//        NotificationCenter.default.post(name: Notification.Name(Globals.didEnterBackground), object: nil)
+//
+//    }
+//
+//    func applicationDidBecomeActive(_ application: UIApplication) {
+//        NotificationCenter.default.post(name: Notification.Name(Globals.didEnterForeground), object: nil)
+//    }
 }

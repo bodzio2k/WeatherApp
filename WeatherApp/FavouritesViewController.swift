@@ -26,13 +26,14 @@ class FavouritesViewController: UIViewController {
     
     //MARL: Properties
     var pendingOperations = 0
+    var canHandle = false
     
     @IBAction func addLocation(_ sender: UITapGestureRecognizer) {
         guard let destVC = storyboard!.instantiateViewController(withIdentifier: "LocationsViewController") as? LocationsViewController else {
             fatalError("Cannot get destintation VC...")
         }
         
-        destVC.modalPresentationStyle = .fullScreen
+        destVC.modalPresentationStyle = .automatic
         
         present(destVC, animated: true, completion: nil)
     }
@@ -78,12 +79,12 @@ class FavouritesViewController: UIViewController {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         
         if authorizationStatus == .denied {
-            print("authorizationStatus is .denied...")
+            Globals.log.debugMessage("authorizationStatus is .denied...")
             return
         }
         
         if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
-            print("significantLocationChangeMonitoringAvailable is false...")
+            Globals.log.debugMessage("significantLocationChangeMonitoringAvailable is false...")
             return
         }
         
@@ -120,7 +121,7 @@ class FavouritesViewController: UIViewController {
         }
         
         if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime), !force {
-            print("No need to refresh...")
+            Globals.log.debugMessage("No need to refresh...")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.tableView.refreshControl?.endRefreshing()
@@ -138,16 +139,9 @@ class FavouritesViewController: UIViewController {
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
                 self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: {(currently, hourly, daily, error) in
-                    if let error = error {
-                        //let msg = "Cannot ger current weather for \(fav.city)...\(error.localizedDescription)..."
-                        //self.errorOccured(error)
-                        
-                        return
-                    }
-                    
                     self.currentTemps[fav.id] = currently!.temperature
                     
-                    print("Getting current temp for \(fav.city)...")
+                    Globals.log.debugMessage("Getting current temp for \(fav.city)...")
                     
                     self.pendingOperations += -1
                     
@@ -156,7 +150,7 @@ class FavouritesViewController: UIViewController {
                             self.tableView.refreshControl?.endRefreshing()
                             self.tableView.reloadData()
                      
-                            print("endRefreshing...")
+                            Globals.log.debugMessage("endRefreshing...")
                             
                             Globals.lastRefreshTime = Date()
                             
@@ -279,7 +273,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FavouritesViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("\(type(of: self)) didUpdateLocations...")
+        Globals.log.debugMessage("\(type(of: self)) didUpdateLocations...")
         
         let lastLocation = locations[0]
         
@@ -297,7 +291,7 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                 let locality = newPlacemark.locality ?? "none"
                 var favouritesCurrentLocation: Location?
                 
-                print("Received new location \(locality)...")
+                Globals.log.debugMessage("Received new location \(locality)...")
                 
                 if self.favourites!.items.count > 0 {
                     favouritesCurrentLocation = self.favourites!.items[0]
@@ -326,10 +320,10 @@ extension FavouritesViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("\(type(of: self)) didChangeAuthorization: \(status.rawValue)...")
+        Globals.log.debugMessage("\(type(of: self)) didChangeAuthorization: \(status.rawValue)...")
         
         /*guard favourites!.items.count < 1 || status == .authorizedWhenInUse else {
-            print("No need to reload first item in the tableView. Exiting...")
+            Globals.log.debugMessage("No need to reload first item in the tableView. Exiting...")
             
             return
         }*/
@@ -341,13 +335,22 @@ extension FavouritesViewController: CLLocationManagerDelegate {
 
 extension FavouritesViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        /*let rc = favourites?.dragItems(indexPath) ?? []
+        let itemCount = favourites?.items.count ?? 0
         
-        return rc*/
-        let item = favourites?.items[indexPath.row]
+        let allowToDrag = indexPath.row > 0 && indexPath.row < itemCount
+        
+        Globals.log.debugMessage { "Attempt to drag row #\(indexPath.row) of \(itemCount); \(allowToDrag)..." }
+        
+        guard allowToDrag else {
+            canHandle = false
+            return []
+        }
+        
+        let item = favourites?[indexPath.row]
         let itemProvider = NSItemProvider(object: item!)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
+        canHandle = true
         return [dragItem]
     }
 }
@@ -358,9 +361,20 @@ extension FavouritesViewController: UITableViewDropDelegate {
     }
   
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        let itemCount = favourites?.items.count ?? 0
+        
+        Globals.log.debugMessage("dropSessionDidUpdate; \(destinationIndexPath?.row ?? -1)...")
+        
+        guard destinationIndexPath != nil, canHandle else {
+            return UITableViewDropProposal(operation: .forbidden)
+        }
         
         if tableView.hasActiveDrag {
-            if destinationIndexPath?.row == 0 || destinationIndexPath?.row == (favourites?.items.count ?? 0) + 1 {
+            Globals.log.debugMessage("dropSessionDidUpdate; tableView.hasActiveDrag is \(tableView.hasActiveDrag)...")
+            
+            if let destinationRow = destinationIndexPath?.row, destinationRow == 0 || destinationRow == itemCount  {
+                Globals.log.debugMessage("dropSessionDidUpdate; Attempt to drop forbidden row #\(destinationRow)...")
+                
                 return UITableViewDropProposal(operation: .forbidden)
             }
         

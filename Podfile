@@ -12,4 +12,5 @@ target 'WeatherApp' do
   pod 'SwinjectStoryboard', '= 2.2.0'
   # pod 'SwinjectAutoregistration'
   pod 'Alamofire'
+  pod 'Willow', '= 5.0'
 end
