@@ -9,10 +9,23 @@
 import Foundation
 import UIKit
 import Network
+import SnapKit
 
 extension UIViewController {
     @objc func errorOccured(_ notification: NSNotification) {
         var message = "Unknown"
+        let errorLabel: UILabel = {
+            let label = UILabel()
+            
+            label.backgroundColor = .red
+            label.textColor = .white
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 12.0)
+            label.restorationIdentifier = Globals.errorOccured
+            label.layer.cornerRadius = 4.0
+            label.layer.masksToBounds = true
+            return label
+        }()
         
         guard notification.name.rawValue == Globals.errorOccured else
         {
@@ -23,11 +36,17 @@ extension UIViewController {
             message = error.localizedDescription
         }
         
-        if !isAlertPresent() {
-            let alert = UIAlertController(title: "An error occured", message: message, preferredStyle: .alert)
-            
-            self.show(alert, sender: self)
-            
+        if  !isAlertPresent() {
+            errorLabel.text = message
+            view.addSubview(errorLabel)
+            errorLabel.snp.makeConstraints { (make) in
+                make.left.rightMargin.equalTo(2)
+                make.topMargin.equalTo(16)
+                make.height.equalTo(self.view.frame.height / 28.0)
+//                make.centerY.equalTo(self.view)
+            }
+            view.bringSubviewToFront(errorLabel)
+
             let pathMonitor = NWPathMonitor()
             let monitorQueue = DispatchQueue(label: "NetworkMonitor")
             
@@ -45,25 +64,27 @@ extension UIViewController {
     }
     
     func dismissAlertController() {
-        /*guard isAlertPresent() else {
-            print("AlertController dismissed already...")
-            
-            return
-        }*/
+        let errorLabel: UIView?
         
-        if let vc = self.presentedViewController {
-            vc.dismiss(animated: true, completion: nil)
+        errorLabel = self.view.subviews.first { (subview) in
+            return subview.restorationIdentifier == Globals.errorOccured
+        }
+        
+        if let errorLabel = errorLabel {
+            errorLabel.removeFromSuperview()
         }
     }
     
     func isAlertPresent() -> Bool {
-        if let vc = self.presentedViewController {
-            if vc.isKind(of: UIAlertController.self) {
-                return true
-            }
+        let isFound: Bool
+        
+        let found = self.view.subviews.filter { (subview) in
+            return subview.restorationIdentifier == Globals.errorOccured
         }
         
-        return false
+        isFound = found.count > 0
+        
+        return isFound
     }
     
     fileprivate func fadeInDuration() -> Double {

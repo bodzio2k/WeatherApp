@@ -13,4 +13,5 @@ target 'WeatherApp' do
   # pod 'SwinjectAutoregistration'
   pod 'Alamofire'
   pod 'Willow', '= 5.0'
+  pod 'SnapKit', '= 5.0.0'
 end

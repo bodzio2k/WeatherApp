@@ -76,6 +76,9 @@ class FavouritesViewController: UIViewController {
         default:
             maxLocationCount = 13
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
