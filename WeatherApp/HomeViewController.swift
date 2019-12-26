@@ -404,6 +404,15 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
             fatalError("Cannot get favourites...")
         }
         
+        guard Globals.isReachable() else {
+            var userInfo: [String: Any] = [:]
+            
+            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+            NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
+            
+            return
+        }
+        
         for i in rows {
             let fav = favourites[i]!
             let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)

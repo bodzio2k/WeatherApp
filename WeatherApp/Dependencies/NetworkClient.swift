@@ -28,7 +28,6 @@ class NetworkClient: NetworkClientProtocol {
                     self.userInfo["error"] = error
                     self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                     
-                    
                     return
                 }
                 

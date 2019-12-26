@@ -143,6 +143,15 @@ class FavouritesViewController: UIViewController {
             return
         }
         
+        guard Globals.isReachable() else {
+            var userInfo: [String: Any] = [:]
+            
+            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+            NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
+            
+            return
+        }
+        
         showActivityIndicator()
         
         for fav in favourites.items {
@@ -260,8 +269,12 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            _ = favourites?.delete(at: indexPath.row, commit: true)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.performBatchUpdates({
+                _ = favourites?.delete(at: indexPath.row, commit: true)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }, completion: { _ in
+                tableView.reloadData()
+            })
         }
     }
     
