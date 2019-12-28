@@ -47,6 +47,7 @@ class FavouritesViewController: UIViewController {
     var networkClient: NetworkClientProtocol?
     var currentTemps: [Int:Int] = [:]
     var locationManager = CLLocationManager()
+    let reachability = try! Reachability()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,23 @@ class FavouritesViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
         
+        reachability.whenUnreachable = { _ in
+            var userInfo: [String: Any] = [:]
+            
+            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+            NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
+            
+            if self.tableView.refreshControl?.isRefreshing ?? false {
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+        
+        reachability.whenReachable = { _ in
+            self.dismissAlertController()
+            self.getCurrentTemps()
+        }
+        
+        try! reachability.startNotifier()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,8 +151,8 @@ class FavouritesViewController: UIViewController {
             fatalError("Cannot get favourites...")
         }
         
-        if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime), !force {
-            Globals.log.debugMessage("No need to refresh...")
+        guard reachability.connection != .unavailable  else {
+            Globals.log.debugMessage("Cannot refresh, connection is unavailable.")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.tableView.refreshControl?.endRefreshing()
@@ -143,11 +161,12 @@ class FavouritesViewController: UIViewController {
             return
         }
         
-        guard Globals.isReachable() else {
-            var userInfo: [String: Any] = [:]
+        if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime), !force {
+            Globals.log.debugMessage("No need to refresh...")
             
-            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
-            NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.tableView.refreshControl?.endRefreshing()
+            })
             
             return
         }

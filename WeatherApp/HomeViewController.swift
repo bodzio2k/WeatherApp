@@ -38,7 +38,8 @@ class HomeViewController: UIViewController {
     var currentLocationTimeZoneId: String?
     var separatorLineWidth: CGFloat = 0
     var errorOccured = false
-     
+    let reachability = try! Reachability()
+    
     override func viewDidLoad() {
         var nibCell: UINib?
         super.viewDidLoad()
@@ -80,6 +81,25 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground), name: Notification.Name(Globals.didEnterForeground), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: Notification.Name(Globals.didEnterBackground), object: nil)
+        
+        reachability.whenUnreachable = { _ in
+            var userInfo: [String: Any] = [:]
+            
+            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+            NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
+            
+            self.errorOccured = true
+        }
+        
+        reachability.whenReachable = { _ in
+            self.dismissAlertController()
+            
+            self.favouritesCollectionView.reloadData()
+            
+            self.errorOccured = false
+        }
+        
+        try! reachability.startNotifier()
     }
     
     @objc func didEnterForeground() {
@@ -402,15 +422,6 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         
         guard let favourites = favourites else {
             fatalError("Cannot get favourites...")
-        }
-        
-        guard Globals.isReachable() else {
-            var userInfo: [String: Any] = [:]
-            
-            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
-            NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
-            
-            return
         }
         
         for i in rows {
