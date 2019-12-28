@@ -45,6 +45,7 @@
 		8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE057962207055D0081A615 /* FavouriteCollectionViewCell.swift */; };
 		8BE057992207055D0081A615 /* FavouriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE057972207055D0081A615 /* FavouriteCollectionViewCell.xib */; };
 		8BEFBFD622BCE9BA00FD675A /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEFBFD522BCE9BA00FD675A /* WeatherAppUITests.swift */; };
+		DE43D5A023B6283D0081CDE7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE43D59F23B6283D0081CDE7 /* Reachability.swift */; };
 		DE9B12A023887A9A0017956F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B129F23887A9A0017956F /* UIViewController+Extension.swift */; };
 		FF17BCB6E45053CC38363FA6 /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF78235CC638F3E1C7601ADD /* Pods_WeatherApp.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +117,7 @@
 		8BEFBFD522BCE9BA00FD675A /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		8BEFBFD722BCE9BA00FD675A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF78235CC638F3E1C7601ADD /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE43D59F23B6283D0081CDE7 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../../../../Downloads/Reachability.swift; sourceTree = "<group>"; };
 		DE9B129F23887A9A0017956F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DEDC2AEF2393CC3500F36D5A /* SandboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SandboxViewController.swift; path = /Users/krzysztof.podolak/Projects/WeatherApp/WeatherApp/SandboxViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -227,6 +229,7 @@
 		8B3A2A01222BF09600CAFBF8 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				DE43D59F23B6283D0081CDE7 /* Reachability.swift */,
 				8B3A29FF222BEF7200CAFBF8 /* FavouritesProtocol.swift */,
 				8B3A2A02222BF0C100CAFBF8 /* Favourites.swift */,
 				8B0B645F2250CEDA00F4CB89 /* Forecast.swift */,
@@ -480,6 +483,7 @@
 				DE9B12A023887A9A0017956F /* UIViewController+Extension.swift in Sources */,
 				8BE057982207055D0081A615 /* FavouriteCollectionViewCell.swift in Sources */,
 				8B3A2A00222BEF7200CAFBF8 /* FavouritesProtocol.swift in Sources */,
+				DE43D5A023B6283D0081CDE7 /* Reachability.swift in Sources */,
 				8B89836621FB363200162764 /* Globals.swift in Sources */,
 				8B0995C922633CF0000852A5 /* NetworkClient.swift in Sources */,
 				8B0B172921ADCB7A001A3219 /* Weather_App.xcdatamodeld in Sources */,
