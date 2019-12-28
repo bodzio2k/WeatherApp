@@ -79,17 +79,4 @@ public struct Globals {
     static let didEnterBackground = "DID_ENTER_BACKGROUND"
     
     static var log = Logger(logLevels: .all, writers: [ConsoleWriter()])
-    static private let reachablity = SCNetworkReachabilityCreateWithName(nil, darkSkyUrl)
-    
-    static func isReachable() -> Bool {
-        var flags = SCNetworkReachabilityFlags()
-        
-        SCNetworkReachabilityGetFlags(reachablity!, &flags)
-        
-        if !flags.contains(.reachable) {
-            return false
-        }
-        
-        return true
-    }
 }
