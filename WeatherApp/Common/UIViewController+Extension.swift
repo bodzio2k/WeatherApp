@@ -43,23 +43,9 @@ extension UIViewController {
                 make.left.rightMargin.equalTo(2)
                 make.topMargin.equalTo(16)
                 make.height.equalTo(self.view.frame.height / 28.0)
-//                make.centerY.equalTo(self.view)
             }
-            view.bringSubviewToFront(errorLabel)
-
-            let pathMonitor = NWPathMonitor()
-            let monitorQueue = DispatchQueue(label: "NetworkMonitor")
             
-            pathMonitor.start(queue: monitorQueue)
-            pathMonitor.pathUpdateHandler = self.pathUpdateHandler
-        }
-    }
-    
-    func pathUpdateHandler(path: NWPath) -> Void {
-        if path.status == NWPath.Status.satisfied{
-            DispatchQueue.main.async {
-                self.dismissAlertController()
-            }
+            view.bringSubviewToFront(errorLabel)
         }
     }
     
