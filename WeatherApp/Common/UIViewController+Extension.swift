@@ -13,26 +13,29 @@ import SnapKit
 
 extension UIViewController {
     @objc func errorOccured(_ notification: NSNotification) {
-        var message = "Unknown"
+        var message = "Unknown error occured."
         let errorLabel: UILabel = {
             let label = UILabel()
             
             label.backgroundColor = .red
             label.textColor = .white
             label.textAlignment = .center
-            label.font = .systemFont(ofSize: 12.0)
+            label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
             label.restorationIdentifier = Globals.errorOccured
-            label.layer.cornerRadius = 4.0
-            label.layer.masksToBounds = true
+        
             return label
         }()
+        
+        let familyNames = UIFont.familyNames.joined(separator: ",")
+        
+        Globals.log.debugMessage("\(#function); familyNames are \(familyNames).")
         
         guard notification.name.rawValue == Globals.errorOccured else
         {
             return
         }
         
-        if let userInfo = notification.userInfo, let error = userInfo["error"] as? Error {
+        if let userInfo = notification.userInfo, let error = userInfo["error"] as? NSError {
             message = error.localizedDescription
         }
         

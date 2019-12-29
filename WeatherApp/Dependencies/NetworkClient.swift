@@ -38,11 +38,13 @@ class NetworkClient: NetworkClientProtocol {
                     self.userInfo["error"] = error
                     self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                     
+                    completion(nil, nil, nil, error)
+                    
                     return
                 }
                 
                 guard let responseDict = response.result.value as? [String:Any] else {
-                    self.userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+                    self.userInfo["error"] = NSError(domain: "", code: -9999)
                     self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                     
                     return
@@ -68,7 +70,7 @@ class NetworkClient: NetworkClientProtocol {
                 }
                 else
                 {
-                    self.userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+                    self.userInfo["error"] = NSError(domain: "", code: -9998)
                     self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                 }
             }
@@ -92,6 +94,7 @@ class NetworkClient: NetworkClientProtocol {
             .responseJSON { response in
                 if let error = response.error {
                     self.userInfo["error"] = error
+                    
                     self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                     
                     return
