@@ -13,6 +13,16 @@ import CoreLocation
 class NetworkClient: NetworkClientProtocol {
     let nc = NotificationCenter.default
     var userInfo: [AnyHashable: Any] = ["error": ""]
+    let sessionManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        
+        configuration.timeoutIntervalForRequest = 2.0
+        configuration.timeoutIntervalForResource = 2.0
+        
+        let sessionManager = SessionManager(configuration: configuration)
+        
+        return sessionManager
+    }()
     
     func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, units: String, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void) {
         let units = Globals.degreeScale == .celsius ? "si" : "us"
@@ -21,7 +31,7 @@ class NetworkClient: NetworkClientProtocol {
         var hourly: [Hourly]?
         var daily: [Daily]?
         
-        Alamofire.request(urlString)
+        sessionManager.request(urlString)
             .validate()
             .responseJSON { response in
                 if let error = response.result.error {
@@ -73,7 +83,7 @@ class NetworkClient: NetworkClientProtocol {
         
         parameters!["namePrefix"] = prefix
         
-        Alamofire.request(Globals.geoDBCitiesUrl,
+        sessionManager.request(Globals.geoDBCitiesUrl,
                           method: HTTPMethod.get,
                           parameters: parameters,
                           encoding: URLEncoding.default,
