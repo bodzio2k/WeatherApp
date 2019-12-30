@@ -104,7 +104,6 @@
 		8B92961C220C5A9100300230 /* WeatherConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditions.swift; sourceTree = "<group>"; };
 		8B92961E221B40E700300230 /* Console.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Console.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8B9D4CE922B642D400159808 /* FavouritesCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		8BA4941E21D0E1E100941AAF /* world-cities.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "world-cities.csv"; sourceTree = "<group>"; };
 		8BA4942021D0F37C00941AAF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8BA64C4422553AF100C568E2 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 		8BB0A7CB2299DB160019A8F3 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
@@ -198,7 +197,6 @@
 				8B3A2A01222BF09600CAFBF8 /* Dependencies */,
 				8B5DE26821BD6A4500DE8EC4 /* Model */,
 				8B5DE26521BD30DB00DE8EC4 /* Cells */,
-				8BA4941D21D0E18200941AAF /* Data */,
 				8B0B172F21ADCB7E001A3219 /* Info.plist */,
 				8B0B172021ADCB79001A3219 /* AppDelegate.swift */,
 				8B89836521FB363200162764 /* Globals.swift */,
@@ -275,14 +273,6 @@
 				8BB0A7CB2299DB160019A8F3 /* Icon.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		8BA4941D21D0E18200941AAF /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8BA4941E21D0E1E100941AAF /* world-cities.csv */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		8BEFBFD422BCE9BA00FD675A /* WeatherAppUITests */ = {

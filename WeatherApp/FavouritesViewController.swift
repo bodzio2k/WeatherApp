@@ -85,7 +85,7 @@ class FavouritesViewController: UIViewController {
             
             Globals.log.debugMessage("\(#function); Network is unreachable now...")
             
-            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+            userInfo["error"] = NSError(domain: "", code: -9997)
             NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
             
             if self.tableView.refreshControl?.isRefreshing ?? false {
@@ -99,7 +99,6 @@ class FavouritesViewController: UIViewController {
             Globals.log.debugMessage("\(#function); Network is reachable now...")
             
             self.dismissAlertController()
-            //self.getCurrentTemps()
         }
         
         try! reachability.startNotifier()
@@ -157,7 +156,17 @@ class FavouritesViewController: UIViewController {
             fatalError("\(#function); Cannot get favourites...")
         }
         
-        guard reachability.connection != .unavailable  else {
+        guard favourites.items.count > 0 else {
+            Globals.log.debugMessage("\(#function); Found no favourites Exiting...")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.tableView.refreshControl?.endRefreshing()
+            })
+            
+            return
+        }
+        
+        guard reachability.connection != .unavailable else {
             Globals.log.debugMessage("\(#function); Cannot refresh, connection is unavailable.")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
@@ -217,9 +226,7 @@ class FavouritesViewController: UIViewController {
                             
                             self.hideActivityIndicator()
                             
-                            if self.isAlertPresent() {
-                                self.dismissAlertController()
-                            }
+                            self.dismissAlertController()
                         })
                     }
                 })

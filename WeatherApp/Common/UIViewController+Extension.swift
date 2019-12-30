@@ -49,6 +49,10 @@ extension UIViewController {
     }
     
     func dismissAlertController() {
+        guard isAlertPresent() else {
+            return
+        }
+        
         let errorLabel: UIView?
         
         errorLabel = self.view.subviews.first { (subview) in

@@ -85,7 +85,7 @@ class HomeViewController: UIViewController {
         reachability.whenUnreachable = { _ in
             var userInfo: [String: Any] = [:]
             
-            userInfo["error"] = NSError(domain: "WeatherApp", code: -9999)
+            userInfo["error"] = NSError(domain: "", code: -9999)
             NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
             
             self.errorOccured = true
@@ -380,6 +380,14 @@ extension HomeViewController: CLLocationManagerDelegate {
                 
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(),completion: { (currently, hourly, daily, error) in
+                    if let error = error {
+                        Globals.log.debugMessage("\(#function); \(error.localizedDescription)")
+                        
+                        return
+                    }
+                    
+                    self.dismissAlertController()
+                    
                     self.prefetched[0] = currently!
                     self.prefetchedHourly[Int.min] = hourly!
                     self.prefetchedDaily[Int.min] = daily!
@@ -434,7 +442,6 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
             let fav = favourites[i]!
             let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
         
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             DispatchQueue.main.async {
                 self.networkClient?.fetchWeatherForecast(for: coordinate, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
                     if let error = error {
@@ -442,6 +449,8 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                         
                         return
                     }
+                    
+                    self.dismissAlertController()
                     
                     Globals.log.debugMessage("Prefetched weather for row \(i)...")
                     
