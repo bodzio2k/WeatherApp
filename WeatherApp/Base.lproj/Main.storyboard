@@ -51,14 +51,14 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
-                                <rect key="frame" x="0.0" y="342" width="312" height="193"/>
+                                <rect key="frame" x="0.0" y="342" width="304" height="193"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="WeatherApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="312" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="304" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9dd-6m-o7V" id="qvR-bQ-YjA">
-                                            <rect key="frame" x="0.0" y="0.0" width="312" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day of week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyN-WB-EPs">
@@ -68,10 +68,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
-                                                    <rect key="frame" x="106" y="0.0" width="100" height="44"/>
+                                                    <rect key="frame" x="102" y="0.0" width="100" height="44"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="z1Q-fu-Lor">
-                                                    <rect key="frame" x="226" y="0.0" width="78" height="44"/>
+                                                    <rect key="frame" x="220" y="0.0" width="76" height="44"/>
                                                     <subviews>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
@@ -113,7 +113,7 @@
                                 <sections/>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="powerd_by" translatesAutoresizingMaskIntoConstraints="NO" id="tUz-jD-vzC">
-                                <rect key="frame" x="8" y="541" width="75" height="22.5"/>
+                                <rect key="frame" x="16" y="541" width="75" height="22.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </imageView>
                             <pageControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0Ox-ma-cBe">
@@ -126,7 +126,7 @@
                                 </connections>
                             </pageControl>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-menu_filled" translatesAutoresizingMaskIntoConstraints="NO" id="PkT-J8-94x">
-                                <rect key="frame" x="274.5" y="541" width="37.5" height="22.5"/>
+                                <rect key="frame" x="266.5" y="541" width="37.5" height="22.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -142,14 +142,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ArT-xm-xWG" secondAttribute="trailing" id="75F-8p-WXD"/>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.34" id="Co6-3S-tQp"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G9Z-zx-wXy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" constant="8" id="KBh-ca-5Lq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PkT-J8-94x" secondAttribute="trailing" constant="8" id="NKZ-qX-boX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" constant="16" id="KBh-ca-5Lq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PkT-J8-94x" secondAttribute="trailing" constant="16" id="NKZ-qX-boX"/>
                             <constraint firstItem="WK1-gO-QvJ" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.4" id="Nxc-JE-Rzi"/>
                             <constraint firstItem="tUz-jD-vzC" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.04" id="VKh-8O-kwh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WK1-gO-QvJ" secondAttribute="trailing" id="XCG-FC-3MF"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="top" secondItem="WK1-gO-QvJ" secondAttribute="bottom" id="crv-CH-AA4"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.2" constant="1" id="dRo-RZ-Yrr"/>
-                            <constraint firstItem="tUz-jD-vzC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="dZL-mY-LRW"/>
+                            <constraint firstItem="tUz-jD-vzC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dZL-mY-LRW"/>
                             <constraint firstItem="PkT-J8-94x" firstAttribute="height" secondItem="tUz-jD-vzC" secondAttribute="height" id="jfS-pn-yTp"/>
                             <constraint firstItem="WK1-gO-QvJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ncs-Mj-4IN"/>
                             <constraint firstItem="0Ox-ma-cBe" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pxY-f3-4mO"/>

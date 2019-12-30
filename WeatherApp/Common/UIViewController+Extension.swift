@@ -26,10 +26,6 @@ extension UIViewController {
             return label
         }()
         
-        let familyNames = UIFont.familyNames.joined(separator: ",")
-        
-        Globals.log.debugMessage("\(#function); familyNames are \(familyNames).")
-        
         guard notification.name.rawValue == Globals.errorOccured else
         {
             return
@@ -43,7 +39,7 @@ extension UIViewController {
             errorLabel.text = message
             view.addSubview(errorLabel)
             errorLabel.snp.makeConstraints { (make) in
-                make.left.rightMargin.equalTo(2)
+                make.left.right.equalTo(0)
                 make.topMargin.equalTo(16)
                 make.height.equalTo(self.view.frame.height / 28.0)
             }
