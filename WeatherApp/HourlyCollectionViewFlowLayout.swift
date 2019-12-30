@@ -14,7 +14,7 @@ class HourlyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         scrollDirection = .horizontal
         
         let collectionViewSize = collectionView!.frame.size
-        let width = collectionViewSize.width / 7.0
+        let width = collectionViewSize.width / 5.0
         let height = collectionViewSize.height
         
         itemSize = CGSize(width: width, height: height)

@@ -50,28 +50,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
-                                <rect key="frame" x="0.0" y="342" width="320" height="193"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-6L-L5U">
+                                <rect key="frame" x="0.0" y="342" width="312" height="193"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="WeatherApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="100.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="312" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9dd-6m-o7V" id="qvR-bQ-YjA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="100.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="312" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day of week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyN-WB-EPs">
-                                                    <rect key="frame" x="15" y="40" width="94" height="20.5"/>
+                                                    <rect key="frame" x="15" y="12" width="94" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Im-jbl">
-                                                    <rect key="frame" x="110" y="0.0" width="100" height="100.5"/>
+                                                    <rect key="frame" x="106" y="0.0" width="100" height="44"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="z1Q-fu-Lor">
-                                                    <rect key="frame" x="248" y="0.0" width="64" height="100.5"/>
+                                                    <rect key="frame" x="226" y="0.0" width="78" height="44"/>
                                                     <subviews>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slD-J7-ykh">
                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
@@ -94,7 +94,7 @@
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="centerX" secondItem="qvR-bQ-YjA" secondAttribute="centerX" id="ARd-gl-Hvw"/>
                                                 <constraint firstItem="RuO-Im-jbl" firstAttribute="top" secondItem="qvR-bQ-YjA" secondAttribute="top" id="E4a-ex-FVX"/>
                                                 <constraint firstItem="z1Q-fu-Lor" firstAttribute="centerY" secondItem="qvR-bQ-YjA" secondAttribute="centerY" id="TTS-25-7dO"/>
-                                                <constraint firstItem="z1Q-fu-Lor" firstAttribute="width" secondItem="qvR-bQ-YjA" secondAttribute="width" multiplier="0.2" id="UAJ-pE-uZo"/>
+                                                <constraint firstItem="z1Q-fu-Lor" firstAttribute="width" secondItem="qvR-bQ-YjA" secondAttribute="width" multiplier="0.25" id="UAJ-pE-uZo"/>
                                                 <constraint firstAttribute="trailing" secondItem="z1Q-fu-Lor" secondAttribute="trailingMargin" constant="8" id="UNK-Hz-hbq"/>
                                                 <constraint firstAttribute="bottom" secondItem="RuO-Im-jbl" secondAttribute="bottom" id="Wj3-sb-ghg"/>
                                                 <constraint firstItem="MyN-WB-EPs" firstAttribute="leading" secondItem="qvR-bQ-YjA" secondAttribute="leadingMargin" id="Z7B-ck-mv6"/>
@@ -142,7 +142,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ArT-xm-xWG" secondAttribute="trailing" id="75F-8p-WXD"/>
                             <constraint firstItem="lOX-6L-L5U" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.34" id="Co6-3S-tQp"/>
                             <constraint firstItem="ArT-xm-xWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G9Z-zx-wXy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" id="KBh-ca-5Lq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lOX-6L-L5U" secondAttribute="trailing" constant="8" id="KBh-ca-5Lq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PkT-J8-94x" secondAttribute="trailing" constant="8" id="NKZ-qX-boX"/>
                             <constraint firstItem="WK1-gO-QvJ" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.4" id="Nxc-JE-Rzi"/>
                             <constraint firstItem="tUz-jD-vzC" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.04" id="VKh-8O-kwh"/>
@@ -202,14 +202,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="WeatherApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="71.5" width="320" height="21"/>
+                                        <rect key="frame" x="0.0" y="71.5" width="320" height="21.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2fV-Jk-vK1" id="PfZ-g0-lIi">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C/°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-zJ-2Jt">
-                                                    <rect key="frame" x="15" y="0.0" width="39.5" height="21"/>
+                                                    <rect key="frame" x="15" y="0.0" width="39.5" height="21.5"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -219,7 +219,7 @@
                                                     </connections>
                                                 </label>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-plus" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-n9-xqa">
-                                                    <rect key="frame" x="267.5" y="-8.5" width="37.5" height="38"/>
+                                                    <rect key="frame" x="267.5" y="-8.5" width="37.5" height="38.5"/>
                                                     <gestureRecognizers/>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="d7G-7E-HSH" appends="YES" id="yCz-tG-kFe"/>

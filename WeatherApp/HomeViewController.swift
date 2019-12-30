@@ -289,6 +289,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 
                 networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
+                    if let error = error {
+                        Globals.log.debugMessage("Cannot create dequeue cell due to \(error.localizedDescription)...")
+                        
+                        return
+                    }
+                    
                     self.prefetched[fav.id] = currently!
                     self.prefetchedHourly[fav.id] = hourly!
                     self.prefetchedDaily[fav.id] = daily!
@@ -428,8 +434,15 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
             let fav = favourites[i]!
             let coordinate = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
         
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.async {
                 self.networkClient?.fetchWeatherForecast(for: coordinate, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
+                    if let error = error {
+                        Globals.log.debugMessage("Cannot prefetch due to \(error.localizedDescription)...")
+                        
+                        return
+                    }
+                    
                     Globals.log.debugMessage("Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
