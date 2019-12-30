@@ -40,7 +40,7 @@ extension UIViewController {
             view.addSubview(errorLabel)
             errorLabel.snp.makeConstraints { (make) in
                 make.left.right.equalTo(0)
-                make.topMargin.equalTo(16)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
                 make.height.equalTo(self.view.frame.height / 28.0)
             }
             
