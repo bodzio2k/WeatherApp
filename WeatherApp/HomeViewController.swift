@@ -176,7 +176,7 @@ class HomeViewController: UIViewController {
         }
         else
         {
-            Globals.log.debugMessage("Cannot find prefeched details...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Cannot find prefeched hourly...")
         }
         
         if prefetchedDaily.keys.contains(fav.id) {
@@ -188,7 +188,7 @@ class HomeViewController: UIViewController {
         }
         else
         {
-            Globals.log.debugMessage("Cannot find prefeched details...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Cannot find prefeched daily...")
             let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
             
             networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (_, hourly, daily, error) in
@@ -290,7 +290,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
                 networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
                     if let error = error {
-                        Globals.log.debugMessage("Cannot create dequeue cell due to \(error.localizedDescription)...")
+                        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Cannot create dequeue cell due to \(error.localizedDescription)...")
                         
                         return
                     }
@@ -347,10 +347,9 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let geocoder = CLGeocoder()
-        let timestamp = dateFormatter.string(from: Date())
         var currentPlacemark: CLPlacemark?
         
-        Globals.log.debugMessage("\(type(of: self)) didUpdateLocations...")
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Trying to obtain current location...")
         
         geocoder.reverseGeocodeLocation(locations[0]) { (placemark, error) in
             if let error = error {
@@ -383,7 +382,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 let coordinates = CLLocationCoordinate2D(latitude: fav.latitude, longitude: fav.longitude)
                 self.networkClient?.fetchWeatherForecast(for: coordinates, units: Globals.degreeScale.toString(),completion: { (currently, hourly, daily, error) in
                     if let error = error {
-                        Globals.log.debugMessage("\(#function); \(error.localizedDescription)")
+                        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); \(error.localizedDescription)")
                         
                         return
                     }
@@ -400,31 +399,31 @@ extension HomeViewController: CLLocationManagerDelegate {
                     self.dailyTableView.reloadData()
                 })
                 
-                Globals.log.debugMessage("Placemark retrieved: \(timestamp); \(locality)")
+                Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Placemark retrieved: \(locality)")
             }
         }
             
         self.hourlyCollectionView.reloadData()
         self.dailyTableView.reloadData()
         
-        Globals.log.debugMessage { "didUpdateLocations: " + self.dateFormatter.string(from: Date()) }
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Finished...")
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        Globals.log.debugMessage { "didFailWithError: " + self.dateFormatter.string(from: Date()) + "; " + error.localizedDescription }
+        Globals.log.debugMessage { "\(self.timeStamp); \(type(of: self)); \(#function); " + self.dateFormatter.string(from: Date()) + "; " + error.localizedDescription }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        Globals.log.debugMessage("didChangeAuthorization: \(status.rawValue)...")
-    
-        if status == .authorizedAlways || status == .authorizedWhenInUse {
-            self.locationManager.requestLocation()
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); \(status.rawValue)...")
+        
+        guard status == .authorizedAlways || status == .authorizedWhenInUse else {
+            return
         }
         
         let favCount = favourites?.count ?? 0
         
         if (status == .denied || status == .restricted) && favCount < 1 {
-            Globals.log.debugMessage("Location services not available...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Location services not available...")
             
             self.performSegue(withIdentifier: "showFavorites", sender: self)
         }
@@ -436,7 +435,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         if collectionView != favouritesCollectionView { return }
         
         let rows = indexPaths.compactMap { i in return i.row }
-        Globals.log.debugMessage("Prefetching rows \(rows)...")
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Prefetching rows \(rows)...")
         
         guard let favourites = favourites else {
             fatalError("Cannot get favourites...")
@@ -449,7 +448,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
             DispatchQueue.main.async {
                 self.networkClient?.fetchWeatherForecast(for: coordinate, units: Globals.degreeScale.toString(), completion: { (currently, hourly, daily, error) in
                     if let error = error {
-                        Globals.log.debugMessage("Cannot prefetch due to \(error.localizedDescription)...")
+                        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Cannot prefetch due to \(error.localizedDescription)...")
                         
                         return
                     }
@@ -457,7 +456,7 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                     if self.reachability.connection != .unavailable {
                         self.dismissAlertController()
                     }
-                    Globals.log.debugMessage("Prefetched weather for row \(i)...")
+                    Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
                     self.prefetchedHourly[fav.id] = hourly!
