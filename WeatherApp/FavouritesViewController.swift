@@ -70,7 +70,7 @@ class FavouritesViewController: UIViewController {
         tableView.refreshControl = refreshControl
         
         let horizontalSizeClass = self.traitCollection.horizontalSizeClass.rawValue
-        Globals.log.debugMessage("horizontalSizeClass is \(horizontalSizeClass)...")
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); horizontalSizeClass is \(horizontalSizeClass)...")
         switch horizontalSizeClass {
         case 0, 1:
             maxLocationCount = 9
@@ -83,7 +83,7 @@ class FavouritesViewController: UIViewController {
         reachability.whenUnreachable = { _ in
             var userInfo: [String: Any] = [:]
             
-            Globals.log.debugMessage("\(#function); Network is unreachable now...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Network is unreachable now...")
             
             userInfo["error"] = NSError(domain: "", code: -9997)
             NotificationCenter.default.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: userInfo)
@@ -96,7 +96,7 @@ class FavouritesViewController: UIViewController {
         }
         
         reachability.whenReachable = { _ in
-            Globals.log.debugMessage("\(#function); Network is reachable now...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Network is reachable now...")
             
             self.dismissAlertController()
         }
@@ -115,12 +115,12 @@ class FavouritesViewController: UIViewController {
         let authorizationStatus = CLLocationManager.authorizationStatus()
         
         if authorizationStatus == .denied {
-            Globals.log.debugMessage("\(#function); authorizationStatus is .denied...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); authorizationStatus is .denied...")
             return
         }
         
         if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
-            Globals.log.debugMessage("\(#function); significantLocationChangeMonitoringAvailable is false...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); significantLocationChangeMonitoringAvailable is false...")
             return
         }
         
@@ -153,11 +153,11 @@ class FavouritesViewController: UIViewController {
     
     @objc func getCurrentTemps(force: Bool = false) {
         guard let favourites = favourites else {
-            fatalError("\(#function); Cannot get favourites...")
+            fatalError("\(self.timeStamp); \(type(of: self)); \(#function); Cannot get favourites...")
         }
         
         guard favourites.items.count > 0 else {
-            Globals.log.debugMessage("\(#function); Found no favourites Exiting...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Found no favourites Exiting...")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.tableView.refreshControl?.endRefreshing()
@@ -167,7 +167,7 @@ class FavouritesViewController: UIViewController {
         }
         
         guard reachability.connection != .unavailable else {
-            Globals.log.debugMessage("\(#function); Cannot refresh, connection is unavailable.")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Cannot refresh, connection is unavailable.")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.tableView.refreshControl?.endRefreshing()
@@ -177,7 +177,7 @@ class FavouritesViewController: UIViewController {
         }
         
         if let lastRefreshTime = Globals.lastRefreshTime, Date() < Date(timeInterval: Globals.minRefreshInterval, since: lastRefreshTime), !force {
-            Globals.log.debugMessage("\(#function); No need to refresh...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); No need to refresh...")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.tableView.refreshControl?.endRefreshing()
@@ -198,7 +198,7 @@ class FavouritesViewController: UIViewController {
                     if let error = error {
                         self.tableView.refreshControl?.endRefreshing()
                         
-                        Globals.log.debugMessage("\(#function); \(error.localizedDescription)")
+                        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); \(error.localizedDescription)")
                         
                         self.hideActivityIndicator()
                         
@@ -211,7 +211,7 @@ class FavouritesViewController: UIViewController {
                     
                     self.currentTemps[fav.id] = currently!.temperature
                     
-                    Globals.log.debugMessage("\(#function); Getting current temp for \(fav.city)...")
+                    Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Getting current temp for \(fav.city)...")
                     
                     self.pendingOperations += -1
                     
@@ -220,7 +220,7 @@ class FavouritesViewController: UIViewController {
                             self.tableView.refreshControl?.endRefreshing()
                             self.tableView.reloadData()
                      
-                            Globals.log.debugMessage("\(#function); endRefreshing...")
+                            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); endRefreshing...")
                             
                             Globals.lastRefreshTime = Date()
                             
@@ -265,7 +265,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         else
         {
             guard let addLocationCell = tableView.dequeueReusableCell(withIdentifier: "AddLocationCell") as? FavouriteOptionsTableViewCell else {
-                fatalError("\(#function); Cannot get FavouriteOptionsTableViewCell..." )
+                fatalError("\(self.timeStamp); \(type(of: self)); \(#function); Cannot get FavouriteOptionsTableViewCell..." )
             }
             let celsiusSelected, fahrenheitSelected, celsiusUnselected, fahrenheitUnselected: NSAttributedString
             let resultText = NSMutableAttributedString(string: "")
@@ -354,7 +354,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FavouritesViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        Globals.log.debugMessage("\(#function); Trying to obtain current location...")
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Trying to obtain current location...")
         
         let lastLocation = locations[0]
         
@@ -372,7 +372,7 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                 let locality = newPlacemark.locality ?? "none"
                 var favouritesCurrentLocation: Location?
                 
-                Globals.log.debugMessage("\(#function); Received new location \(locality)...")
+                Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Received new location \(locality)...")
                 
                 if self.favourites!.items.count > 0 {
                     favouritesCurrentLocation = self.favourites!.items[0]
@@ -401,16 +401,20 @@ extension FavouritesViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        Globals.log.debugMessage("\(#function); Status is \(status.rawValue)...")
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Status is \(status.rawValue)...")
         
-        /*guard favourites!.items.count < 1 || status == .authorizedWhenInUse else {
-            Globals.log.debugMessage("No need to reload first item in the tableView. Exiting...")
-            
-            return
-        }*/
+        guard status == .authorizedAlways || status == .authorizedWhenInUse else {
+             return
+        }
+        
+        //locationManager.requestLocation()
         
         let firstItem = IndexPath(item: 0, section: 0)
         tableView.reloadRows(at: [firstItem], with: .fade)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        Globals.log.debugMessage { "\(self.timeStamp); \(type(of: self)); \(#function); " + error.localizedDescription }
     }
 }
 
@@ -420,7 +424,7 @@ extension FavouritesViewController: UITableViewDragDelegate {
         
         let allowToDrag = indexPath.row > 0 && indexPath.row < itemCount
         
-        Globals.log.debugMessage { "\(#function); Attempt to drag row #\(indexPath.row) of \(itemCount); \(allowToDrag)..." }
+        Globals.log.debugMessage { "\(self.timeStamp); \(type(of: self)); \(#function); Attempt to drag row #\(indexPath.row) of \(itemCount); \(allowToDrag)..." }
         
         guard allowToDrag else {
             canHandle = false
@@ -446,17 +450,17 @@ extension FavouritesViewController: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         let itemCount = favourites?.items.count ?? 0
         
-        Globals.log.debugMessage("\(#function); destinationIndexPath is \(destinationIndexPath?.row ?? -1)...")
+        Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); destinationIndexPath is \(destinationIndexPath?.row ?? -1)...")
         
         guard destinationIndexPath != nil, canHandle else {
             return UITableViewDropProposal(operation: .forbidden)
         }
         
         if tableView.hasActiveDrag {
-            Globals.log.debugMessage("\(#function); tableView.hasActiveDrag is \(tableView.hasActiveDrag)...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); tableView.hasActiveDrag is \(tableView.hasActiveDrag)...")
             
             if let destinationRow = destinationIndexPath?.row, destinationRow == 0 || destinationRow == itemCount  {
-                Globals.log.debugMessage("\(#function); Attempt to drop forbidden row #\(destinationRow)...")
+                Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Attempt to drop forbidden row #\(destinationRow)...")
                 
                 return UITableViewDropProposal(operation: .forbidden)
             }
