@@ -325,20 +325,22 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == favouritesCollectionView {
-            let currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
-            
-            guard let fav = favourites?[currentIndex] else {
-                fatalError("Cannot get fav...")
-            }
-            
-            currentLocationTimeZoneId = fav.timeZoneId
-            
-            reloadDetails(for: fav)
-            
-            lastFavouriteIndex = currentIndex
-            pageControl.currentPage = currentIndex
+        guard scrollView == favouritesCollectionView else {
+            return
         }
+    
+        let currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        
+        guard let fav = favourites?[currentIndex] else {
+            fatalError("Cannot get fav...")
+        }
+        
+        currentLocationTimeZoneId = fav.timeZoneId
+        
+        reloadDetails(for: fav)
+        
+        lastFavouriteIndex = currentIndex
+        pageControl.currentPage = currentIndex
     }
 }
 
@@ -386,7 +388,9 @@ extension HomeViewController: CLLocationManagerDelegate {
                         return
                     }
                     
-                    self.dismissAlertController()
+                    if self.reachability.connection != .unavailable {
+                        self.dismissAlertController()
+                    }
                     
                     self.prefetched[0] = currently!
                     self.prefetchedHourly[Int.min] = hourly!
@@ -450,8 +454,9 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
                         return
                     }
                     
-                    self.dismissAlertController()
-                    
+                    if self.reachability.connection != .unavailable {
+                        self.dismissAlertController()
+                    }
                     Globals.log.debugMessage("Prefetched weather for row \(i)...")
                     
                     self.prefetched[fav.id] = currently!
