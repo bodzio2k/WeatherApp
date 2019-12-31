@@ -91,4 +91,13 @@ extension UIViewController {
         self.view.alpha = 0.0
        })
    }
+    
+    var timeStamp: String {
+        let dateFormatter = DateFormatter()
+        let now = Date()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
+        
+        return dateFormatter.string(from: now)
+    }
 }

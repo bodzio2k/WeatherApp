@@ -14,9 +14,19 @@ import MobileCoreServices
 class Favourites: FavouritesProtocol {
     internal var items: [Location] = []
     var filePath = ""
+    var fileName = "favourites.json"
     var locationManager: CLLocationManager!
     var count: Int {
         return self.items.count
+    }
+    
+    var timeStamp: String {
+        let dateFormatter = DateFormatter()
+        let now = Date()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
+        
+        return dateFormatter.string(from: now)
     }
     
     func delete(id: Int, commit: Bool) -> Void {
@@ -51,7 +61,7 @@ class Favourites: FavouritesProtocol {
     }
     
     init(_ dir : String) {
-        filePath = dir + "/favorites.json"
+        filePath = dir + "/" + fileName
     }
     
     func save() {
@@ -72,13 +82,13 @@ class Favourites: FavouritesProtocol {
             FileManager.default.createFile(atPath: filePath, contents: encoded!, attributes: nil)
         }
         
-        print("Saved at \(filePath)...")
+        print("\(self.timeStamp); \(type(of: self)); \(#function); Saved at \(fileName)...")
     }
     
     func load() {
         let decoder = JSONDecoder()
         
-        print("Attempting to load favourties from \(filePath)...")
+        print("\(self.timeStamp); \(type(of: self)); \(#function); Attempting to load favourties from \(fileName)...")
         
         if FileManager.default.fileExists(atPath: filePath) {
             if let file = FileHandle(forReadingAtPath: filePath) {
