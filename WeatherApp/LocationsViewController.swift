@@ -13,10 +13,10 @@ class LocationsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     var shouldShowSearchResults = false
-    var locations: [Location]?
+    var locations = Array<Location>()
     var favourites: FavouritesProtocol?
     var networkClient: NetworkClientProtocol?
-    var searchFor: String!
+    var searchFor = ""
     var detailText: String?
     
     func configureSearchBar() {
@@ -49,8 +49,15 @@ class LocationsViewController: UIViewController {
 
 extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard locations.count != 0 else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomMessageCell", for: indexPath)
+            cell.textLabel?.text = searchFor.count < 3 ? "Enter city..." : "No results found..."
+            
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
-        let location = locations![indexPath.row]
+        let location = locations[indexPath.row]
         let locationName = location.city
         let locationNamePrefix = String(locationName.prefix(searchFor.count))
         let highlightedPart = NSMutableAttributedString(string: locationNamePrefix, attributes: Globals.highlightedAttrs)
@@ -79,7 +86,7 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let location = locations![indexPath.row]
+        let location = locations[indexPath.row]
 
         favourites!.add(location)
         favourites!.save()
@@ -100,7 +107,7 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rc = locations?.count ?? 0
+        let rc = locations.count > 0 ? locations.count : 1
         
         return rc
     }
@@ -124,6 +131,12 @@ extension LocationsViewController: UISearchResultsUpdating {
         }
         
         networkClient?.fetchCities(by: searchFor, completion: { (locations, error) in
+            if let error = error {
+                Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); \(error.localizedDescription)")
+                
+                return
+            }
+            
             if let locations = locations {
                 self.locations = locations
                 self.tableView.reloadData()
