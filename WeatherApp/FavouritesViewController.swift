@@ -64,6 +64,7 @@ class FavouritesViewController: UIViewController {
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.distanceFilter = 3000.0 //meters
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getCurrentTemps), for: .valueChanged)

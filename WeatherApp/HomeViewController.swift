@@ -60,6 +60,7 @@ class HomeViewController: UIViewController {
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.distanceFilter = 3000.0 //meters
         
         nibCell = UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
         hourlyCollectionView.register(nibCell, forCellWithReuseIdentifier: "HourlyCollectionViewCell")
