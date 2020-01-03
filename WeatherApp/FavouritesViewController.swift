@@ -404,14 +404,14 @@ extension FavouritesViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Status is \(status.rawValue)...")
         
-        guard status == .authorizedAlways || status == .authorizedWhenInUse else {
-             return
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            locationManager.requestLocation()
         }
         
-        //locationManager.requestLocation()
-        
-        let firstItem = IndexPath(item: 0, section: 0)
-        tableView.reloadRows(at: [firstItem], with: .fade)
+        if favourites?.items.count ?? 0 > 0 {
+            let firstItem = IndexPath(item: 0, section: 0)
+            tableView.reloadRows(at: [firstItem], with: .fade)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
