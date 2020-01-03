@@ -11,7 +11,7 @@ target 'WeatherApp' do
   pod 'Swinject', '= 2.6.2'
   pod 'SwinjectStoryboard', '= 2.2.0'
   # pod 'SwinjectAutoregistration'
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.9.1'
   pod 'Willow', '= 5.0'
   pod 'SnapKit', '= 5.0.0'
 end
