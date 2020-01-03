@@ -20,7 +20,7 @@ class FavouritesViewController: UIViewController {
         Globals.lastRefreshTime = Globals.needToRefresh
         
         DispatchQueue.main.async {
-            self.getCurrentTemps()
+            self.getCurrentTemps(for: nil)
         }
     }
     
@@ -111,7 +111,7 @@ class FavouritesViewController: UIViewController {
         pendingOperations = 0
         
         favourites?.load()
-        getCurrentTemps()
+        getCurrentTemps(for: nil)
         
         let authorizationStatus = CLLocationManager.authorizationStatus()
         
@@ -120,16 +120,13 @@ class FavouritesViewController: UIViewController {
             return
         }
         
-        if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
-            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); significantLocationChangeMonitoringAvailable is false...")
-            return
-        }
-        
-        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startUpdatingLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.locationManager.stopUpdatingLocation()
         
         Globals.lastRefreshTime = Globals.needToRefresh
     }
@@ -152,13 +149,13 @@ class FavouritesViewController: UIViewController {
         activityIndicator.stopAnimating()
     }
     
-    @objc func getCurrentTemps(force: Bool = false) {
+    @objc func getCurrentTemps(force: Bool = false, for locations: [Location]?) {
         guard let favourites = favourites else {
             fatalError("\(self.timeStamp); \(type(of: self)); \(#function); Cannot get favourites...")
         }
         
         guard favourites.items.count > 0 else {
-            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Found no favourites Exiting...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Found no favourites... Exiting...")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.tableView.refreshControl?.endRefreshing()
@@ -187,9 +184,18 @@ class FavouritesViewController: UIViewController {
             return
         }
         
+        var items: [Location]!
+        
+        if locations != nil {
+            items = locations!
+        }
+        else {
+            items = favourites.items
+        }
+        
         showActivityIndicator()
         
-        for fav in favourites.items {
+        for fav in items {
             pendingOperations += 1
             
             OperationQueue.main.addOperation {
@@ -395,7 +401,7 @@ extension FavouritesViewController: CLLocationManagerDelegate {
                     self.favourites!.delete(id: Int.min, commit: true)
                     self.favourites!.insert(newLocation, at: 0)
                     self.favourites!.save()
-                    self.getCurrentTemps(force: true)
+                    self.getCurrentTemps(force: true, for: [newLocation])
                 }
             }
         }

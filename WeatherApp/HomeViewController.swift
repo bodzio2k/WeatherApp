@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
    
     //MARK: Actions
     @IBAction func goToFavouritesView(_ sender: UITapGestureRecognizer) {
+        self.locationManager.stopUpdatingLocation()
+        
         self.performSegue(withIdentifier: "showFavorites", sender: self)
     }
     
@@ -116,7 +118,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         favourites?.load()
         
-        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startUpdatingLocation()
         
         let favouritesCount = favourites?.count ?? 0
         
