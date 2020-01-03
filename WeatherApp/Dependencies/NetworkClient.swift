@@ -16,13 +16,21 @@ class NetworkClient: NetworkClientProtocol {
     let sessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         
-        configuration.timeoutIntervalForRequest = 2.0
-        configuration.timeoutIntervalForResource = 2.0
+        configuration.timeoutIntervalForRequest = 4.0
+        configuration.timeoutIntervalForResource = 4.0
         
         let sessionManager = SessionManager(configuration: configuration)
         
         return sessionManager
     }()
+    var timeStamp: String {
+        let dateFormatter = DateFormatter()
+        let now = Date()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
+        
+        return dateFormatter.string(from: now)
+    }
     
     func fetchWeatherForecast(for coordinate: CLLocationCoordinate2D, units: String, completion: @escaping (Currently?, [Hourly]?, [Daily]?, Error?) -> Void) {
         let units = Globals.degreeScale == .celsius ? "si" : "us"
@@ -95,6 +103,7 @@ class NetworkClient: NetworkClientProtocol {
                 if let error = response.error {
                     self.userInfo["error"] = error
                     
+                    self.userInfo["error"] = NSError(domain: "", code: -9996)
                     self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
                     
                     return
