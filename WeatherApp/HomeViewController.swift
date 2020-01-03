@@ -375,6 +375,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 self.favourites?.insert(initialLocation, at: 0)
                 self.favourites?.save()
                 self.favouritesCollectionView.reloadData()
+                self.pageControl.numberOfPages = self.favourites?.items.count ?? 0
                 
                 guard let fav = self.favourites?[self.scrollToFavourite] else {
                     fatalError("Error while getting fav...")
@@ -398,6 +399,8 @@ extension HomeViewController: CLLocationManagerDelegate {
                     
                     self.hourlyCollectionView.reloadData()
                     self.dailyTableView.reloadData()
+                    
+                    Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Weather fetched for \(locality)...")
                 })
                 
                 Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Placemark retrieved: \(locality)")
@@ -416,15 +419,11 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); \(status.rawValue)...")
-        
-        guard status == .authorizedAlways || status == .authorizedWhenInUse else {
-            return
-        }
-        
+         
         let favCount = favourites?.count ?? 0
         
         if (status == .denied || status == .restricted) && favCount < 1 {
-            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Location services not available...")
+            Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); Location services not available, favs are empty. ")
             
             self.performSegue(withIdentifier: "showFavorites", sender: self)
         }
