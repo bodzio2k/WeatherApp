@@ -201,15 +201,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="WeatherApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="71.5" width="320" height="21"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" rowHeight="120" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="71.5" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2fV-Jk-vK1" id="PfZ-g0-lIi">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C/°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-zJ-2Jt">
-                                                    <rect key="frame" x="15" y="0.0" width="39.5" height="21"/>
+                                                    <rect key="frame" x="15" y="0.0" width="39.5" height="120"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -219,7 +219,7 @@
                                                     </connections>
                                                 </label>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-plus" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-n9-xqa">
-                                                    <rect key="frame" x="267.5" y="-8.5" width="37.5" height="38"/>
+                                                    <rect key="frame" x="267.5" y="41.5" width="37.5" height="37.5"/>
                                                     <gestureRecognizers/>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="d7G-7E-HSH" appends="YES" id="yCz-tG-kFe"/>
@@ -261,6 +261,7 @@
                         <outlet property="tableView" destination="1HK-VR-hfn" id="lZM-4h-ICG"/>
                         <segue destination="JVf-RJ-mOv" kind="unwind" identifier="backToHome" unwindAction="unwindBackToHomeWithSegue:" id="Z3k-Hm-JbB"/>
                         <segue destination="JVf-RJ-mOv" kind="unwind" identifier="unwindBackToHomeWithSegue" unwindAction="unwindBackToHomeWithSegue:" id="yYM-Gn-s7m"/>
+                        <segue destination="Ipr-q1-heh" kind="presentation" identifier="showLocations" modalPresentationStyle="automatic" id="DQo-ey-A9L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYZ-fC-DSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -283,11 +284,11 @@
             <objects>
                 <viewController storyboardIdentifier="LocationsViewController" id="Ipr-q1-heh" customClass="LocationsViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GrB-YE-kpo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QCL-67-MTF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationCell" textLabel="yDk-g3-8p2" detailTextLabel="41S-zi-aYU" style="IBUITableViewCellStyleSubtitle" id="FUM-mI-fhD">
                                         <rect key="frame" x="0.0" y="28" width="320" height="56"/>

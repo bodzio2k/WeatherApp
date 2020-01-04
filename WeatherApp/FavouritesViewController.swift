@@ -30,13 +30,7 @@ class FavouritesViewController: UIViewController {
     var maxLocationCount: Int?
     
     @IBAction func addLocation(_ sender: UITapGestureRecognizer) {
-        guard let destVC = storyboard!.instantiateViewController(withIdentifier: "LocationsViewController") as? LocationsViewController else {
-            fatalError("Cannot get destintation VC...")
-        }
-        
-        destVC.modalPresentationStyle = .fullScreen
-        
-        present(destVC, animated: true, completion: nil)
+        performSegue(withIdentifier: "showLocations", sender: sender)
     }
     
     //MARK: Properties
