@@ -85,13 +85,13 @@ class NetworkClient: NetworkClientProtocol {
         }
     
     func fetchCities(by prefix: String, completion: @escaping ([Location]?, Error?) -> Void) {
-        var httpHeaders: HTTPHeaders? = [:]
-        var parameters: Parameters? = [:]
+        var httpHeaders: HTTPHeaders = [:]
+        var parameters: Parameters = [:]
         
-        httpHeaders!["X-RapidAPI-Host"] = Globals.geoDBCitiesApiHost
-        httpHeaders!["X-RapidAPI-Key"] = Globals.geoDBCitiesApiKey
+        httpHeaders["X-RapidAPI-Host"] = Globals.geoDBCitiesApiHost
+        httpHeaders["X-RapidAPI-Key"] = Globals.geoDBCitiesApiKey
         
-        parameters!["namePrefix"] = prefix
+        parameters["namePrefix"] = prefix
         
         sessionManager.request(Globals.geoDBCitiesUrl,
                           method: HTTPMethod.get,
@@ -101,10 +101,7 @@ class NetworkClient: NetworkClientProtocol {
             .validate()
             .responseJSON { response in
                 if let error = response.error {
-                    self.userInfo["error"] = error
-                    
-                    self.userInfo["error"] = NSError(domain: "", code: -9996)
-                    self.nc.post(name: Notification.Name(Globals.errorOccured), object: nil, userInfo: self.userInfo)
+                    completion(nil, error)
                     
                     return
                 }

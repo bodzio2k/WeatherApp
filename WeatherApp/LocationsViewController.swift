@@ -18,6 +18,8 @@ class LocationsViewController: UIViewController {
     var networkClient: NetworkClientProtocol?
     var searchFor = ""
     var detailText: String?
+    var lastError: Error?
+    var errorOccured = false
     
     func configureSearchBar() {
         searchController.searchResultsUpdater = self
@@ -36,8 +38,6 @@ class LocationsViewController: UIViewController {
         tableView.delegate = self
         
         configureSearchBar()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(errorOccured(_:)), name: Notification.Name(Globals.errorOccured), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,9 +49,32 @@ class LocationsViewController: UIViewController {
 
 extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard !errorOccured else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomMessageCell", for: indexPath)
+             
+            cell.contentView.backgroundColor = .red
+            cell.textLabel?.textColor = .white
+            cell.textLabel?.text = lastError!.localizedDescription
+             
+            return cell
+        }
+        
         guard locations.count != 0 else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomMessageCell", for: indexPath)
-            cell.textLabel?.text = searchFor.count < 3 ? "Enter city..." : "No results found..."
+            let text: String
+            
+            switch searchFor.count {
+            case 0:
+                text = ""
+            case 0..<Globals.searchForMinCharacterCount:
+                text = "Validating city."
+            default:
+                text = "No results found."
+            }
+            
+            cell.contentView.backgroundColor = .systemBackground
+            cell.textLabel?.textColor = .label
+            cell.textLabel?.text = text
             
             return cell
         }
@@ -107,6 +130,10 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard !errorOccured else {
+            return 1
+        }
+        
         let rc = locations.count > 0 ? locations.count : 1
         
         return rc
@@ -123,7 +150,9 @@ extension LocationsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchFor = searchController.searchBar.text ?? ""
         
-        if searchFor.count < 3 || 1 == 0 {
+        if searchFor.count < Globals.searchForMinCharacterCount {
+            errorOccured = false
+            
             locations = []
             tableView.reloadData()
             
@@ -134,13 +163,17 @@ extension LocationsViewController: UISearchResultsUpdating {
             if let error = error {
                 Globals.log.debugMessage("\(self.timeStamp); \(type(of: self)); \(#function); \(error.localizedDescription)")
                 
-                return
+                self.errorOccured = true
+                self.lastError = error
             }
             
             if let locations = locations {
                 self.locations = locations
-                self.tableView.reloadData()
+                
+                self.errorOccured = false
             }
+            
+            self.tableView.reloadData()
         })
     }
 }

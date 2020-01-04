@@ -79,4 +79,6 @@ public struct Globals {
     static let didEnterBackground = "DID_ENTER_BACKGROUND"
     
     static var log = Logger(logLevels: .all, writers: [ConsoleWriter()])
+    
+    static let searchForMinCharacterCount = 2
 }
