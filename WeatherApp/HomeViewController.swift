@@ -416,7 +416,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        Globals.log.debugMessage { "\(self.timeStamp); \(type(of: self)); \(#function); " + self.dateFormatter.string(from: Date()) + "; " + error.localizedDescription }
+        Globals.log.debugMessage { "\(self.timeStamp); \(type(of: self)); \(#function); " + error.localizedDescription }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
