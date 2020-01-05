@@ -22,9 +22,19 @@ class LocationsViewController: UIViewController {
     var errorOccured = false
     
     func configureSearchBar() {
+        let backgroundColor: UIColor
+        
+        if #available(iOS 13, *) {
+            backgroundColor = .systemBackground
+        }
+        else {
+            backgroundColor = .white
+        }
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "SEARCH"
+        searchController.searchBar.searchTextField.backgroundColor = backgroundColor
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
         
