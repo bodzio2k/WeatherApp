@@ -260,7 +260,6 @@
                         <outlet property="activityIndicator" destination="kap-JX-NLc" id="mtS-n4-Dgu"/>
                         <outlet property="tableView" destination="1HK-VR-hfn" id="lZM-4h-ICG"/>
                         <segue destination="JVf-RJ-mOv" kind="unwind" identifier="backToHome" unwindAction="unwindBackToHomeWithSegue:" id="Z3k-Hm-JbB"/>
-                        <segue destination="JVf-RJ-mOv" kind="unwind" identifier="unwindBackToHomeWithSegue" unwindAction="unwindBackToHomeWithSegue:" id="yYM-Gn-s7m"/>
                         <segue destination="Ipr-q1-heh" kind="presentation" identifier="showLocations" modalPresentationStyle="automatic" id="DQo-ey-A9L"/>
                     </connections>
                 </viewController>
@@ -351,9 +350,11 @@
                     <navigationItem key="navigationItem" id="9H0-mx-mSF"/>
                     <connections>
                         <outlet property="tableView" destination="QCL-67-MTF" id="S6N-Bq-waN"/>
+                        <segue destination="Yze-cF-kKh" kind="unwind" identifier="unwindBackToFavourites" unwindAction="unwindBackToFavouritesWithSegue:" id="U8I-6K-mNB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXS-NC-SsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Yze-cF-kKh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3203" y="949"/>
         </scene>

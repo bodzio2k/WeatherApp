@@ -125,12 +125,18 @@ class FavouritesViewController: UIViewController {
         Globals.lastRefreshTime = Globals.needToRefresh
     }
     
+    //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ?? "" == "backToHome" {
             let destVC = segue.destination as! HomeViewController
             
             destVC.scrollToFavourite = selectedItemIndex
         }
+    }
+
+    @IBAction func unwindBackToFavourites(segue: UIStoryboardSegue) {
+        favourites?.load()
+        getCurrentTemps(force: true, for: nil)
     }
     
     func showActivityIndicator() {

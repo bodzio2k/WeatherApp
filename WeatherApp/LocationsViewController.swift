@@ -109,20 +109,22 @@ extension LocationsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let location = locations[indexPath.row]
+        let completion = {
+            let location = self.locations[indexPath.row]
+            
+            self.favourites!.add(location)
+            self.favourites!.save()
 
-        favourites!.add(location)
-        favourites!.save()
-
+            self.performSegue(withIdentifier: "unwindBackToFavourites", sender: self)
+        }
+        
         if searchController.isActive {
-            searchController.dismiss(animated: false, completion: {
-                self.dismiss(animated: true, completion: nil)
-            })
+            searchController.dismiss(animated: false, completion: completion)
+            
+            return
         }
-        else
-        {
-            self.dismiss(animated: true, completion: nil)
-        }
+        
+        completion()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
