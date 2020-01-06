@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,27 +15,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSf-UU-Zk7">
-                                <rect key="frame" x="92" y="313" width="191" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Easy Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSf-UU-Zk7">
+                                <rect key="frame" x="87.5" y="313" width="200.5" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcF-cZ-VFX">
-                                <rect key="frame" x="283" y="313" width="92" height="21"/>
+                                <rect key="frame" x="288" y="313" width="87" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ver. 0.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd9-cb-aoD">
-                                <rect key="frame" x="163.5" y="641" width="48" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="poweredby-oneline" translatesAutoresizingMaskIntoConstraints="NO" id="ljE-Ap-QpK">
+                                <rect key="frame" x="96" y="580" width="183" height="111"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Dd9-cb-aoD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DbT-bc-Rle"/>
+                            <constraint firstItem="ljE-Ap-QpK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="3Do-Fp-xfX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ljE-Ap-QpK" secondAttribute="trailing" constant="96" id="E8r-Wb-JMW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tcF-cZ-VFX" secondAttribute="trailing" id="EHm-N8-LMT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Dd9-cb-aoD" secondAttribute="bottom" constant="8" id="UQl-p5-S1x"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ljE-Ap-QpK" secondAttribute="bottom" constant="-24" id="JiT-fM-Ulg"/>
                             <constraint firstItem="tcF-cZ-VFX" firstAttribute="leading" secondItem="sSf-UU-Zk7" secondAttribute="trailing" id="aj5-O8-GtM"/>
                             <constraint firstItem="sSf-UU-Zk7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qMY-lw-XkH"/>
                             <constraint firstItem="sSf-UU-Zk7" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="qfd-FQ-zEd"/>
@@ -47,7 +46,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="poweredby-oneline" width="705" height="111"/>
+    </resources>
 </document>
