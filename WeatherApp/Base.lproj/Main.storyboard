@@ -10,7 +10,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Easy_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -18,7 +18,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WK1-gO-QvJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="227"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rjn-YB-dZI" customClass="FavouritesCollectionViewFlowLayout" customModule="WeatherApp" customModuleProvider="target">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rjn-YB-dZI" customClass="FavouritesCollectionViewFlowLayout" customModule="Easy_Weather" customModuleProvider="target">
                                     <size key="itemSize" width="276" height="172"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -38,9 +38,9 @@
                             <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-xm-xWG">
                                 <rect key="frame" x="0.0" y="227" width="320" height="115"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewLayout key="collectionViewLayout" id="ZOQ-KZ-wXB" customClass="HourlyCollectionViewFlowLayout" customModule="WeatherApp" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="ZOQ-KZ-wXB" customClass="HourlyCollectionViewFlowLayout" customModule="Easy_Weather" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HourlyCollectionViewCell" id="Eqh-Wa-iOo" customClass="HourlyCollectionViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HourlyCollectionViewCell" id="Eqh-Wa-iOo" customClass="HourlyCollectionViewCell" customModule="Easy_Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -54,7 +54,7 @@
                                 <rect key="frame" x="0.0" y="342" width="304" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="Easy_Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="304" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9dd-6m-o7V" id="qvR-bQ-YjA">
@@ -112,9 +112,12 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="powerd_by" translatesAutoresizingMaskIntoConstraints="NO" id="tUz-jD-vzC">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="powerd_by" translatesAutoresizingMaskIntoConstraints="NO" id="tUz-jD-vzC">
                                 <rect key="frame" x="16" y="538" width="75" height="21"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="qoP-Oa-0E9" appends="YES" id="bNn-Ex-gOk"/>
+                                </connections>
                             </imageView>
                             <pageControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0Ox-ma-cBe">
                                 <rect key="frame" x="160" y="538" width="0.0" height="21"/>
@@ -170,6 +173,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qoP-Oa-0E9">
+                    <connections>
+                        <action selector="showDarkSkyCredits:" destination="BYZ-38-t0r" id="R79-If-pJu"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <tapGestureRecognizer id="kc8-zO-Ko2">
                     <connections>
                         <action selector="goToFavouritesView:" destination="BYZ-38-t0r" id="EPN-Ct-tPL"/>
@@ -181,7 +189,7 @@
         <!--Favourites View Controller-->
         <scene sceneID="T8d-im-NAT">
             <objects>
-                <viewController id="PEh-Xk-Y3V" customClass="FavouritesViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PEh-Xk-Y3V" customClass="FavouritesViewController" customModule="Easy_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xcq-3Q-4pP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,12 +204,12 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FavoriteCell" id="7YV-bt-paQ">
                                         <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7YV-bt-paQ" id="lkf-t0-TRp" customClass="FavoriteTableViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7YV-bt-paQ" id="lkf-t0-TRp" customClass="FavoriteTableViewCell" customModule="Easy_Weather" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" rowHeight="120" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="WeatherApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" rowHeight="120" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="Easy_Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="71.5" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2fV-Jk-vK1" id="PfZ-g0-lIi">
@@ -281,7 +289,7 @@
         <!--Locations View Controller-->
         <scene sceneID="yFQ-nP-aYe">
             <objects>
-                <viewController storyboardIdentifier="LocationsViewController" id="Ipr-q1-heh" customClass="LocationsViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationsViewController" id="Ipr-q1-heh" customClass="LocationsViewController" customModule="Easy_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GrB-YE-kpo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

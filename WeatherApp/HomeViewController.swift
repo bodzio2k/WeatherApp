@@ -9,6 +9,7 @@
 import UIKit
 import Swinject
 import CoreLocation
+import SafariServices
 
 class HomeViewController: UIViewController {
     //MARK: IBOutlets
@@ -23,6 +24,15 @@ class HomeViewController: UIViewController {
         
         self.performSegue(withIdentifier: "showFavorites", sender: self)
     }
+    
+    @IBAction func showDarkSkyCredits(_ sender: UITapGestureRecognizer) {
+        guard let url = URL(string: "https://darksky.net/poweredby/") else { return }
+        
+        let safariVC = SFSafariViewController(url: url)
+        
+        present(safariVC, animated: true)
+    }
+    
     
     //MARK: Properties
     var favourites: FavouritesProtocol?
