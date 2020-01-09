@@ -75,7 +75,7 @@
 		8B08C6CA22567B3400B8DAD7 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		8B0995C822633CF0000852A5 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		8B0995CB22635091000852A5 /* GeoDBCitiesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDBCitiesTest.swift; sourceTree = "<group>"; };
-		8B0B171D21ADCB79001A3219 /* Easy Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0B171D21ADCB79001A3219 /* Calm Skies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calm Skies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0B172021ADCB79001A3219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B0B172221ADCB79001A3219 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8B0B172521ADCB7A001A3219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		8B0B171E21ADCB79001A3219 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B0B171D21ADCB79001A3219 /* Easy Weather.app */,
+				8B0B171D21ADCB79001A3219 /* Calm Skies.app */,
 				8B59669B22355A0A00B17BE2 /* WeatherAppTests.xctest */,
 				8BEFBFD322BCE9B900FD675A /* WeatherAppUITests.xctest */,
 			);
@@ -306,7 +306,7 @@
 			);
 			name = WeatherApp;
 			productName = "Weather App";
-			productReference = 8B0B171D21ADCB79001A3219 /* Easy Weather.app */;
+			productReference = 8B0B171D21ADCB79001A3219 /* Calm Skies.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8B59669A22355A0A00B17BE2 /* WeatherAppTests */ = {
@@ -679,7 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MHN6385WQS;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
@@ -688,8 +688,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bodzio2k.weatherapp;
-				PRODUCT_NAME = "Easy Weather";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "Calm Skies";
+				PROVISIONING_PROFILE_SPECIFIER = "Development Provisioning Profile";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -701,7 +701,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MHN6385WQS;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
@@ -710,8 +710,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bodzio2k.weatherapp;
-				PRODUCT_NAME = "Easy Weather";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "Calm Skies";
+				PROVISIONING_PROFILE_SPECIFIER = "Development Provisioning Profile";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
