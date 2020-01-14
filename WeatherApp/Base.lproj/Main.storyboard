@@ -1,16 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="54Y-FH-pUw">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Lauch View Controller-->
+        <scene sceneID="a3q-0w-R9c">
+            <objects>
+                <viewController id="54Y-FH-pUw" customClass="LauchViewController" customModule="Calm_Skies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cCK-jZ-Zwr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calm Skies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVY-Rf-deq">
+                                <rect key="frame" x="88.5" y="266" width="143.5" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZN-vM-oYm">
+                                <rect key="frame" x="232" y="266" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="poweredby-oneline" translatesAutoresizingMaskIntoConstraints="NO" id="JuV-Pe-8mv">
+                                <rect key="frame" x="96" y="481" width="128" height="111"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="JuV-Pe-8mv" firstAttribute="leading" secondItem="xQe-Ol-LRB" secondAttribute="leading" constant="96" id="2by-dK-eqS"/>
+                            <constraint firstItem="xQe-Ol-LRB" firstAttribute="trailing" secondItem="vZN-vM-oYm" secondAttribute="trailing" id="C2l-25-QzD"/>
+                            <constraint firstItem="qVY-Rf-deq" firstAttribute="centerY" secondItem="xQe-Ol-LRB" secondAttribute="centerY" id="JcG-mY-fuX"/>
+                            <constraint firstItem="qVY-Rf-deq" firstAttribute="centerX" secondItem="xQe-Ol-LRB" secondAttribute="centerX" id="U1C-2X-RXE"/>
+                            <constraint firstItem="xQe-Ol-LRB" firstAttribute="trailing" secondItem="JuV-Pe-8mv" secondAttribute="trailing" constant="96" id="Xqd-tN-fKf"/>
+                            <constraint firstItem="xQe-Ol-LRB" firstAttribute="bottom" secondItem="JuV-Pe-8mv" secondAttribute="bottom" constant="-24" id="bDH-RI-e4x"/>
+                            <constraint firstItem="vZN-vM-oYm" firstAttribute="leading" secondItem="qVY-Rf-deq" secondAttribute="trailing" id="r2D-oX-cbL"/>
+                            <constraint firstItem="vZN-vM-oYm" firstAttribute="top" secondItem="qVY-Rf-deq" secondAttribute="top" id="rX9-bS-Nez"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xQe-Ol-LRB"/>
+                    </view>
+                    <connections>
+                        <outlet property="appTitle" destination="qVY-Rf-deq" id="vIA-8E-PfP"/>
+                        <outlet property="copyright" destination="vZN-vM-oYm" id="j71-rL-8gY"/>
+                        <outlet property="powerdBy" destination="JuV-Pe-8mv" id="zth-DQ-aFn"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showHome" animates="NO" modalPresentationStyle="fullScreen" id="1EC-Ij-OPS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xck-Oo-hGo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1211" y="132"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Easy_Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Calm_Skies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -18,7 +65,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WK1-gO-QvJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="227"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rjn-YB-dZI" customClass="FavouritesCollectionViewFlowLayout" customModule="Easy_Weather" customModuleProvider="target">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rjn-YB-dZI" customClass="FavouritesCollectionViewFlowLayout" customModule="Calm_Skies" customModuleProvider="target">
                                     <size key="itemSize" width="276" height="172"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -38,9 +85,9 @@
                             <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-xm-xWG">
                                 <rect key="frame" x="0.0" y="227" width="320" height="115"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewLayout key="collectionViewLayout" id="ZOQ-KZ-wXB" customClass="HourlyCollectionViewFlowLayout" customModule="Easy_Weather" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="ZOQ-KZ-wXB" customClass="HourlyCollectionViewFlowLayout" customModule="Calm_Skies" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HourlyCollectionViewCell" id="Eqh-Wa-iOo" customClass="HourlyCollectionViewCell" customModule="Easy_Weather" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HourlyCollectionViewCell" id="Eqh-Wa-iOo" customClass="HourlyCollectionViewCell" customModule="Calm_Skies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -54,7 +101,7 @@
                                 <rect key="frame" x="0.0" y="342" width="304" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="Easy_Weather" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DailyTableViewCell" id="9dd-6m-o7V" customClass="DailyTableViewCell" customModule="Calm_Skies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="304" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9dd-6m-o7V" id="qvR-bQ-YjA">
@@ -189,7 +236,7 @@
         <!--Favourites View Controller-->
         <scene sceneID="T8d-im-NAT">
             <objects>
-                <viewController id="PEh-Xk-Y3V" customClass="FavouritesViewController" customModule="Easy_Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PEh-Xk-Y3V" customClass="FavouritesViewController" customModule="Calm_Skies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xcq-3Q-4pP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,12 +251,12 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FavoriteCell" id="7YV-bt-paQ">
                                         <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7YV-bt-paQ" id="lkf-t0-TRp" customClass="FavoriteTableViewCell" customModule="Easy_Weather" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7YV-bt-paQ" id="lkf-t0-TRp" customClass="FavoriteTableViewCell" customModule="Calm_Skies" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" rowHeight="120" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="Easy_Weather" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddLocationCell" rowHeight="120" id="2fV-Jk-vK1" customClass="FavouriteOptionsTableViewCell" customModule="Calm_Skies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="71.5" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2fV-Jk-vK1" id="PfZ-g0-lIi">
@@ -289,7 +336,7 @@
         <!--Locations View Controller-->
         <scene sceneID="yFQ-nP-aYe">
             <objects>
-                <viewController storyboardIdentifier="LocationsViewController" id="Ipr-q1-heh" customClass="LocationsViewController" customModule="Easy_Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationsViewController" id="Ipr-q1-heh" customClass="LocationsViewController" customModule="Calm_Skies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GrB-YE-kpo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -371,6 +418,7 @@
         <image name="icons8-menu_filled" width="37.5" height="37.5"/>
         <image name="icons8-plus" width="37.5" height="37.5"/>
         <image name="powerd_by" width="75" height="26"/>
+        <image name="poweredby-oneline" width="705" height="111"/>
         <image name="refresh" width="100" height="100"/>
     </resources>
     <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
