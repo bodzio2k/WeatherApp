@@ -15,11 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calm Skies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVY-Rf-deq">
-                                <rect key="frame" x="88.5" y="266" width="143.5" height="36"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZN-vM-oYm">
                                 <rect key="frame" x="232" y="266" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -29,6 +24,11 @@
                                 <rect key="frame" x="96" y="481" width="128" height="111"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calm Skies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVY-Rf-deq">
+                                <rect key="frame" x="88.5" y="266" width="143.5" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -52,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xck-Oo-hGo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1211" y="132"/>
+            <point key="canvasLocation" x="1209.375" y="130.98591549295776"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -222,7 +222,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="qoP-Oa-0E9">
                     <connections>
-                        <action selector="showDarkSkyCredits:" destination="BYZ-38-t0r" id="R79-If-pJu"/>
+                        <action selector="showDarkSkyCredits:" destination="BYZ-38-t0r" id="PdG-g6-bhU"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="kc8-zO-Ko2">
@@ -264,7 +264,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C/°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-zJ-2Jt">
-                                                    <rect key="frame" x="15" y="0.0" width="39.5" height="120"/>
+                                                    <rect key="frame" x="15" y="7" width="39.5" height="45.5"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -274,20 +274,28 @@
                                                     </connections>
                                                 </label>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-plus" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-n9-xqa">
-                                                    <rect key="frame" x="267.5" y="41.5" width="37.5" height="37.5"/>
+                                                    <rect key="frame" x="267.5" y="11" width="37.5" height="37.5"/>
                                                     <gestureRecognizers/>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="d7G-7E-HSH" appends="YES" id="yCz-tG-kFe"/>
                                                     </connections>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powerd_by" translatesAutoresizingMaskIntoConstraints="NO" id="F1V-wi-XuG">
+                                                    <rect key="frame" x="122.5" y="64.5" width="75" height="44.5"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="85d-hZ-n5C" appends="YES" id="rb0-jf-dBZ"/>
+                                                    </connections>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="top" secondItem="PfZ-g0-lIi" secondAttribute="top" id="Cd9-Rp-f0C"/>
+                                                <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="height" secondItem="PBJ-n9-xqa" secondAttribute="height" constant="8" id="0jS-gI-kgb"/>
+                                                <constraint firstItem="F1V-wi-XuG" firstAttribute="top" secondItem="PBJ-n9-xqa" secondAttribute="bottom" constant="16" id="DMQ-dc-OrA"/>
                                                 <constraint firstItem="PBJ-n9-xqa" firstAttribute="trailing" secondItem="PfZ-g0-lIi" secondAttribute="trailingMargin" id="KSa-CH-bWi"/>
-                                                <constraint firstAttribute="bottom" secondItem="5Z0-zJ-2Jt" secondAttribute="bottom" id="Kwf-iX-eot"/>
-                                                <constraint firstItem="PBJ-n9-xqa" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="aR9-Rv-bZn"/>
                                                 <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="leading" secondItem="PfZ-g0-lIi" secondAttribute="leadingMargin" id="cLw-sa-U6j"/>
-                                                <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="centerY" secondItem="PfZ-g0-lIi" secondAttribute="centerY" id="kua-kt-5fp"/>
+                                                <constraint firstItem="5Z0-zJ-2Jt" firstAttribute="centerY" secondItem="PBJ-n9-xqa" secondAttribute="centerY" id="elV-1y-Lbu"/>
+                                                <constraint firstItem="F1V-wi-XuG" firstAttribute="bottom" secondItem="PfZ-g0-lIi" secondAttribute="bottomMargin" id="mve-SA-GQu"/>
+                                                <constraint firstItem="PBJ-n9-xqa" firstAttribute="top" secondItem="PfZ-g0-lIi" secondAttribute="topMargin" id="oVc-km-XJO"/>
+                                                <constraint firstItem="F1V-wi-XuG" firstAttribute="centerX" secondItem="PfZ-g0-lIi" secondAttribute="centerX" id="omO-YR-DEj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
@@ -319,6 +327,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYZ-fC-DSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="85d-hZ-n5C">
+                    <connections>
+                        <action selector="showDarkSkyWebSite:" destination="PEh-Xk-Y3V" id="Q9Z-9a-dj5"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <exit id="JVf-RJ-mOv" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="1RD-XK-gai">
                     <connections>

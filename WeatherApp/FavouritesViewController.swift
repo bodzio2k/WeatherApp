@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SafariServices
 
 class FavouritesViewController: UIViewController {
     //MARK: IBOutlets
@@ -24,15 +25,18 @@ class FavouritesViewController: UIViewController {
         }
     }
     
-    //MARL: Properties
-    var pendingOperations = 0
-    var canHandle = false
-    var maxLocationCount: Int?
-    
     @IBAction func addLocation(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showLocations", sender: sender)
     }
     
+    @IBAction func showDarkSkyWebSite(_ sender: UITapGestureRecognizer) {
+       guard let url = URL(string: "https://darksky.net/poweredby/") else { return }
+       
+       let safariVC = SFSafariViewController(url: url)
+       
+       present(safariVC, animated: true)
+   }
+
     //MARK: Properties
     var selectedLocation: Location?
     var favourites: FavouritesProtocol?
@@ -42,6 +46,9 @@ class FavouritesViewController: UIViewController {
     var currentTemps: [Int:Int] = [:]
     var locationManager = CLLocationManager()
     let reachability = try! Reachability()
+    var pendingOperations = 0
+    var canHandle = false
+    var maxLocationCount: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -333,18 +340,6 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
                 tableView.reloadData()
             })
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var rc: CGFloat!
-        
-        if indexPath.row == favourites!.items.count + 1 {
-            rc = 120.00
-        }
-        
-        rc = 90
-        
-        return rc
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
